@@ -1,0 +1,13 @@
+{
+    "name": "changelog-generator",
+    "description": "Generate changelogs from git commits.",
+    "version": "1.0.0",
+    "author": {
+        "name": "Tobias Kokesch",
+        "email": "hallo@binary-hype.com"
+    },
+    "homepage": "https://github.com/Binary-Hype/claude-marketplace",
+    "repository": "https://github.com/Binary-Hype/claude-marketplace",
+    "license": "MIT",
+    "keywords": ["skills", "git", "changelog", "generator", "commit"]
+}
