@@ -7,7 +7,7 @@
     "plugins": [
         {
             "name": "changelog-generator",
-            "source": "./plugins/changelog-generator",
+            "source": "./changelog-generator",
             "description": "Automatic changelog generator from git commits",
             "version": "1.0.0"
         }
