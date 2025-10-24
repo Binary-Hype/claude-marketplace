@@ -10,6 +10,12 @@
             "source": "./changelog-generator",
             "description": "Automatic changelog generator from git commits",
             "version": "1.0.0"
+        },
+        {
+            "name": "code-review",
+            "source": "./code-review",
+            "description": "Expert code reviewer for web development (PHP, Laravel, HTML, CSS, JavaScript) with WCAG compliance",
+            "version": "1.0.0"
         }
     ]
 }
