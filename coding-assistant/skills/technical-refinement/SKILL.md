@@ -1,11 +1,11 @@
 ---
 name: technical-refinement
-description: Expert technical lead that transforms product requirements and customer requests into actionable developer todo lists. Analyzes project architecture and conventions to create clear, ordered implementation tasks.
+description: Expert technical lead that transforms product requirements and customer requests into actionable developer todo lists. Asks interactive clarifying questions, can read requirements.md automatically, and analyzes project architecture to create clear, ordered implementation tasks.
 ---
 
 # Technical Refinement Skill
 
-A skilled technical lead who takes requirements from product owners or customers and creates clear, actionable todo lists for developers. This skill analyzes your codebase, considers your project's architecture and conventions, then breaks down features into concrete implementation tasks.
+A skilled technical lead who takes requirements from product owners or customers and creates clear, actionable todo lists for developers. This skill can automatically read from `requirements.md`, asks interactive clarifying questions, analyzes your codebase, considers your project's architecture and conventions, then breaks down features into concrete implementation tasks.
 
 ## When to Use This Skill
 
@@ -22,10 +22,12 @@ Use this skill when:
 
 This skill acts as your technical lead by:
 
-1. **Analyzing Requirements**
+1. **Gathering Requirements**
+   - If no instructions provided, automatically reads `requirements.md` from the current directory
    - Understands what the product owner/customer wants
    - Identifies technical implications
-   - Asks clarifying questions if needed
+   - Uses interactive questions (AskUserQuestion tool) to clarify ambiguities
+   - Asks about implementation preferences, technical choices, and constraints
 
 2. **Reviewing Your Codebase**
    - Examines your project structure and architecture
@@ -63,6 +65,34 @@ Each task includes:
 - Testing requirements
 - Questions that need answering
 
+## Workflow
+
+When this skill is invoked, follow this process:
+
+1. **Check for Requirements**
+   - If the user provided specific requirements/instructions with the skill invocation, use those
+   - If NO requirements provided, check for `requirements.md` in the current directory using the Read tool
+   - If `requirements.md` doesn't exist and no instructions given, ask the user to provide requirements
+
+2. **Clarify Ambiguities Interactively**
+   - After analyzing requirements, use the **AskUserQuestion tool** to clarify:
+     - Implementation approach choices (e.g., "Which authentication method?")
+     - Technical stack preferences (e.g., "Which library for PDF generation?")
+     - Scope and priority decisions (e.g., "Should this include mobile support?")
+     - Feature details that aren't specified
+   - Ask 1-4 focused questions at a time
+   - DO NOT ask questions in plain text output - use the AskUserQuestion tool
+
+3. **Analyze Codebase**
+   - Use Glob and Grep to understand project structure
+   - Identify patterns, conventions, and existing implementations
+   - Review relevant configuration files
+
+4. **Generate Todo List**
+   - Create comprehensive, ordered task breakdown
+   - Include all necessary context and file references
+   - Provide complexity estimates
+
 ## How to Use
 
 Invoke the skill with requirements:
@@ -79,7 +109,29 @@ Invoke the skill with requirements:
 /technical-refinement Customer requested scheduling feature for posts
 ```
 
+Or invoke without requirements to read from `requirements.md`:
+
+```
+/technical-refinement
+```
+
 ## Examples
+
+### Example 0: Reading from requirements.md
+
+**User invokes:**
+```
+/technical-refinement
+```
+
+**Skill behavior:**
+1. Checks current directory for `requirements.md`
+2. Reads the file content
+3. Analyzes the requirements
+4. Uses AskUserQuestion tool to clarify ambiguities:
+   - "Which PDF generation library should we use?"
+   - "Should exports be generated synchronously or via background jobs?"
+5. Proceeds with codebase analysis and todo list generation
 
 ### Example 1: User Export Feature
 
@@ -87,6 +139,13 @@ Invoke the skill with requirements:
 ```
 Users want to export their activity history to PDF and CSV formats
 ```
+
+**Skill behavior:**
+1. Analyzes the requirement
+2. Uses AskUserQuestion tool to ask:
+   - "Which approach for handling large datasets?" (Options: Pagination, Streaming, Background jobs)
+   - "Which library for PDF generation?" (Options: dompdf, wkhtmltopdf, Snappy)
+3. After receiving answers, proceeds with detailed todo list
 
 **Output:**
 
@@ -437,12 +496,14 @@ This skill automatically considers:
 
 ## Tips for Best Results
 
-1. **Be Specific**: "Add payment processing with Stripe" is better than "add payments"
-2. **Mention Constraints**: Share deadlines, technical limitations, or preferences
-3. **Provide Context**: Mention if this relates to existing features
-4. **Ask Questions**: The skill will ask clarifying questions when needed
-5. **Iterate**: Use the todo list, then refine based on what you learn
-6. **Review Codebase First**: Make sure your project is accessible for analysis
+1. **Use requirements.md**: Place your requirements in a `requirements.md` file and invoke the skill without arguments for automatic reading
+2. **Be Specific**: "Add payment processing with Stripe" is better than "add payments"
+3. **Mention Constraints**: Share deadlines, technical limitations, or preferences
+4. **Provide Context**: Mention if this relates to existing features
+5. **Answer Interactive Questions**: The skill uses AskUserQuestion to clarify ambiguities - answer thoughtfully
+6. **Iterate**: Use the todo list, then refine based on what you learn
+7. **Review Codebase First**: Make sure your project is accessible for analysis
+8. **Provide Feedback**: If the skill's questions don't cover your concerns, mention them in your answers
 
 ## Related Use Cases
 
