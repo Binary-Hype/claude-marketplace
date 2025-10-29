@@ -12,9 +12,9 @@
             "version": "1.0.0"
         },
         {
-            "name": "code-review",
-            "source": "./code-review",
-            "description": "Expert code reviewer for web development (PHP, Laravel, HTML, CSS, JavaScript) with WCAG compliance",
+            "name": "coding-assistant",
+            "source": "./coding-assistant",
+            "description": "A comprehensive coding assistant that helps developers in their daily work. Provides expert guidance on code quality, planning, and implementation while respecting your project's architecture and conventions.",
             "version": "1.0.0"
         }
     ]
