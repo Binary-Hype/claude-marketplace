@@ -1,11 +1,11 @@
 ---
 name: commit-message
-description: Generates well-structured git commit messages with concise subject lines and detailed descriptions. Analyzes staged changes to create meaningful commit messages following best practices.
+description: Generates well-structured git commit messages with concise subject lines and brief descriptions. Analyzes staged changes to create meaningful commit messages following best practices.
 ---
 
 # Commit Message Generator
 
-An intelligent skill that crafts professional git commit messages by analyzing your staged changes. Creates concise subject lines (50 characters or less) with comprehensive descriptions that explain the what, why, and how of your changes.
+An intelligent skill that crafts professional git commit messages by analyzing your staged changes. Creates concise subject lines (50 characters or less) with brief, focused descriptions (1-3 sentences) that explain the why and what of your changes.
 
 ## When to Use This Skill
 
@@ -34,10 +34,10 @@ This skill provides comprehensive commit message support by:
    - Avoids unnecessary details in the subject
 
 3. **Description Writing**
-   - Explains WHY changes were made
-   - Provides context about the problem being solved
-   - Details HOW the solution works if non-obvious
-   - Lists breaking changes or important considerations
+   - Briefly explains WHY changes were made (1-2 sentences)
+   - Keeps descriptions concise and focused
+   - Only includes essential context
+   - Notes breaking changes if any
    - References related issues or tickets when applicable
 
 4. **Format Adherence**
@@ -91,32 +91,21 @@ When this skill is invoked, it follows this process:
      - "Refactor database query optimization"
      - "Update API documentation for v2 endpoints"
 
-4. **Write Detailed Description**
-   - Explain the motivation for the change
-   - Describe what was changed and why
-   - Include implementation details if helpful
-   - Note any breaking changes or migrations needed
+4. **Write Concise Description**
+   - Keep it brief: 1-3 sentences explaining why and what
+   - Only include essential context not obvious from the diff
+   - Note breaking changes if any
    - Reference issue numbers or tickets
    - **IMPORTANT**: Do NOT add any AI-generated notes, Claude Code references, or Co-Authored-By lines
+   - Avoid lengthy bullet lists unless absolutely necessary
    - Format example:
      ```
      Add user authentication with JWT
 
-     Implements JWT-based authentication to replace session-based auth.
-     This provides better scalability for our API and allows mobile
-     clients to authenticate more easily.
+     Replaces session-based auth with JWT for better API scalability
+     and easier mobile client integration.
 
-     Changes:
-     - Add JWT token generation and validation
-     - Update User model with token methods
-     - Create AuthController with login/logout endpoints
-     - Add authentication middleware
-     - Update API routes to use auth middleware
-
-     Breaking changes:
-     - Session-based auth endpoints are deprecated
-     - Clients must update to use Authorization header
-
+     Breaking change: Session endpoints deprecated, use Authorization header.
      Fixes #123
      ```
 
@@ -172,11 +161,10 @@ Or simply:
 ```
 
 **Body Rules:**
-- Wrap at 72 characters per line
-- Explain the WHY, not just the WHAT
+- Keep it concise: 1-3 sentences is ideal
+- Explain the WHY briefly, not just the WHAT
 - Use present tense
-- Separate paragraphs with blank lines
-- Use bullet points for lists
+- Only use bullet points if absolutely necessary
 - Include breaking changes if any
 - Reference issues/tickets at the end
 
@@ -190,24 +178,9 @@ Or simply:
 ```
 Add email notification system for user events
 
-Implements a comprehensive email notification system to keep users
-informed about important account activities. Uses queued jobs for
-performance and includes customizable notification preferences.
-
-Features:
-- Email templates for common notifications
-- User preference management for notification types
-- Queue-based sending to avoid blocking requests
-- Support for both transactional and marketing emails
-- Configurable SMTP settings
-
-Technical details:
-- Uses Laravel's notification system
-- Implements Mailable classes for each email type
-- Adds notifications table for tracking sent emails
-- Uses Redis queue for background processing
-
-Users can now manage their email preferences in account settings.
+Implements queued email notifications to keep users informed about
+account activities. Uses Laravel notifications with customizable
+user preferences.
 
 Related to #456
 ```
@@ -220,21 +193,8 @@ Related to #456
 ```
 Fix race condition in payment processing
 
-Resolves an issue where concurrent payment requests could result in
-duplicate charges. The problem occurred when multiple requests tried
-to process payments for the same order simultaneously.
-
-Root cause:
-- Lack of database-level locking on order records
-- Insufficient validation of payment status before processing
-
-Solution:
-- Add pessimistic locking when fetching orders for payment
-- Check payment status within transaction
-- Add unique constraint on payment reference IDs
-
-This ensures only one payment can be processed per order, even under
-high concurrency.
+Adds pessimistic locking and unique constraints to prevent duplicate
+charges when concurrent requests process the same order.
 
 Fixes #789
 ```
@@ -247,24 +207,8 @@ Fixes #789
 ```
 Refactor user service for better testability
 
-Restructures the UserService class to improve code organization,
-testability, and maintainability. No functional changes to user-facing
-behavior.
-
-Changes:
-- Extract validation logic into separate methods
-- Use dependency injection for external services
-- Remove duplicated code between methods
-- Add type hints and return types
-- Improve method naming for clarity
-
-Benefits:
-- Easier to write unit tests
-- Better separation of concerns
-- More maintainable codebase
-- Improved IDE autocomplete support
-
-All existing tests pass without modification.
+Extracts validation logic, adds dependency injection, and improves
+type hints. No functional changes, all tests pass.
 ```
 
 ### Example 4: Documentation Update
@@ -275,19 +219,8 @@ All existing tests pass without modification.
 ```
 Update API documentation for v2 endpoints
 
-Adds comprehensive documentation for all v2 API endpoints including
-request/response examples, authentication requirements, and error
-handling.
-
-Updates:
-- Add endpoint descriptions with parameters
-- Include example requests and responses
-- Document authentication requirements
-- Add error code reference table
-- Update README with migration guide from v1
-
-This helps developers integrate with our API more easily and reduces
-support requests about endpoint usage.
+Adds endpoint descriptions, request/response examples, and migration
+guide from v1 to help developers integrate more easily.
 ```
 
 ### Example 5: Multiple Related Changes
@@ -298,23 +231,8 @@ support requests about endpoint usage.
 ```
 Optimize database queries for dashboard page
 
-Improves dashboard load time by 60% through query optimization and
-strategic eager loading. Reduces database queries from 45+ to 8 per
-page load.
-
-Optimizations:
-- Add eager loading for user relationships
-- Implement query result caching (5 minute TTL)
-- Add database indexes for common queries
-- Replace N+1 queries with batch loading
-- Optimize JSON serialization
-
-Performance impact:
-- Average page load: 850ms → 340ms
-- Database queries: 45+ → 8
-- Memory usage: stable
-
-The changes maintain backward compatibility and all tests pass.
+Adds eager loading, caching, and indexes to reduce queries from 45+
+to 8, improving load time by 60% (850ms → 340ms).
 
 Closes #234
 ```
@@ -326,17 +244,17 @@ Closes #234
    - Use imperative: "Add feature" not "Added feature" or "Adds feature"
    - Stay brief: If it's too long, you're including too much detail
 
-2. **Body Completeness**
-   - Answer: Why is this change needed?
-   - Answer: What does this change do?
-   - Answer: How does it work? (if complex)
-   - Include: Breaking changes, migration steps, related issues
+2. **Body Brevity**
+   - Answer: Why is this change needed? (1-2 sentences)
+   - Mention what changed only if not obvious from subject
+   - Skip implementation details unless critical
+   - Include: Breaking changes if any, related issues
 
 3. **Formatting Consistency**
    - One blank line between subject and body
+   - Keep descriptions to 1-3 sentences
+   - Avoid bullet lists unless absolutely necessary
    - Wrap lines at 72 characters
-   - Use bullet points for lists
-   - Keep paragraphs focused on one topic
 
 4. **Project Context**
    - Match your project's commit message style
@@ -347,8 +265,8 @@ Closes #234
 5. **Meaningful Content**
    - Avoid: "Fix bug" or "Update code"
    - Avoid: Repeating what the diff shows
-   - Include: Context that isn't obvious from the code
-   - Include: Reasoning behind implementation choices
+   - Avoid: Long explanations of implementation details
+   - Include: Brief context about WHY (1-2 sentences)
 
 ## Integration with Your Workflow
 
@@ -384,44 +302,35 @@ I've staged my changes. What would be a good commit message?
 ```
 Add [feature name]
 
-[Why it's needed]
-[What it does]
-[How to use it]
+[1-2 sentences: why it's needed and what it does]
 ```
 
 **Bug Fix:**
 ```
 Fix [specific problem]
 
-[What caused it]
-[How it's fixed]
-[Impact]
+[1-2 sentences: what caused it and how it's fixed]
 ```
 
 **Refactoring:**
 ```
 Refactor [component] for [benefit]
 
-[What changed]
-[Why]
-[Impact on tests/behavior]
+[1-2 sentences: what changed and why, mention if tests pass]
 ```
 
 **Documentation:**
 ```
 Update [what documentation]
 
-[What's changed]
-[Why]
+[1 sentence: what changed and why]
 ```
 
 **Performance:**
 ```
 Optimize [what] for [improvement]
 
-[Metrics before/after]
-[What changed]
-[Trade-offs]
+[1-2 sentences: key metrics and what changed]
 ```
 
 ## What This Skill Won't Do
