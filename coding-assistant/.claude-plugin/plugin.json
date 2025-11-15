@@ -1,6 +1,6 @@
 {
     "name": "coding-assistant",
-    "description": "A comprehensive coding assistant that helps developers in their daily work. Provides expert guidance on code quality, planning, and implementation while respecting your project's architecture and conventions.",
+    "description": "Comprehensive Laravel coding assistant with specialized skills for refactoring, testing (Pest), API documentation, commit messages, and time estimation. Includes expert subagents for code review, security scanning (OWASP Top 10), Laravel best practices with Action patterns, WCAG 2.2 accessibility, and framework documentation (FluxUI, DaisyUI, Tailwind CSS).",
     "version": "1.0.0",
     "author": {
         "name": "Tobias Kokesch",
@@ -9,5 +9,26 @@
     "homepage": "https://github.com/Binary-Hype/claude-marketplace",
     "repository": "https://github.com/Binary-Hype/claude-marketplace",
     "license": "MIT",
-    "keywords": ["skills", "php", "laravel", "javascript", "web-development", "quality"]
+    "keywords": [
+        "skills",
+        "php",
+        "laravel",
+        "javascript",
+        "web-development",
+        "code-quality",
+        "refactoring",
+        "testing",
+        "pest",
+        "api-documentation",
+        "security",
+        "owasp",
+        "accessibility",
+        "wcag",
+        "action-pattern",
+        "code-review",
+        "git",
+        "tailwindcss",
+        "fluxui",
+        "daisyui"
+    ]
 }
