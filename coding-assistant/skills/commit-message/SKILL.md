@@ -69,17 +69,21 @@ I've staged changes to the user model and auth controller. Help me write a commi
 
 When this skill is invoked, it follows this process:
 
-1. **Analyze Staged Changes**
+1. **Stage All Changes**
+   - Run `git add .` to stage all modified and new files
+   - Ensure all changes are ready for commit
+
+2. **Analyze Staged Changes**
    - Run `git status` to see what's staged
    - Run `git diff --staged` to see the actual changes
    - Review recent commits with `git log` to match project style
 
-2. **Understand the Context**
+3. **Understand the Context**
    - Identify the type of change (feature, fix, refactor, docs, test, etc.)
    - Determine the scope (which part of the codebase)
    - Recognize the impact (breaking change, enhancement, bug fix)
 
-3. **Generate Subject Line**
+4. **Generate Subject Line**
    - Start with a verb in imperative mood
    - Keep it under 50 characters
    - Don't end with a period
@@ -90,12 +94,13 @@ When this skill is invoked, it follows this process:
      - "Refactor database query optimization"
      - "Update API documentation for v2 endpoints"
 
-4. **Write Detailed Description**
+5. **Write Detailed Description**
    - Explain the motivation for the change
    - Describe what was changed and why
    - Include implementation details if helpful
    - Note any breaking changes or migrations needed
    - Reference issue numbers or tickets
+   - **IMPORTANT**: Do NOT add any AI-generated notes, Claude Code references, or Co-Authored-By lines
    - Format example:
      ```
      Add user authentication with JWT
@@ -118,10 +123,11 @@ When this skill is invoked, it follows this process:
      Fixes #123
      ```
 
-5. **Present the Commit Message**
-   - Show the complete message with subject and body
-   - Explain the reasoning behind the message structure
-   - Allow for user review and adjustments
+6. **Create the Commit**
+   - Automatically execute `git commit` with the generated message
+   - Use HEREDOC format to ensure proper formatting
+   - Verify the commit was created successfully with `git log -1`
+   - Do NOT add Claude Code attribution, Co-Authored-By, or any AI-generated notes
 
 ## Commit Message Structure
 
