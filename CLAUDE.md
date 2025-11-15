@@ -8,21 +8,8 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 
 ### Plugins
 
-1. **changelog-generator** - Automatic changelog generation from git commits
-2. **coding-assistant** - Comprehensive coding assistance with multiple specialized skills
-3. **research-assistant** - Research and analysis toolkit for market intelligence and insights
-
-## Plugin: changelog-generator
-
-**Location:** `./changelog-generator`
-**Version:** 1.0.0
-
-### Skills
-
-- **changelog-generator**: Transforms technical git commits into user-friendly changelogs by analyzing commit history, categorizing changes, and creating polished release notes.
-
-### Usage
-Use when preparing release notes, documenting changes for customers, or maintaining public changelogs.
+1. **coding-assistant** - Comprehensive coding assistance with multiple specialized skills
+2. **research-assistant** - Research and analysis toolkit for market intelligence and insights
 
 ## Plugin: coding-assistant
 
@@ -33,15 +20,17 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 ### Skills
 
-1. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Creates concise subject lines (≤50 chars) with detailed descriptions following best practices.
+1. **changelog-generator**: Transforms technical git commits into user-friendly changelogs by analyzing commit history, categorizing changes, and creating polished release notes. Use when preparing release notes, documenting changes for customers, or maintaining public changelogs.
 
-2. **time-estimation**: Estimates development time for features by analyzing complexity, dependencies, and project structure. Provides manual vs AI-assisted development time comparisons showing hours saved when using AI tools.
+2. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Creates concise subject lines (≤50 chars) with detailed descriptions following best practices.
 
-3. **refactoring-assistant**: Identifies code smells and suggests refactoring improvements using proven design patterns. Helps improve code quality, maintainability, and testability with Laravel-specific refactoring guidance.
+3. **time-estimation**: Estimates development time for features by analyzing complexity, dependencies, and project structure. Provides manual vs AI-assisted development time comparisons showing hours saved when using AI tools.
 
-4. **api-documentation**: Automatically generates comprehensive API documentation including OpenAPI/Swagger specs, endpoint descriptions, request/response examples, and integration guides. Perfect for Laravel APIs with automatic route discovery.
+4. **refactoring-assistant**: Identifies code smells and suggests refactoring improvements using proven design patterns. Helps improve code quality, maintainability, and testability with Laravel-specific refactoring guidance.
 
-5. **test-generator**: Generates comprehensive Laravel tests using Pest syntax. Creates feature tests, unit tests, factories, and test data with proper assertions, mocking, and Laravel testing helpers.
+5. **api-documentation**: Automatically generates comprehensive API documentation including OpenAPI/Swagger specs, endpoint descriptions, request/response examples, and integration guides. Perfect for Laravel APIs with automatic route discovery.
+
+6. **test-generator**: Generates comprehensive Laravel tests using Pest syntax. Creates feature tests, unit tests, factories, and test data with proper assertions, mocking, and Laravel testing helpers.
 
 ### Subagents
 
