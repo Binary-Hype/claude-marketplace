@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Bash(research-assistant/skills/research-analyst/SKILL.md)",
+      "Bash(research-assistant/skills/search-specialist/SKILL.md)",
+      "Bash(research-assistant/skills/trend-analyst/SKILL.md)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

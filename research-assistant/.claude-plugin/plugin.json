@@ -1,0 +1,19 @@
+{
+  "name": "research-assistant",
+  "version": "1.0.0",
+  "description": "Comprehensive research and analysis toolkit with specialized subagents for market research, competitive intelligence, trend analysis, and data investigation",
+  "author": "Tobias Kokesch (Binary Hype)",
+  "email": "hallo@binary-hype.com",
+  "repository": "https://github.com/Binary-Hype/claude-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "analysis",
+    "market-research",
+    "competitive-intelligence",
+    "trend-analysis",
+    "data-research",
+    "insights",
+    "business-intelligence"
+  ]
+}
