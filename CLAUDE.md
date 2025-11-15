@@ -44,12 +44,20 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
    - Code quality and best practices
    - Security vulnerabilities (SQL injection, XSS, CSRF)
    - Performance optimization (N+1 queries, caching)
-   - WCAG accessibility compliance (Levels A, AA, AAA)
    - Laravel-specific conventions
+   - Delegates WCAG accessibility checks to wcag-compliance subagent
 
-2. **fluxui-docs**: Automatically checks official FluxUI documentation (https://fluxui.dev/docs) when working with Flux components. Fetches component APIs, props, and best practices.
+2. **wcag-compliance**: Specialized WCAG 2.2 accessibility compliance checker. Analyzes HTML, JSX, TSX, Blade, and Vue files for comprehensive accessibility issues. Features:
+   - All 86 WCAG 2.2 success criteria (including 9 new WCAG 2.2 criteria)
+   - Categorization by conformance level (A, AA, AAA)
+   - Accepts specific files or folder patterns for targeted audits
+   - Provides detailed remediation guidance with code examples
+   - References official W3C WCAG documentation
+   - Framework-aware (Laravel Blade, React, Vue)
 
-3. **daisyui-docs**: Automatically checks official DaisyUI documentation (https://daisyui.com/components/) when working with DaisyUI components. Fetches component classes, modifiers, variants, and usage examples.
+3. **fluxui-docs**: Automatically checks official FluxUI documentation (https://fluxui.dev/docs) when working with Flux components. Fetches component APIs, props, and best practices.
+
+4. **daisyui-docs**: Automatically checks official DaisyUI documentation (https://daisyui.com/components/) when working with DaisyUI components. Fetches component classes, modifiers, variants, and usage examples.
 
 ## Project Conventions
 
@@ -61,7 +69,7 @@ When working with this codebase:
 - `flux:button` does NOT have size="lg"
 
 ### Code Review Standards
-- All code should be reviewed for WCAG accessibility compliance
+- All code should be reviewed for WCAG 2.2 accessibility compliance using wcag-compliance subagent
 - Laravel best practices must be followed
 - Security is a top priority (prevent injection attacks, XSS, CSRF)
 
@@ -75,9 +83,10 @@ When working with this codebase:
 
 1. **Planning**: Use technical-refinement skill to transform requirements into tasks
 2. **Implementation**: Follow Laravel conventions and FluxUI component guidelines
-3. **Review**: Use code-review skill to check quality, security, and accessibility
-4. **Commit**: Use commit-message skill for professional commit messages
-5. **Release**: Use changelog-generator skill to create user-facing release notes
+3. **Review**: Use code-review subagent to check quality, security, and performance
+4. **Accessibility**: Use wcag-compliance subagent for comprehensive WCAG 2.2 accessibility audits
+5. **Commit**: Use commit-message skill for professional commit messages
+6. **Release**: Use changelog-generator skill to create user-facing release notes
 
 ## Repository Information
 
