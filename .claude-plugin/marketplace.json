@@ -16,6 +16,12 @@
             "source": "./coding-assistant",
             "description": "A comprehensive coding assistant that helps developers in their daily work. Provides expert guidance on code quality, planning, and implementation while respecting your project's architecture and conventions.",
             "version": "1.0.0"
+        },
+        {
+            "name": "research-assistant",
+            "source": "./research-assistant",
+            "description": "Comprehensive research and analysis toolkit with specialized agents for market research, competitive intelligence, trend analysis, and data investigation. Delivers actionable insights through expert research methodologies.",
+            "version": "1.0.0"
         }
     ]
 }
