@@ -34,16 +34,22 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 1. **technical-refinement**: Transforms product requirements into actionable developer todo lists. Asks clarifying questions, reads requirements.md, and analyzes project architecture.
 
-2. **code-review**: Expert code reviewer specializing in PHP, HTML, CSS, JavaScript, and Laravel. Reviews for:
+2. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Creates concise subject lines (≤50 chars) with detailed descriptions following best practices.
+
+3. **time-estimation**: Estimates development time for features by analyzing complexity, dependencies, and project structure. Provides manual vs AI-assisted development time comparisons showing hours saved when using AI tools.
+
+### Subagents
+
+1. **code-review**: Expert autonomous code reviewer specializing in PHP, HTML, CSS, JavaScript, and Laravel. Performs systematic code analysis using Read, Grep, Glob, and IDE diagnostics tools. Reviews for:
    - Code quality and best practices
    - Security vulnerabilities (SQL injection, XSS, CSRF)
    - Performance optimization (N+1 queries, caching)
    - WCAG accessibility compliance (Levels A, AA, AAA)
    - Laravel-specific conventions
 
-3. **fluxui-docs**: Automatically checks official FluxUI documentation (https://fluxui.dev/docs) when working with Flux components. Fetches component APIs, props, and best practices.
+2. **fluxui-docs**: Automatically checks official FluxUI documentation (https://fluxui.dev/docs) when working with Flux components. Fetches component APIs, props, and best practices.
 
-4. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Creates concise subject lines (≤50 chars) with detailed descriptions following best practices.
+3. **daisyui-docs**: Automatically checks official DaisyUI documentation (https://daisyui.com/components/) when working with DaisyUI components. Fetches component classes, modifiers, variants, and usage examples.
 
 ## Project Conventions
 
