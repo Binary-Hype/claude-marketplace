@@ -69,21 +69,18 @@ I've staged changes to the user model and auth controller. Help me write a commi
 
 When this skill is invoked, it follows this process:
 
-1. **Stage All Changes**
-   - Run `git add .` to stage all modified and new files
-   - Ensure all changes are ready for commit
-
-2. **Analyze Staged Changes**
+1. **Analyze Staged Changes**
    - Run `git status` to see what's staged
    - Run `git diff --staged` to see the actual changes
    - Review recent commits with `git log` to match project style
+   - **IMPORTANT**: Only analyze files that are already staged - do NOT stage any files
 
-3. **Understand the Context**
+2. **Understand the Context**
    - Identify the type of change (feature, fix, refactor, docs, test, etc.)
    - Determine the scope (which part of the codebase)
    - Recognize the impact (breaking change, enhancement, bug fix)
 
-4. **Generate Subject Line**
+3. **Generate Subject Line**
    - Start with a verb in imperative mood
    - Keep it under 50 characters
    - Don't end with a period
@@ -94,7 +91,7 @@ When this skill is invoked, it follows this process:
      - "Refactor database query optimization"
      - "Update API documentation for v2 endpoints"
 
-5. **Write Detailed Description**
+4. **Write Detailed Description**
    - Explain the motivation for the change
    - Describe what was changed and why
    - Include implementation details if helpful
@@ -123,7 +120,7 @@ When this skill is invoked, it follows this process:
      Fixes #123
      ```
 
-6. **Create the Commit**
+5. **Create the Commit**
    - Automatically execute `git commit` with the generated message
    - Use HEREDOC format to ensure proper formatting
    - Verify the commit was created successfully with `git log -1`
