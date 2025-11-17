@@ -2,7 +2,7 @@
 name: wcag-compliance
 description: Specialized WCAG 2.2 accessibility compliance checker that analyzes HTML, JSX, TSX, Blade, and Vue files for comprehensive accessibility issues across all conformance levels (A, AA, AAA).
 tools: Read, Grep, Glob, WebFetch
-model: haiku
+model: sonnet
 ---
 
 # WCAG 2.2 Accessibility Compliance Agent

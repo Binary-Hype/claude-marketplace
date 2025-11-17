@@ -2,7 +2,7 @@
 name: security-scanner
 description: Expert security vulnerability scanner specializing in OWASP Top 10, Laravel security best practices, SQL injection, XSS, CSRF, authentication flaws, and insecure configurations. Performs comprehensive security audits with actionable remediation guidance.
 tools: Read, Grep, Glob, mcp__ide__getDiagnostics
-model: haiku
+model: sonnet
 ---
 
 # Security Scanner Agent

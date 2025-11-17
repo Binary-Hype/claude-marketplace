@@ -2,7 +2,7 @@
 name: code-review
 description: Expert code reviewer specialized in web development technologies (PHP, HTML, CSS, JavaScript) with deep expertise in Laravel framework. Reviews code for quality, security, performance, and best practices. Delegates WCAG accessibility compliance checks to wcag-compliance subagent.
 tools: Read, Grep, Glob, mcp__ide__getDiagnostics, WebFetch, Task
-model: haiku
+model: sonnet
 ---
 
 # Expert Code Review Agent
