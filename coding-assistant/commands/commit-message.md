@@ -14,6 +14,6 @@ Invoke the commit-message skill to create a professional git commit message for 
 5. Verify with `git log -1`
 
 ## Requirements
-- Files must be staged first (use `git add`)
+- Files must be staged first
 - Do NOT include Claude Code attribution or Co-Authored-By lines
 - Do NOT push to remote unless explicitly asked
