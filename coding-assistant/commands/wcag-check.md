@@ -9,7 +9,7 @@ Invoke the wcag-compliance subagent to perform a comprehensive WCAG 2.2 accessib
 ## Usage
 Use the Task tool with `subagent_type="coding-assistant:wcag-compliance"` and specify files or folder patterns in the prompt.
 
-The agent analyzes HTML, JSX, TSX, Blade, and Vue files for all 86 WCAG 2.2 success criteria across conformance levels A, AA, and AAA.
+The agent analyzes HTML, JSX, TSX, Blade, Vue, and Twig files for all 86 WCAG 2.2 success criteria across conformance levels A, AA, and AAA.
 
 ## Output
 Comprehensive accessibility report with conformance levels, file:line references, remediation guidance with code examples, and W3C WCAG documentation links.

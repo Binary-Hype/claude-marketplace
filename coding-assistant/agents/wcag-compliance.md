@@ -1,6 +1,6 @@
 ---
 name: wcag-compliance
-description: Specialized WCAG 2.2 accessibility compliance checker that analyzes HTML, JSX, TSX, Blade, and Vue files for comprehensive accessibility issues across all conformance levels (A, AA, AAA).
+description: Specialized WCAG 2.2 accessibility compliance checker that analyzes HTML, JSX, TSX, Blade, Vue, and Twig files for comprehensive accessibility issues across all conformance levels (A, AA, AAA).
 tools: Read, Grep, Glob, WebFetch
 model: sonnet
 ---
@@ -42,12 +42,13 @@ Glob: pattern="src/components/**/*.tsx"
 Glob: pattern="resources/views/**/*.blade.php"
 
 # For folder paths - find all relevant files
-Glob: pattern="resources/views/**/*.{blade.php,html,vue,jsx,tsx}"
+Glob: pattern="resources/views/**/*.{blade.php,html,vue,jsx,tsx,twig}"
 ```
 
 **Target file types**:
 - `.html` - Static HTML
 - `.blade.php` - Laravel Blade templates
+- `.twig` - Symfony/Twig templates
 - `.jsx`, `.tsx` - React components
 - `.vue` - Vue components
 - `.php` (with HTML output)
@@ -839,6 +840,24 @@ button:focus-visible {
 
 {{-- FluxUI components (already accessible) --}}
 <flux:input label="Email" name="email" type="email" />
+```
+
+### Twig (Symfony)
+
+```twig
+{# Images #}
+<img src="{{ asset('images/logo.png') }}" alt="Company Logo">
+
+{# Forms #}
+<label for="email">Email</label>
+<input type="email" id="email" name="email" value="{{ email }}" required>
+
+{% if error %}
+  <span role="alert" id="email-error">{{ error }}</span>
+{% endif %}
+
+{# Form widget (Symfony forms are accessible by default) #}
+{{ form_row(form.email) }}
 ```
 
 ### Vue
