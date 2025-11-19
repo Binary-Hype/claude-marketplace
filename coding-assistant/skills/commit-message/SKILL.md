@@ -34,8 +34,9 @@ This skill provides comprehensive commit message support by:
    - Avoids unnecessary details in the subject
 
 3. **Description Writing**
-   - Briefly explains WHY changes were made (1-2 sentences)
-   - Keeps descriptions concise and focused
+   - Formats as a bulleted list with each point starting with a dash
+   - Briefly explains WHY changes were made
+   - Keeps each point concise and focused
    - Only includes essential context
    - Notes breaking changes if any
    - References related issues or tickets when applicable
@@ -92,21 +93,20 @@ When this skill is invoked, it follows this process:
      - "Update API documentation for v2 endpoints"
 
 4. **Write Concise Description**
-   - Keep it brief: 1-3 sentences explaining why and what
+   - Format as a bulleted list with each point starting with a dash
+   - Keep each point brief and focused (1 line per point)
    - Only include essential context not obvious from the diff
    - Note breaking changes if any
    - Reference issue numbers or tickets
    - **IMPORTANT**: Do NOT add any AI-generated notes, Claude Code references, or Co-Authored-By lines
-   - Avoid lengthy bullet lists unless absolutely necessary
    - Format example:
      ```
      Add user authentication with JWT
 
-     Replaces session-based auth with JWT for better API scalability
-     and easier mobile client integration.
-
-     Breaking change: Session endpoints deprecated, use Authorization header.
-     Fixes #123
+     - Replaces session-based auth with JWT for better API scalability
+     - Easier mobile client integration
+     - Breaking change: Session endpoints deprecated, use Authorization header
+     - Fixes #123
      ```
 
 5. **Create the Commit**
@@ -161,10 +161,10 @@ Or simply:
 ```
 
 **Body Rules:**
-- Keep it concise: 1-3 sentences is ideal
+- Format as a bulleted list with each point starting with a dash
+- Keep each point concise (1 line per point)
 - Explain the WHY briefly, not just the WHAT
 - Use present tense
-- Only use bullet points if absolutely necessary
 - Include breaking changes if any
 - Reference issues/tickets at the end
 
@@ -178,11 +178,9 @@ Or simply:
 ```
 Add email notification system for user events
 
-Implements queued email notifications to keep users informed about
-account activities. Uses Laravel notifications with customizable
-user preferences.
-
-Related to #456
+- Implements queued email notifications to keep users informed about account activities
+- Uses Laravel notifications with customizable user preferences
+- Related to #456
 ```
 
 ### Example 2: Bug Fix
@@ -193,10 +191,9 @@ Related to #456
 ```
 Fix race condition in payment processing
 
-Adds pessimistic locking and unique constraints to prevent duplicate
-charges when concurrent requests process the same order.
-
-Fixes #789
+- Adds pessimistic locking and unique constraints
+- Prevents duplicate charges when concurrent requests process the same order
+- Fixes #789
 ```
 
 ### Example 3: Refactoring
@@ -207,8 +204,10 @@ Fixes #789
 ```
 Refactor user service for better testability
 
-Extracts validation logic, adds dependency injection, and improves
-type hints. No functional changes, all tests pass.
+- Extracts validation logic into separate methods
+- Adds dependency injection for better testing
+- Improves type hints throughout the service
+- No functional changes, all tests pass
 ```
 
 ### Example 4: Documentation Update
@@ -219,8 +218,9 @@ type hints. No functional changes, all tests pass.
 ```
 Update API documentation for v2 endpoints
 
-Adds endpoint descriptions, request/response examples, and migration
-guide from v1 to help developers integrate more easily.
+- Adds comprehensive endpoint descriptions
+- Includes request/response examples
+- Provides migration guide from v1 to help developers integrate more easily
 ```
 
 ### Example 5: Multiple Related Changes
@@ -231,10 +231,10 @@ guide from v1 to help developers integrate more easily.
 ```
 Optimize database queries for dashboard page
 
-Adds eager loading, caching, and indexes to reduce queries from 45+
-to 8, improving load time by 60% (850ms → 340ms).
-
-Closes #234
+- Adds eager loading, caching, and indexes
+- Reduces queries from 45+ to 8
+- Improves load time by 60% (850ms → 340ms)
+- Closes #234
 ```
 
 ## Best Practices
@@ -245,15 +245,16 @@ Closes #234
    - Stay brief: If it's too long, you're including too much detail
 
 2. **Body Brevity**
-   - Answer: Why is this change needed? (1-2 sentences)
+   - Format as bulleted list with dashes
+   - Answer: Why is this change needed? (1 line per point)
    - Mention what changed only if not obvious from subject
    - Skip implementation details unless critical
    - Include: Breaking changes if any, related issues
 
 3. **Formatting Consistency**
    - One blank line between subject and body
-   - Keep descriptions to 1-3 sentences
-   - Avoid bullet lists unless absolutely necessary
+   - Format body as bulleted list with dashes
+   - Keep each point concise (1 line per point)
    - Wrap lines at 72 characters
 
 4. **Project Context**
@@ -266,7 +267,7 @@ Closes #234
    - Avoid: "Fix bug" or "Update code"
    - Avoid: Repeating what the diff shows
    - Avoid: Long explanations of implementation details
-   - Include: Brief context about WHY (1-2 sentences)
+   - Include: Brief context about WHY (bulleted list format)
 
 ## Integration with Your Workflow
 
@@ -302,35 +303,42 @@ I've staged my changes. What would be a good commit message?
 ```
 Add [feature name]
 
-[1-2 sentences: why it's needed and what it does]
+- [Why it's needed]
+- [What it does]
+- [Any other relevant points]
 ```
 
 **Bug Fix:**
 ```
 Fix [specific problem]
 
-[1-2 sentences: what caused it and how it's fixed]
+- [What caused it]
+- [How it's fixed]
+- [Fixes #issue]
 ```
 
 **Refactoring:**
 ```
 Refactor [component] for [benefit]
 
-[1-2 sentences: what changed and why, mention if tests pass]
+- [What changed]
+- [Why it's better]
+- [Tests pass/no functional changes]
 ```
 
 **Documentation:**
 ```
 Update [what documentation]
 
-[1 sentence: what changed and why]
+- [What changed and why]
 ```
 
 **Performance:**
 ```
 Optimize [what] for [improvement]
 
-[1-2 sentences: key metrics and what changed]
+- [Key metrics showing improvement]
+- [What changed to achieve this]
 ```
 
 ## What This Skill Won't Do
