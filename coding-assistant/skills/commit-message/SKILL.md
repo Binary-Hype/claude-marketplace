@@ -17,6 +17,19 @@ Use this skill when:
 - You need to explain the reasoning behind your changes
 - You're working on a team and want clear commit history
 
+## ⚠️ CRITICAL: Keep Commits Clean and Professional
+
+**This skill generates CLEAN, PROFESSIONAL commit messages WITHOUT any AI attribution or metadata.**
+
+**Absolutely NO:**
+- ❌ Co-Authored-By lines (Claude, AI assistants, etc.)
+- ❌ "Generated with Claude Code" or similar AI references
+- ❌ Emoji decorations or fancy formatting
+- ❌ Metadata tags or unnecessary footers
+- ❌ Any indication that AI was involved
+
+**Why?** Your commit messages should appear as if written by a human developer. They become part of your project's permanent history and should maintain professionalism and authenticity.
+
 ## What This Skill Does
 
 This skill provides comprehensive commit message support by:
@@ -66,6 +79,34 @@ Or ask for help with a specific commit:
 I've staged changes to the user model and auth controller. Help me write a commit message.
 ```
 
+## 🚫 Critical Restrictions - What NOT to Include
+
+**Your commit messages must be CLEAN and PROFESSIONAL. Do NOT include:**
+
+1. **NO Co-Authored-By Lines**
+   - ❌ `Co-Authored-By: Claude <noreply@anthropic.com>`
+   - ❌ `Co-Authored-By: AI Assistant <...>`
+   - ❌ Any co-authorship attribution to AI tools
+
+2. **NO AI-Generated Attribution**
+   - ❌ "Generated with Claude Code"
+   - ❌ "Created by AI" or similar references
+   - ❌ Links to AI tools or services
+   - ❌ Any mention of automation or AI assistance
+
+3. **NO Decorative Elements**
+   - ❌ Emoji in commit messages (🤖, ✨, etc.)
+   - ❌ Fancy formatting or ASCII art
+   - ❌ Unnecessary symbols or decorations
+
+4. **NO Metadata Tags or Footers**
+   - ❌ Tool version information
+   - ❌ Timestamp footers
+   - ❌ Custom metadata fields
+   - ❌ Unnecessary technical tags
+
+**Remember:** Commit messages become part of your project's permanent history. They should appear as if written by a professional human developer, maintaining authenticity and credibility.
+
 ## Workflow
 
 When this skill is invoked, it follows this process:
@@ -98,7 +139,7 @@ When this skill is invoked, it follows this process:
    - Only include essential context not obvious from the diff
    - Note breaking changes if any
    - Reference issue numbers or tickets
-   - **IMPORTANT**: Do NOT add any AI-generated notes, Claude Code references, or Co-Authored-By lines
+   - **🚨 CRITICAL - READ THIS**: Do NOT add any AI-generated notes, Claude Code references, Co-Authored-By lines, emojis, or ANY metadata. Keep the commit message clean and professional as if written by a human developer. This is NON-NEGOTIABLE.
    - Format example:
      ```
      Add user authentication with JWT
@@ -113,7 +154,7 @@ When this skill is invoked, it follows this process:
    - Automatically execute `git commit` with the generated message
    - Use HEREDOC format to ensure proper formatting
    - Verify the commit was created successfully with `git log -1`
-   - Do NOT add Claude Code attribution, Co-Authored-By, or any AI-generated notes
+   - **🚨 ABSOLUTELY NO AI ATTRIBUTION**: Do NOT add Claude Code attribution, Co-Authored-By lines, "Generated with" footers, emojis, or ANY indication that AI was involved. The commit must appear 100% human-written.
 
 ## Commit Message Structure
 
@@ -170,6 +211,8 @@ Or simply:
 
 ## Examples
 
+**⚠️ Notice:** All examples below demonstrate CLEAN commit messages without any AI attribution, Co-Authored-By lines, emojis, or metadata. This is the ONLY acceptable format.
+
 ### Example 1: Feature Addition
 
 **Staged changes:** New email notification system
@@ -181,6 +224,9 @@ Add email notification system for user events
 - Implements queued email notifications to keep users informed about account activities
 - Uses Laravel notifications with customizable user preferences
 - Related to #456
+
+# ✅ CORRECT: Clean, professional, no AI attribution
+# ❌ WRONG: Do NOT add "Co-Authored-By: Claude" or similar
 ```
 
 ### Example 2: Bug Fix
@@ -235,7 +281,24 @@ Optimize database queries for dashboard page
 - Reduces queries from 45+ to 8
 - Improves load time by 60% (850ms → 340ms)
 - Closes #234
+
+# ✅ CORRECT: Professional commit message, metrics-driven, no fluff
+# ❌ WRONG: Do NOT add any footers, emojis, or "Generated with" text
 ```
+
+**❌ NEVER do this:**
+```
+Optimize database queries for dashboard page
+
+- Adds eager loading, caching, and indexes
+- Reduces queries from 45+ to 8
+- Improves load time by 60% (850ms → 340ms)
+- Closes #234
+
+🤖 Generated with Claude Code
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+**This is completely unacceptable and defeats the purpose of professional commit messages.**
 
 ## Best Practices
 
@@ -268,6 +331,14 @@ Optimize database queries for dashboard page
    - Avoid: Repeating what the diff shows
    - Avoid: Long explanations of implementation details
    - Include: Brief context about WHY (bulleted list format)
+
+6. **🚨 Absolute Requirement: NO AI Attribution**
+   - **NEVER** add Co-Authored-By lines for AI or Claude
+   - **NEVER** add "Generated with" or AI tool references
+   - **NEVER** add emojis or decorative elements
+   - **NEVER** add metadata tags or automation footers
+   - Commit messages MUST appear human-written and professional
+   - This maintains authenticity and project credibility
 
 ## Integration with Your Workflow
 
