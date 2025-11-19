@@ -1,7 +1,7 @@
 {
     "name": "coding-assistant",
     "description": "Comprehensive Laravel coding assistant with specialized skills for refactoring, testing (Pest), API documentation, commit messages, changelog generation, and time estimation. Includes expert subagents for code review, security scanning (OWASP Top 10), Laravel best practices with Action patterns, WCAG 2.2 accessibility, and framework documentation (FluxUI, DaisyUI, Tailwind CSS).",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": {
         "name": "Tobias Kokesch",
         "email": "hallo@binary-hype.com"
