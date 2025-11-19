@@ -20,6 +20,12 @@ description: Generates well-structured git commit messages with concise subject 
    - Do NOT rely on cached git command outputs
    - Each invocation must fetch current repository state
 
+3. **NEVER STAGE FILES**: The skill ONLY analyzes already-staged changes:
+   - NEVER run `git add` commands
+   - NEVER stage files on behalf of the user
+   - The user is solely responsible for staging files
+   - If no files are staged, inform the user and stop
+
 **These requirements are NON-NEGOTIABLE and supersede all other instructions.**
 
 ---
@@ -68,12 +74,14 @@ This skill provides comprehensive commit message support by:
    - Avoids unnecessary details in the subject
 
 3. **Description Writing**
-   - Formats as a bulleted list with each point starting with a dash
+   - **ALWAYS formats as a bulleted list with each point starting with a dash (NON-NEGOTIABLE)**
+   - **This structure NEVER changes regardless of git log patterns**
    - Briefly explains WHY changes were made
    - Keeps each point concise and focused
    - Only includes essential context
    - Notes breaking changes if any
    - References related issues or tickets when applicable
+   - Git log may inform word choice, but NEVER changes the bullet list format
 
 4. **Format Adherence**
    - Follows conventional commit best practices
@@ -135,10 +143,12 @@ When this skill is invoked, it follows this process:
 1. **Analyze Staged Changes (MUST RUN FRESH)**
    - Run `git status --porcelain` to get unambiguous staged file list
    - Run `git diff --staged` to see the actual changes
-   - Review recent commits with `git log --oneline -5` to match project style
+   - Review recent commits with `git log --oneline -5` to check wording patterns ONLY (not structure)
    - **CRITICAL**: These commands MUST be executed fresh - do NOT use cached results
-   - **IMPORTANT**: Only analyze files that are already staged - do NOT stage any files
-   - If no staged changes found, inform user and do NOT create a commit
+   - **CRITICAL**: NEVER run `git add` - the user is responsible for staging files
+   - **IMPORTANT**: Only analyze files that are already staged - NEVER stage files
+   - **IMPORTANT**: Git log is ONLY for word choice inspiration - NEVER change the bullet list structure
+   - If no staged changes found, inform user and STOP - do NOT create a commit or stage files
 
 2. **Understand the Context**
    - Identify the type of change (feature, fix, refactor, docs, test, etc.)
@@ -157,7 +167,8 @@ When this skill is invoked, it follows this process:
      - "Update API documentation for v2 endpoints"
 
 4. **Write Concise Description**
-   - Format as a bulleted list with each point starting with a dash
+   - **MUST format as a bulleted list with each point starting with a dash (MANDATORY)**
+   - **Git log provides wording ideas ONLY - NEVER change the bullet list structure**
    - Keep each point brief and focused (1 line per point)
    - Only include essential context not obvious from the diff
    - Note breaking changes if any
@@ -231,7 +242,8 @@ Or simply:
 ```
 
 **Body Rules:**
-- Format as a bulleted list with each point starting with a dash
+- **ALWAYS format as a bulleted list with each point starting with a dash (MANDATORY)**
+- **Git log is ONLY for wording inspiration - NEVER change this structure**
 - Keep each point concise (1 line per point)
 - Explain the WHY briefly, not just the WHAT
 - Use present tense
@@ -372,14 +384,20 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ## Integration with Your Workflow
 
 **Before Committing:**
-```
+```bash
+# Step 1: YOU stage the files (the skill will NOT do this)
 git add .
+
+# Step 2: Invoke the skill to generate commit message
 /commit-message
 ```
 
 **For Specific Changes:**
-```
+```bash
+# Step 1: YOU stage specific files
 git add src/auth/*
+
+# Step 2: Ask for commit message
 /commit-message Help me write a message for these auth changes
 ```
 
@@ -387,6 +405,8 @@ git add src/auth/*
 ```
 I've staged my changes. What would be a good commit message?
 ```
+
+**Important:** Always stage files yourself with `git add` before invoking this skill. The skill will NOT stage files for you.
 
 ## Tips for Best Results
 
@@ -443,6 +463,7 @@ Optimize [what] for [improvement]
 
 ## What This Skill Won't Do
 
+- Won't stage files (you must run `git add` yourself first)
 - Won't automatically commit your changes (you control when to commit)
 - Won't modify your staged changes
 - Won't force a specific commit message style (adapts to your project)
@@ -462,9 +483,9 @@ Optimize [what] for [improvement]
 
 This skill:
 1. Uses `git status` and `git diff --staged` to analyze changes
-2. Reviews `git log` to understand project commit style
-3. Applies commit message best practices
-4. Generates structured messages with subject and body
+2. Reviews `git log` for wording patterns ONLY (NEVER to change structure)
+3. Applies commit message best practices with mandatory bullet list format
+4. Generates structured messages with subject and bulleted body
 5. Presents messages in proper format for direct use
 
 The skill ensures you always have professional, informative commit messages that make your git history a valuable resource for your team.
