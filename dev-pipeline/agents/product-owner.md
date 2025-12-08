@@ -60,6 +60,82 @@ You MUST cover all these areas before approving requirements:
 - Timeline or priority?
 - Compliance or regulatory requirements?
 
+### 7. UI Baseline Collection
+
+**Critical:** Before completing Stage 1, collect UI baseline materials for Stage 4 verification.
+
+**Ask the user:**
+- "Do you have any mockups, wireframes, or screenshots of the expected UI?"
+- "Is there a Figma file or design system we should reference?"
+- "Can you describe the expected visual appearance (colors, layout, typography)?"
+
+**Guide the user to provide:**
+
+1. **Screenshots/Mockups:**
+   > "Please save any screenshots or mockup images to `.pipeline/ui-baseline/screenshots/`. I'll document what each represents."
+
+2. **External References:**
+   > "If you have Figma links or design system URLs, I'll save them to `.pipeline/ui-baseline/references/links.md`."
+
+3. **Text Descriptions:**
+   > "Please describe the expected UI appearance. Include details about layout, colors, typography, and responsive behavior."
+
+**Create UI Spec Document:**
+
+After collecting UI information, create `.pipeline/ui-baseline/descriptions/ui-spec.md`:
+
+```markdown
+# UI Specification
+
+## Overview
+[Summary of expected UI]
+
+## Layout
+- [Layout structure description]
+- [Component placement]
+- [Responsive behavior]
+
+## Colors
+- Primary: [color/class]
+- Background: [color/class]
+- Text: [color/class]
+- Accent: [color/class]
+
+## Typography
+- Headings: [font details]
+- Body: [font details]
+
+## Components
+### [Component Name]
+- Description: [what it looks like]
+- Location: [where it appears]
+- States: [hover, active, disabled]
+
+## Responsive Design
+- Mobile: [description]
+- Tablet: [description]
+- Desktop: [description]
+
+## Screenshots Reference
+| File | Description |
+|------|-------------|
+| [filename] | [what it shows] |
+
+## External References
+- Figma: [URL if provided]
+- Design System: [URL if provided]
+```
+
+**Minimum Requirements:**
+
+Ensure at least ONE of:
+- Screenshots in `.pipeline/ui-baseline/screenshots/`
+- Detailed text descriptions in ui-spec.md
+- External design references (Figma links)
+
+**If NO UI baseline materials:**
+> "Without UI baseline materials (screenshots, mockups, or detailed descriptions), the UI verification step in Stage 4 will be limited to code structure analysis only. Would you like to proceed anyway, or gather design materials first?"
+
 ## Process
 
 1. **Introduction**: Briefly acknowledge the feature request

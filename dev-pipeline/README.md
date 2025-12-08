@@ -93,12 +93,14 @@ EOF
                               ↓
 ┌──────────────────────────────────────────────────────────────┐
 │  Stage 4: REVIEW ✅                                          │
-│  Agent: Code Reviewer                                        │
+│  Agent: Code Reviewer → UI Checker (sequentiell)             │
 │  → Security Check                                            │
 │  → Architecture Review                                       │
 │  → WCAG 2.1 AA Compliance                                    │
 │  → Performance Check                                         │
 │  → Erstellt .pipeline/review.md                              │
+│  → UI Verification (visuell + Code-Analyse)                  │
+│  → Erstellt .pipeline/ui-review.md                           │
 └──────────────────────────────────────────────────────────────┘
                               ↓
                          🎉 DONE!
@@ -112,9 +114,14 @@ Die Pipeline erstellt im `.pipeline/` Ordner:
 .pipeline/
 ├── state.json      # Pipeline State (Stage, Status)
 ├── spec.md         # Requirements (Stage 1)
+├── ui-baseline/    # UI Baseline Materialien (Stage 1)
+│   ├── screenshots/      # Mockups, Screenshots
+│   ├── descriptions/     # ui-spec.md
+│   └── references/       # Figma Links, Design System
 ├── tech-spec.md    # Technische Spezifikation (Stage 2)
 ├── changelog.md    # Implementierungs-Log (Stage 3)
-└── review.md       # Review Report (Stage 4)
+├── review.md       # Code Review Report (Stage 4)
+└── ui-review.md    # UI Verification Report (Stage 4)
 ```
 
 ## Agents
@@ -122,6 +129,7 @@ Die Pipeline erstellt im `.pipeline/` Ordner:
 ### Product Owner (Stage 1)
 - Stellt viele Fragen zu Requirements
 - Fokus auf User Stories, Edge Cases, UI/UX
+- **Sammelt UI Baseline Materialien** (Screenshots, Figma, Beschreibungen)
 - Erstellt vollständige Spezifikation
 
 ### Lead Developer (Stage 2)
@@ -136,12 +144,19 @@ Die Pipeline erstellt im `.pipeline/` Ordner:
 - Fragt bei Unklarheiten
 - Dokumentiert Änderungen
 
-### Code Reviewer (Stage 4)
+### Code Reviewer (Stage 4 - Step 1)
 - Security Vulnerabilities Check
 - Clean Architecture Review
 - WCAG 2.1 AA Compliance
 - Performance Analysis
 - Error Handling Check
+
+### UI Checker (Stage 4 - Step 2)
+- **Visuelle Analyse** von Screenshots/Mockups
+- **Code-Analyse** von CSS/Tailwind Klassen
+- Vergleicht Implementation mit UI Baseline
+- Prüft Farben, Typography, Spacing, Layout
+- Responsive Design Verification
 
 ## Tipps
 
@@ -167,7 +182,8 @@ dev-pipeline/
 │   ├── product-owner.md     # Stage 1 Agent
 │   ├── lead-developer.md    # Stage 2 Agent
 │   ├── senior-developer.md  # Stage 3 Agent
-│   └── code-reviewer.md     # Stage 4 Agent
+│   ├── code-reviewer.md     # Stage 4 Agent (Step 1)
+│   └── ui-checker.md        # Stage 4 Agent (Step 2)
 └── skills/
     └── pipeline-state/
         └── SKILL.md         # State Management Skill

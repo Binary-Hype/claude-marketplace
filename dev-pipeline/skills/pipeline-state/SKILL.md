@@ -65,9 +65,14 @@ Determine current stage before processing commands.
 |------|------------|---------|
 | `state.json` | Stage 1 | Pipeline state |
 | `spec.md` | Stage 1 | Requirements |
+| `ui-baseline/` | Stage 1 | UI baseline folder |
+| `ui-baseline/screenshots/` | Stage 1 | Mockups, screenshots |
+| `ui-baseline/descriptions/ui-spec.md` | Stage 1 | UI specification |
+| `ui-baseline/references/links.md` | Stage 1 | External design refs |
 | `tech-spec.md` | Stage 2 | Technical spec |
 | `changelog.md` | Stage 3 | Implementation log |
-| `review.md` | Stage 4 | Review report |
+| `review.md` | Stage 4 | Code review report |
+| `ui-review.md` | Stage 4 | UI verification report |
 
 ## Stage Indicators
 

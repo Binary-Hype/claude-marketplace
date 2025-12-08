@@ -177,4 +177,49 @@ Set pipeline back to stage 3.
 > "Review complete. [X] minor issues found (non-blocking). Type `/approve` to complete the pipeline."
 
 **If no issues:**
-> "Review complete. No issues found! 🎉 Type `/approve` to complete the pipeline."
+> "Review complete. No issues found! Proceeding to UI verification..."
+
+## Sequential UI Verification
+
+After completing your code review, you MUST invoke the UI checker for visual verification.
+
+### Stage 4 Flow
+
+```
+Stage 4: Review ✅
+├── Step 1: Code Review (this agent)
+│   ├── Security review
+│   ├── Architecture review
+│   ├── WCAG compliance
+│   ├── Performance review
+│   └── Creates .pipeline/review.md
+│
+└── Step 2: UI Verification (ui-checker agent)
+    ├── Visual analysis (screenshots)
+    ├── Code analysis (CSS/Tailwind)
+    └── Creates .pipeline/ui-review.md
+```
+
+### If Code Review Passes (no critical/major issues):
+
+After creating `.pipeline/review.md`, invoke the `ui-checker` agent:
+
+> "Code review complete with [X] minor issues (non-blocking). Now proceeding to UI verification..."
+
+The UI checker will:
+1. Compare implementation against `.pipeline/ui-baseline/`
+2. Analyze CSS/Tailwind classes against specifications
+3. Use visual analysis on any baseline screenshots
+4. Create `.pipeline/ui-review.md`
+
+**IMPORTANT:** Do NOT prompt user for `/approve` until UI verification is done. The ui-checker agent will handle the final approval prompt.
+
+### If Code Review Fails (critical/major issues):
+
+Do NOT invoke UI checker. Return to Stage 3 for code fixes first:
+
+> "Review complete. Found [X] critical and [Y] major issues. See report. Returning to Stage 3 for fixes."
+
+### Combined Approval
+
+Both `.pipeline/review.md` AND `.pipeline/ui-review.md` must pass for Stage 4 approval.

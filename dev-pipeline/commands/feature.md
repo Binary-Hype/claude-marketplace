@@ -13,7 +13,11 @@ Start a structured 4-stage development pipeline for the requested feature.
 ## Pipeline Initialization
 
 1. Create `.pipeline/` directory if it doesn't exist
-2. Create `.pipeline/state.json` with initial state:
+2. Create `.pipeline/ui-baseline/` directory structure:
+   - `.pipeline/ui-baseline/screenshots/` (for mockups/screenshots)
+   - `.pipeline/ui-baseline/descriptions/` (for text-based UI specs)
+   - `.pipeline/ui-baseline/references/` (for external links)
+3. Create `.pipeline/state.json` with initial state:
 ```json
 {
   "feature": "$ARGUMENTS",

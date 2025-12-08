@@ -51,8 +51,13 @@ Approve the current stage and advance the pipeline to the next stage.
 
 ### From Stage 4 (Review) → Complete
 
-1. Update state.json: stage 4 → approved, stage → 5 (complete)
-2. Display:
+1. Verify `.pipeline/review.md` exists (code review complete)
+2. Verify `.pipeline/ui-review.md` exists (UI verification complete)
+3. Check both reports for approval status:
+   - If EITHER has 🔴 BLOCKED status, inform user and do NOT complete
+   - If both are 🟢 APPROVED or 🟡 NEEDS CHANGES (minor only), proceed
+4. Update state.json: stage 4 → approved, stage → 5 (complete)
+5. Display:
 ```
 🎉 Pipeline completed for: [feature name]
 
@@ -61,5 +66,7 @@ All stages approved! Feature is ready for merge.
 Summary:
 - Spec: .pipeline/spec.md
 - Tech Spec: .pipeline/tech-spec.md
-- Review: .pipeline/review.md
+- UI Baseline: .pipeline/ui-baseline/
+- Code Review: .pipeline/review.md
+- UI Review: .pipeline/ui-review.md
 ```
