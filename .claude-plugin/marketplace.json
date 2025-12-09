@@ -21,7 +21,7 @@
             "name": "dev-pipeline",
             "source": "./dev-pipeline",
             "description": "Structured 4-stage development pipeline enforcing Product Owner → Lead Developer → Senior Developer → Code Reviewer workflow. Use /feature to start a new feature with mandatory approval gates, thorough requirements gathering, technical planning, clean implementation, and comprehensive code review.",
-            "version": "1.0.0"
+            "version": "1.0.1"
         }
     ]
 }
