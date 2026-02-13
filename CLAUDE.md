@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.0.4
+**Version:** 1.1.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -21,7 +21,7 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 1. **changelog-generator**: Transforms technical git commits into user-friendly changelogs by analyzing commit history, categorizing changes, and creating polished release notes. Use when preparing release notes, documenting changes for customers, or maintaining public changelogs.
 
-2. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Creates concise subject lines (≤50 chars) with detailed descriptions following best practices.
+2. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Creates concise subject lines (<=50 chars) with detailed descriptions following best practices.
 
 3. **time-estimation**: Estimates development time for features by analyzing complexity, dependencies, and project structure. Provides manual vs AI-assisted development time comparisons showing hours saved when using AI tools.
 
@@ -30,6 +30,12 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 5. **api-documentation**: Automatically generates comprehensive API documentation including OpenAPI/Swagger specs, endpoint descriptions, request/response examples, and integration guides. Perfect for Laravel APIs with automatic route discovery.
 
 6. **test-generator**: Generates comprehensive Laravel tests using Pest syntax. Creates feature tests, unit tests, factories, and test data with proper assertions, mocking, and Laravel testing helpers.
+
+7. **continuous-learning**: Instinct-based learning system that observes Claude Code sessions via hooks, creates atomic instincts with confidence scoring (0.3-0.9), and evolves them into skills/commands/agents. Includes observation hooks, instinct CLI, and commands for status, export, import, and evolution.
+
+8. **api-design**: REST API design patterns including resource naming, status codes, pagination, filtering, error responses, versioning, and rate limiting. Includes Laravel and plain PHP implementation examples.
+
+9. **iterative-retrieval**: Pattern for progressively refining context retrieval in multi-agent workflows. Solves the subagent context problem through 4-phase DISPATCH-EVALUATE-REFINE-LOOP cycles (max 3 iterations) with relevance scoring and gap identification.
 
 ### Subagents
 
@@ -59,6 +65,22 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 7. **tailwindcss-docs**: Automatically checks official Tailwind CSS documentation (https://tailwindcss.com/docs) when using or working with Tailwind utility classes. Fetches and analyzes documentation for utility classes, responsive design, dark mode, customization, and best practices.
 
+8. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes Laravel Eloquent patterns, migration best practices, and MariaDB-specific features. Use when writing SQL, creating migrations, or troubleshooting performance.
+
+### Commands
+
+1. **commit-message**: Generates well-structured git commit messages and automatically creates the commit. Analyzes staged changes to create meaningful commit messages following best practices.
+
+2. **instinct-export**: Export instincts for sharing with teammates or other projects. Filters by domain and confidence, strips sensitive information, and outputs shareable YAML/JSON/MD files.
+
+3. **instinct-import**: Import instincts from teammates, Skill Creator, or other sources. Handles duplicate detection and conflict resolution with configurable merge strategies.
+
+4. **learn**: Extracts reusable patterns from the current session and saves them as skills. Identifies error resolutions, debugging techniques, workarounds, and project-specific patterns.
+
+5. **refactor-clean**: Safely identifies and removes dead code in PHP/Laravel/Shopware projects. Uses PHPStan, Psalm, composer-unused, and Deptrac for detection with test verification at every step.
+
+6. **update-docs**: Syncs documentation with the codebase for PHP/Laravel/Shopware projects. Generates from source-of-truth files like composer.json, .env.example, route definitions, and artisan commands.
+
 ## Project Conventions
 
 When working with this codebase:
@@ -75,7 +97,7 @@ When working with this codebase:
 - Action pattern should be used for complex business logic (single-responsibility classes)
 
 ### Commit Messages
-- Subject lines should be ≤50 characters
+- Subject lines should be <=50 characters
 - Use imperative mood ("Add feature" not "Added feature")
 - Include detailed body explaining WHY, not just WHAT
 - Reference issues/tickets when applicable
@@ -86,9 +108,11 @@ When working with this codebase:
 2. **Implementation**: Follow Laravel conventions, Action patterns, and FluxUI component guidelines
 3. **Testing**: Use test-generator skill to create comprehensive Pest tests
 4. **Review**: Use code-review subagent to check quality (delegates to security-scanner, wcag-compliance, laravel-best-practices)
-5. **Documentation**: Use api-documentation skill for API endpoints
-6. **Commit**: Use commit-message skill for professional commit messages
+5. **Documentation**: Use api-documentation skill for API endpoints, update-docs command for project docs
+6. **Commit**: Use commit-message command for professional commit messages
 7. **Release**: Use changelog-generator skill to create user-facing release notes
+8. **Learn**: Use /learn command to extract reusable patterns from sessions
+9. **Clean**: Use /refactor-clean command to identify and remove dead code
 
 ## Repository Information
 
@@ -101,11 +125,12 @@ When working with this codebase:
 
 - Skills
 - Git (changelog, commits)
-- Web Development (PHP, Laravel, JavaScript)
+- Web Development (PHP, Laravel, Shopware, JavaScript)
 - Code Quality
 - Testing (Pest, PHPUnit)
 - Refactoring
 - API Documentation
+- API Design Patterns
 - Security (OWASP Top 10)
 - Accessibility (WCAG)
 - Laravel Best Practices
@@ -114,6 +139,9 @@ When working with this codebase:
 - TailwindCSS
 - DaisyUI
 - Code Review Workflow
+- Database (MySQL, MariaDB, PostgreSQL)
+- Continuous Learning
+- Dead Code Removal
 
 ## Notes for AI Assistants
 
@@ -121,6 +149,7 @@ When working in this repository:
 
 1. Each plugin is self-contained in its own directory
 2. Skills are defined in `SKILL.md` files within each plugin
-3. Plugin metadata is in `.claude-plugin/plugin.json`
-4. The marketplace configuration is in `.claude-plugin/marketplace.json`
-5. All plugins are MIT licensed and maintained by Binary Hype
+3. Commands are defined as `.md` files in the `commands/` directory
+4. Plugin metadata is in `.claude-plugin/plugin.json`
+5. The marketplace configuration is in `.claude-plugin/marketplace.json`
+6. All plugins are MIT licensed and maintained by Binary Hype

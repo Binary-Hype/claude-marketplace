@@ -1,7 +1,7 @@
 {
     "name": "coding-assistant",
-    "description": "Comprehensive Laravel coding assistant with specialized skills for refactoring, testing (Pest), API documentation, commit messages, changelog generation, and time estimation. Includes expert subagents for code review, security scanning (OWASP Top 10), Laravel best practices with Action patterns, WCAG 2.2 accessibility, and framework documentation (FluxUI, DaisyUI, Tailwind CSS).",
-    "version": "1.0.6",
+    "description": "Comprehensive Laravel coding assistant with specialized skills for refactoring, testing (Pest), API documentation, API design patterns, commit messages, changelog generation, time estimation, continuous learning, and iterative retrieval. Includes expert subagents for code review, security scanning (OWASP Top 10), database review (MySQL/MariaDB/PostgreSQL), Laravel best practices with Action patterns, WCAG 2.2 accessibility, and framework documentation (FluxUI, DaisyUI, Tailwind CSS).",
+    "version": "1.1.0",
     "author": {
         "name": "Tobias Kokesch",
         "email": "hallo@binary-hype.com"
@@ -13,6 +13,7 @@
         "skills",
         "php",
         "laravel",
+        "shopware",
         "javascript",
         "web-development",
         "code-quality",
@@ -20,6 +21,7 @@
         "testing",
         "pest",
         "api-documentation",
+        "api-design",
         "security",
         "owasp",
         "accessibility",
@@ -31,6 +33,14 @@
         "release-notes",
         "tailwindcss",
         "fluxui",
-        "daisyui"
+        "daisyui",
+        "continuous-learning",
+        "instincts",
+        "database",
+        "mysql",
+        "mariadb",
+        "postgresql",
+        "dead-code",
+        "documentation"
     ]
 }

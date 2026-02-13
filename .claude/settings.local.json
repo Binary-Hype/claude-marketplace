@@ -5,7 +5,9 @@
       "Bash(curl:*)",
       "Bash(research-assistant/skills/research-analyst/SKILL.md)",
       "Bash(research-assistant/skills/search-specialist/SKILL.md)",
-      "Bash(research-assistant/skills/trend-analyst/SKILL.md)"
+      "Bash(research-assistant/skills/trend-analyst/SKILL.md)",
+      "Bash(gh api:*)",
+      "Bash(chmod:*)"
     ],
     "deny": [],
     "ask": []
