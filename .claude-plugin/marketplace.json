@@ -10,18 +10,6 @@
             "source": "./coding-assistant",
             "description": "A comprehensive coding assistant that helps developers in their daily work. Provides expert guidance on code quality, planning, and implementation while respecting your project's architecture and conventions.",
             "version": "1.0.6"
-        },
-        {
-            "name": "research-assistant",
-            "source": "./research-assistant",
-            "description": "Comprehensive research and analysis toolkit with specialized agents for market research, competitive intelligence, trend analysis, and data investigation. Delivers actionable insights through expert research methodologies.",
-            "version": "1.0.0"
-        },
-        {
-            "name": "dev-pipeline",
-            "source": "./dev-pipeline",
-            "description": "Structured 4-stage development pipeline enforcing Product Owner → Lead Developer → Senior Developer → Code Reviewer workflow. Use /feature to start a new feature with mandatory approval gates, thorough requirements gathering, technical planning, clean implementation, and comprehensive code review.",
-            "version": "1.0.1"
         }
     ]
 }

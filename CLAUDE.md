@@ -4,13 +4,11 @@ This repository contains Claude Code plugins that provide specialized skills for
 
 ## Project Structure
 
-This is a marketplace repository for Claude Code plugins created by Binary Hype (Tobias Kokesch). The project contains multiple plugins, each providing specialized skills:
+This is a marketplace repository for Claude Code plugins created by Binary Hype (Tobias Kokesch).
 
 ### Plugins
 
 1. **coding-assistant** - Comprehensive coding assistance with multiple specialized skills
-2. **research-assistant** - Research and analysis toolkit for market intelligence and insights
-3. **dev-pipeline** - Structured 4-stage development pipeline with approval gates
 
 ## Plugin: coding-assistant
 
@@ -60,81 +58,6 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 6. **daisyui-docs**: Automatically checks official DaisyUI documentation (https://daisyui.com/components/) when working with DaisyUI components. Fetches component classes, modifiers, variants, and usage examples.
 
 7. **tailwindcss-docs**: Automatically checks official Tailwind CSS documentation (https://tailwindcss.com/docs) when using or working with Tailwind utility classes. Fetches and analyzes documentation for utility classes, responsive design, dark mode, customization, and best practices.
-
-## Plugin: research-assistant
-
-**Location:** `./research-assistant`
-**Version:** 1.0.0
-
-Comprehensive research and analysis toolkit with specialized subagents for market research, competitive intelligence, trend analysis, and data investigation.
-
-### Subagents
-
-1. **research-analyst**: Expert research analyst for comprehensive information gathering, synthesis, and insight generation. Masters research methodologies, data analysis, and report creation with focus on delivering actionable intelligence.
-
-2. **search-specialist**: Advanced information retrieval expert specializing in query optimization and knowledge discovery. Finds needle-in-haystack information with precision > 90% using advanced search techniques and specialized databases.
-
-3. **trend-analyst**: Senior trend analyst specializing in pattern recognition, forecasting, and strategic foresight. Identifies emerging trends before mainstream awareness and assesses strategic implications across technology, consumer, social, and economic domains.
-
-4. **competitive-analyst**: Expert competitive intelligence specialist for competitor analysis, SWOT analysis, and market positioning. Provides strategic recommendations for sustainable competitive advantage through ethical intelligence gathering.
-
-5. **market-researcher**: Expert market researcher specializing in market sizing (TAM, SAM, SOM), consumer insights, and segmentation analysis. Masters primary and secondary research to identify market opportunities and inform go-to-market strategies.
-
-6. **data-researcher**: Expert data researcher specializing in data discovery, statistical analysis, and pattern recognition. Extracts meaningful insights from complex datasets through rigorous analytical methods and creates compelling visualizations.
-
-### Usage
-Use when conducting market research, competitive analysis, trend forecasting, or data-driven decision making. Each subagent is autonomous and performs deep research independently.
-
-## Plugin: dev-pipeline
-
-**Location:** `./dev-pipeline`
-**Version:** 1.0.0
-
-Structured 4-stage development pipeline enforcing Product Owner → Lead Developer → Senior Developer → Code Reviewer workflow with mandatory approval gates.
-
-### Commands
-
-| Command | Description |
-|---------|-------------|
-| `/feature <description>` | Start new pipeline at Stage 1 |
-| `/stage` | Show current pipeline status |
-| `/approve` | Approve current stage → move to next |
-| `/back` | Return to previous stage |
-| `/abort` | Abort the pipeline |
-| `/review [target]` | Standalone code review |
-
-### Pipeline Stages
-
-1. **Stage 1: Spec Generation** (Product Owner)
-   - Gathers requirements through targeted questions
-   - Creates `.pipeline/spec.md`
-   - Focuses on user stories, edge cases, UI/UX
-
-2. **Stage 2: Technical Refinement** (Lead Developer)
-   - Analyzes existing codebase
-   - Creates architecture diagrams (Mermaid)
-   - Asks about architecture preferences
-   - Creates `.pipeline/tech-spec.md`
-
-3. **Stage 3: Implementation** (Senior Developer)
-   - Follows tech spec exactly
-   - No shortcuts or quick fixes
-   - Asks when unclear
-   - Documents changes in `.pipeline/changelog.md`
-
-4. **Stage 4: Review** (Code Reviewer)
-   - Security vulnerabilities check
-   - Clean architecture review
-   - WCAG 2.1 AA compliance
-   - Performance analysis
-   - Creates `.pipeline/review.md`
-
-### Skills
-
-1. **pipeline-state**: State management skill for tracking pipeline progress and stage transitions.
-
-### Usage
-Use `/feature` to start a new feature development with the full pipeline workflow. Each stage requires explicit `/approve` to proceed, ensuring thorough requirements gathering, technical planning, clean implementation, and comprehensive code review.
 
 ## Project Conventions
 
@@ -190,13 +113,6 @@ When working with this codebase:
 - FluxUI
 - TailwindCSS
 - DaisyUI
-- Research & Analysis
-- Market Research
-- Competitive Intelligence
-- Trend Analysis
-- Business Intelligence
-- Development Pipeline
-- Approval Gates
 - Code Review Workflow
 
 ## Notes for AI Assistants
