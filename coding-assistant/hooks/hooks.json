@@ -1,0 +1,49 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|Bash|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/protect-secrets.js",
+            "timeout": 10
+          }
+        ],
+        "description": "Block access to secret/credential files (configurable denylist with session overrides)"
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/protect-credentials.sh"
+          }
+        ],
+        "description": "Scan staged git changes for hardcoded credentials before commit"
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{try{const i=JSON.parse(d);const p=i.tool_input?.file_path||'';const b=require('path').basename(p);const ext=require('path').extname(b);const keep=new Set(['README.md','CLAUDE.md','CONTRIBUTING.md','CHANGELOG.md','LICENSE','LICENSE.md','SECURITY.md']);if((ext==='.md'||ext==='.txt')&&!keep.has(b)&&!b.startsWith('SKILL')){process.stderr.write('[Hook] BLOCKED: Unnecessary doc file: '+b+'\\n');process.exit(2)}}catch{}})\"",
+            "timeout": 5
+          }
+        ],
+        "description": "Block creation of random .md/.txt files (allows README, CLAUDE, CHANGELOG, SKILL*)"
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{try{const i=JSON.parse(d);const c=i.tool_input?.content||'';const n=c.split('\\n').length;if(n>800){process.stderr.write('[Hook] BLOCKED: File has '+n+' lines (max 800). Split into smaller modules.\\n');process.exit(2)}}catch{}})\"",
+            "timeout": 5
+          }
+        ],
+        "description": "Block creation of files exceeding 800 lines"
+      }
+    ]
+  }
+}

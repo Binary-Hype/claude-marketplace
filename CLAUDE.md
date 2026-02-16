@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.1.0
+**Version:** 1.2.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -21,29 +21,26 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 1. **changelog-generator**: Transforms technical git commits into user-friendly changelogs by analyzing commit history, categorizing changes, and creating polished release notes. Use when preparing release notes, documenting changes for customers, or maintaining public changelogs.
 
-2. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Creates concise subject lines (<=50 chars) with detailed descriptions following best practices.
+2. **time-estimation**: Estimates development time for features by analyzing complexity, dependencies, and project structure. Provides manual vs AI-assisted development time comparisons showing hours saved when using AI tools.
 
-3. **time-estimation**: Estimates development time for features by analyzing complexity, dependencies, and project structure. Provides manual vs AI-assisted development time comparisons showing hours saved when using AI tools.
+3. **refactoring-assistant**: Identifies code smells and suggests refactoring improvements using proven design patterns. Includes Laravel-specific patterns but applicable to any codebase.
 
-4. **refactoring-assistant**: Identifies code smells and suggests refactoring improvements using proven design patterns. Helps improve code quality, maintainability, and testability with Laravel-specific refactoring guidance.
+4. **api-documentation**: Automatically generates comprehensive API documentation including OpenAPI/Swagger specs, endpoint descriptions, request/response examples, and integration guides. Includes Laravel route discovery support.
 
-5. **api-documentation**: Automatically generates comprehensive API documentation including OpenAPI/Swagger specs, endpoint descriptions, request/response examples, and integration guides. Perfect for Laravel APIs with automatic route discovery.
+5. **test-generator**: Generates comprehensive tests using Pest syntax with Laravel testing helpers. Creates feature tests, unit tests, factories, and test data with proper assertions and mocking.
 
-6. **test-generator**: Generates comprehensive Laravel tests using Pest syntax. Creates feature tests, unit tests, factories, and test data with proper assertions, mocking, and Laravel testing helpers.
+6. **api-design**: REST API design patterns including resource naming, status codes, pagination, filtering, error responses, versioning, and rate limiting for production APIs. Includes implementation examples for Laravel and plain PHP.
 
-7. **continuous-learning**: Instinct-based learning system that observes Claude Code sessions via hooks, creates atomic instincts with confidence scoring (0.3-0.9), and evolves them into skills/commands/agents. Includes observation hooks, instinct CLI, and commands for status, export, import, and evolution.
-
-8. **api-design**: REST API design patterns including resource naming, status codes, pagination, filtering, error responses, versioning, and rate limiting. Includes Laravel and plain PHP implementation examples.
-
-9. **iterative-retrieval**: Pattern for progressively refining context retrieval in multi-agent workflows. Solves the subagent context problem through 4-phase DISPATCH-EVALUATE-REFINE-LOOP cycles (max 3 iterations) with relevance scoring and gap identification.
+7. **iterative-retrieval**: Pattern for progressively refining context retrieval in multi-agent workflows. Solves the subagent context problem through 4-phase DISPATCH-EVALUATE-REFINE-LOOP cycles (max 3 iterations) with relevance scoring and gap identification.
 
 ### Subagents
 
-1. **code-review**: Expert autonomous code reviewer specializing in PHP, HTML, CSS, JavaScript, and Laravel. Performs systematic code analysis using Read, Grep, Glob, and IDE diagnostics tools. Reviews for:
-   - Code quality and best practices
+1. **code-review**: Expert PHP web application code reviewer with automatic framework detection. Reads `composer.json` to detect Laravel (`laravel/framework`) or Shopware 6 (`shopware/core`) and delegates framework-specific reviews to specialist subagents. Reviews for:
+   - Code quality and best practices (PSR-1/PSR-12, SOLID, type safety)
    - Security vulnerabilities (SQL injection, XSS, CSRF)
    - Performance optimization (N+1 queries, caching)
-   - Laravel-specific conventions
+   - General PHP patterns and conventions
+   - Delegates framework-specific checks to code-review-laravel or code-review-shopware subagent
    - Delegates WCAG accessibility checks to wcag-compliance subagent
    - Delegates security scans to security-scanner subagent
 
@@ -55,46 +52,73 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
    - References official W3C WCAG documentation
    - Framework-aware (Laravel Blade, React, Vue)
 
-3. **security-scanner**: Expert security vulnerability scanner specializing in OWASP Top 10, Laravel security best practices, SQL injection, XSS, CSRF, authentication flaws, and insecure configurations. Performs comprehensive security audits with actionable remediation guidance.
+3. **security-scanner**: Expert PHP web application security scanner with automatic framework detection. Specializes in OWASP Top 10, SQL injection, XSS, CSRF, authentication flaws, and insecure configurations. Reads `composer.json` to detect Laravel or Shopware 6 and delegates framework-specific security checks to specialist subagents. Performs comprehensive security audits with actionable remediation guidance.
 
-4. **laravel-best-practices**: Expert Laravel best practices auditor specializing in framework conventions, Action patterns, service architecture, Eloquent optimization, and modern Laravel patterns. Promotes single-responsibility Action classes for business logic and ensures adherence to Laravel's ecosystem standards.
+4. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes ORM patterns (Eloquent) and migration best practices. Use when writing SQL, creating migrations, or troubleshooting performance.
 
-5. **fluxui-docs**: Automatically checks official FluxUI documentation (https://fluxui.dev/docs) when working with Flux components. Fetches component APIs, props, and best practices.
+5. **code-review-laravel**: Laravel specialist code reviewer (leaf agent). Delegated to by code-review when `laravel/framework` is detected. Reviews Eloquent/DB patterns (N+1, eager loading), controllers (thin controllers, Form Requests), Blade templates (XSS, CSRF, Livewire syntax), service providers, events/listeners, queue jobs, middleware, and config/cache compatibility.
 
-6. **daisyui-docs**: Automatically checks official DaisyUI documentation (https://daisyui.com/components/) when working with DaisyUI components. Fetches component classes, modifiers, variants, and usage examples.
+6. **code-review-shopware**: Shopware 6 specialist code reviewer (leaf agent). Delegated to by code-review when `shopware/core` is detected. Reviews plugin architecture (lifecycle, services.xml), DAL usage (EntityDefinition, Criteria, Repository), Twig templates (sw_extends, |trans), event subscribers, migration patterns, and Shopware anti-patterns.
 
-7. **tailwindcss-docs**: Automatically checks official Tailwind CSS documentation (https://tailwindcss.com/docs) when using or working with Tailwind utility classes. Fetches and analyzes documentation for utility classes, responsive design, dark mode, customization, and best practices.
+7. **security-scanner-laravel**: Laravel security specialist (leaf agent). Delegated to by security-scanner when `laravel/framework` is detected. Scans for mass assignment, Eloquent injection, Blade XSS/CSRF, route protection, Sanctum/Passport token security, signed URLs, broadcasting authorization, and Laravel configuration security.
 
-8. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes Laravel Eloquent patterns, migration best practices, and MariaDB-specific features. Use when writing SQL, creating migrations, or troubleshooting performance.
+8. **security-scanner-shopware**: Shopware 6 security specialist (leaf agent). Delegated to by security-scanner when `shopware/core` is detected. Scans for ACL/permissions, Store API security, Admin API authentication, plugin sandbox risks, Twig |raw abuse, DAL access control, and Shopware misconfigurations.
+
+9. **performance-auditor**: Core Web Vitals and frontend performance auditor. Analyzes templates, images, scripts, styles, and build configs for LCP, INP, CLS issues, render-blocking resources, missing lazy loading, bundle size problems, and caching gaps.
+
+10. **dependency-auditor**: Audits project dependencies for known vulnerabilities (CVEs), outdated packages, license compliance, and abandoned packages. Supports Composer (PHP) and npm (Node.js) with DDEV-aware command execution.
+
+11. **seo-auditor**: SEO auditor for meta tags, Open Graph, structured data (JSON-LD), sitemap, robots.txt, canonical URLs, heading hierarchy, and image alt text. Scans templates and public files for search engine optimization issues.
+
+12. **cicd-assistant**: CI/CD pipeline assistant for GitHub Actions, Docker, docker-compose, and deployment configurations. Reviews, generates, and fixes workflow files, Dockerfiles, and environment configs with security and performance best practices.
+
+13. **migration-assistant**: Framework and dependency migration/upgrade assistant. Detects current versions, identifies breaking changes, scans for deprecated API usage, and provides step-by-step upgrade paths for Laravel, Shopware, PHP, and Node.js projects.
+
+14. **i18n-checker**: Internationalization checker for missing translations, hardcoded strings, locale file completeness, and placeholder consistency. Supports Laravel lang files, gettext .po, JSON translations, and Shopware snippets.
+
+15. **pr-reviewer**: Pull request reviewer that analyzes diffs, generates PR descriptions, identifies debug code, assesses change impact and risk, categorizes modifications, and checks for common PR issues like merge conflicts and missing tests.
 
 ### Commands
 
 1. **commit-message**: Generates well-structured git commit messages and automatically creates the commit. Analyzes staged changes to create meaningful commit messages following best practices.
 
-2. **instinct-export**: Export instincts for sharing with teammates or other projects. Filters by domain and confidence, strips sensitive information, and outputs shareable YAML/JSON/MD files.
+2. **refactor-clean**: Safely identifies and removes dead code in PHP projects (including Laravel and Shopware). Uses PHPStan, Psalm, composer-unused, and Deptrac for detection with test verification at every step.
 
-3. **instinct-import**: Import instincts from teammates, Skill Creator, or other sources. Handles duplicate detection and conflict resolution with configurable merge strategies.
+3. **update-docs**: Syncs documentation with the codebase for PHP projects (including Laravel and Shopware). Generates from source-of-truth files like composer.json, .env.example, route definitions, and artisan commands.
 
-4. **learn**: Extracts reusable patterns from the current session and saves them as skills. Identifies error resolutions, debugging techniques, workarounds, and project-specific patterns.
+4. **setup-statusline**: Installs the coding-assistant statusline showing model, current task, directory, and context usage. Modifies `~/.claude/settings.json`.
 
-5. **refactor-clean**: Safely identifies and removes dead code in PHP/Laravel/Shopware projects. Uses PHPStan, Psalm, composer-unused, and Deptrac for detection with test verification at every step.
+### Hooks
 
-6. **update-docs**: Syncs documentation with the codebase for PHP/Laravel/Shopware projects. Generates from source-of-truth files like composer.json, .env.example, route definitions, and artisan commands.
+1. **hooks.json**: Hook configuration file registering PreToolUse hooks for the plugin.
+
+2. **statusline.js**: Displays model, current task, directory, and context usage in the Claude Code status line.
+
+3. **setup-statusline.js**: Statusline setup and installation hook.
+
+4. **protect-secrets.js**: PreToolUse security hook that blocks access to secret/credential files using a configurable denylist. Covers `.env`, `.env.*`, SSH keys (`id_rsa*`, `id_ed25519*`), certificates (`*.pem`, `*.key`, `*.p12`, `*.pfx`, `*.crt`), keystores (`*.jks`, `*.keystore`), auth configs (`.npmrc`, `.netrc`, `.htpasswd`, `.pgpass`), vault files (`vault.yml`, `secrets.yml`, `secrets.json`), and more. Features:
+   - 3-tier configuration: plugin defaults → `~/.claude/security/denylist.json` → `.claude/security/denylist.json`
+   - Allow list for safe files (`.env.example`, `.env.dist`, `.env.template`)
+   - Session-scoped overrides via `bin/exempt-secret` (temporary, lost on reboot)
+   - Fail-closed design: blocks all file access if config is unavailable
+   - Intercepts Read, Edit, Write, Bash, Grep, and Glob tool calls
+
+5. **protect-credentials.sh**: PreToolUse security hook that scans staged git changes for credentials before allowing commits. Detects AWS keys, API tokens, private keys, passwords, database connection strings, JWT tokens, GitHub/GitLab tokens, Slack/Discord webhooks, Stripe/SendGrid/Twilio keys, and other secret patterns. Blocks commits with clear error messages listing findings. Skips test files and placeholder values to reduce false positives. Fails open on errors.
+
+6. **doc-file-blocker** (inline): PreToolUse hook that blocks creation of random `.md`/`.txt` files. Allows known files: `README.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE`, `SECURITY.md`, `SKILL*.md`.
+
+7. **large-file-blocker** (inline): PreToolUse hook that blocks creation of files exceeding 800 lines. Suggests splitting into smaller modules.
+
+8. **protect-env.sh** (legacy): Original `.env` protection hook, kept for backwards compatibility. Superseded by `protect-secrets.js`.
 
 ## Project Conventions
 
 When working with this codebase:
 
-### FluxUI Components (from fluxui-docs skill)
-- Use `<livewire:component>` syntax, NOT `@livewire('component')`
-- FluxUI inputs already have error messages attached - don't add additional error displays
-- `flux:button` does NOT have size="lg"
-
 ### Code Review Standards
 - All code should be reviewed for WCAG 2.2 accessibility compliance using wcag-compliance subagent
-- Laravel best practices must be followed (use laravel-best-practices subagent)
+- Framework best practices should be followed
 - Security is a top priority (use security-scanner subagent for OWASP Top 10 checks)
-- Action pattern should be used for complex business logic (single-responsibility classes)
 
 ### Commit Messages
 - Subject lines should be <=50 characters
@@ -105,14 +129,13 @@ When working with this codebase:
 ## Development Workflow
 
 1. **Planning**: Use refactoring-assistant skill to improve existing code or plan architecture
-2. **Implementation**: Follow Laravel conventions, Action patterns, and FluxUI component guidelines
-3. **Testing**: Use test-generator skill to create comprehensive Pest tests
-4. **Review**: Use code-review subagent to check quality (delegates to security-scanner, wcag-compliance, laravel-best-practices)
+2. **Implementation**: Follow established framework conventions and project patterns
+3. **Testing**: Use test-generator skill to create comprehensive tests
+4. **Review**: Use code-review subagent to check quality (delegates to security-scanner, wcag-compliance)
 5. **Documentation**: Use api-documentation skill for API endpoints, update-docs command for project docs
 6. **Commit**: Use commit-message command for professional commit messages
 7. **Release**: Use changelog-generator skill to create user-facing release notes
-8. **Learn**: Use /learn command to extract reusable patterns from sessions
-9. **Clean**: Use /refactor-clean command to identify and remove dead code
+8. **Clean**: Use /refactor-clean command to identify and remove dead code
 
 ## Repository Information
 
@@ -125,23 +148,26 @@ When working with this codebase:
 
 - Skills
 - Git (changelog, commits)
-- Web Development (PHP, Laravel, Shopware, JavaScript)
+- Web Development (PHP, JavaScript)
 - Code Quality
-- Testing (Pest, PHPUnit)
+- Testing
 - Refactoring
-- API Documentation
+- API Documentation (OpenAPI)
 - API Design Patterns
 - Security (OWASP Top 10)
-- Accessibility (WCAG)
-- Laravel Best Practices
-- Action Pattern
-- FluxUI
-- TailwindCSS
-- DaisyUI
-- Code Review Workflow
+- Accessibility (WCAG 2.2)
+- Code Review Workflow (multi-framework: Laravel, Shopware 6, plain PHP)
+- Shopware 6
 - Database (MySQL, MariaDB, PostgreSQL)
-- Continuous Learning
 - Dead Code Removal
+- Time Estimation
+- Performance (Core Web Vitals)
+- Dependency Auditing (CVEs, Licenses)
+- SEO (Meta Tags, Structured Data, Open Graph)
+- CI/CD (GitHub Actions, Docker)
+- Migration & Upgrades
+- Internationalization (i18n)
+- Pull Request Review
 
 ## Notes for AI Assistants
 
@@ -150,6 +176,6 @@ When working in this repository:
 1. Each plugin is self-contained in its own directory
 2. Skills are defined in `SKILL.md` files within each plugin
 3. Commands are defined as `.md` files in the `commands/` directory
-4. Plugin metadata is in `.claude-plugin/plugin.json`
-5. The marketplace configuration is in `.claude-plugin/marketplace.json`
+4. Hooks are defined in the `hooks/` directory with configuration in `hooks.json`
+5. Plugin metadata is in `.claude-plugin/plugin.json`
 6. All plugins are MIT licensed and maintained by Binary Hype

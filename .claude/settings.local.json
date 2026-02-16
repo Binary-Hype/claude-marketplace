@@ -7,7 +7,9 @@
       "Bash(research-assistant/skills/search-specialist/SKILL.md)",
       "Bash(research-assistant/skills/trend-analyst/SKILL.md)",
       "Bash(gh api:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(/Users/tobse/Projects/claude-marketplace/coding-assistant/hooks/protect-env.sh)",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": []
