@@ -33,12 +33,6 @@ run_secret_hook() {
   run bash -c 'printf "%s" "$1" | CLAUDE_SECURITY_CACHE_DIR="$CLAUDE_SECURITY_CACHE_DIR" CLAUDE_PLUGIN_ROOT="$CLAUDE_PLUGIN_ROOT" HOME="$HOME" node "$2/hooks/protect-secrets.js"' _ "$payload" "$REPO_ROOT"
 }
 
-# Run the doc file blocker inline hook
-run_doc_blocker() {
-  local payload="$1"
-  run bash -c 'printf "%s" "$1" | node -e "let d=\"\";process.stdin.on(\"data\",c=>d+=c);process.stdin.on(\"end\",()=>{try{const i=JSON.parse(d);const p=i.tool_input?.file_path||\"\";const b=require(\"path\").basename(p);const ext=require(\"path\").extname(b);const keep=new Set([\"README.md\",\"CLAUDE.md\",\"CONTRIBUTING.md\",\"CHANGELOG.md\",\"LICENSE\",\"LICENSE.md\",\"SECURITY.md\"]);if((ext===\".md\"||ext===\".txt\")&&!keep.has(b)&&!b.startsWith(\"SKILL\")){process.stderr.write(\"[Hook] BLOCKED: Unnecessary doc file: \"+b+\"\\n\");process.exit(2)}}catch{}})"' _ "$payload"
-}
-
 # Run the large file blocker inline hook
 run_file_size_blocker() {
   local payload="$1"

@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.2.0
+**Version:** 1.2.1
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -105,11 +105,9 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 5. **protect-credentials.sh**: PreToolUse security hook that scans staged git changes for credentials before allowing commits. Detects AWS keys, API tokens, private keys, passwords, database connection strings, JWT tokens, GitHub/GitLab tokens, Slack/Discord webhooks, Stripe/SendGrid/Twilio keys, and other secret patterns. Blocks commits with clear error messages listing findings. Skips test files and placeholder values to reduce false positives. Fails open on errors.
 
-6. **doc-file-blocker** (inline): PreToolUse hook that blocks creation of random `.md`/`.txt` files. Allows known files: `README.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE`, `SECURITY.md`, `SKILL*.md`.
+6. **large-file-blocker** (inline): PreToolUse hook that blocks creation of files exceeding 800 lines. Suggests splitting into smaller modules.
 
-7. **large-file-blocker** (inline): PreToolUse hook that blocks creation of files exceeding 800 lines. Suggests splitting into smaller modules.
-
-8. **protect-env.sh** (legacy): Original `.env` protection hook, kept for backwards compatibility. Superseded by `protect-secrets.js`.
+7. **protect-env.sh** (legacy): Original `.env` protection hook, kept for backwards compatibility. Superseded by `protect-secrets.js`.
 
 ## Project Conventions
 
