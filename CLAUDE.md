@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.2.1
+**Version:** 1.3.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -32,6 +32,8 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 6. **api-design**: REST API design patterns including resource naming, status codes, pagination, filtering, error responses, versioning, and rate limiting for production APIs. Includes implementation examples for Laravel and plain PHP.
 
 7. **iterative-retrieval**: Pattern for progressively refining context retrieval in multi-agent workflows. Solves the subagent context problem through 4-phase DISPATCH-EVALUATE-REFINE-LOOP cycles (max 3 iterations) with relevance scoring and gap identification.
+
+8. **merge-conflict-resolver**: Analyzes git merge conflicts and recommends resolutions by examining both sides of each conflict, gathering branch context, and providing per-conflict recommendations with risk levels. Handles special cases like lock files, migrations, config files, and auto-generated files.
 
 ### Subagents
 
@@ -166,6 +168,7 @@ When working with this codebase:
 - Migration & Upgrades
 - Internationalization (i18n)
 - Pull Request Review
+- Merge Conflict Resolution
 
 ## Notes for AI Assistants
 

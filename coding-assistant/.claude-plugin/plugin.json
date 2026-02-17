@@ -1,7 +1,7 @@
 {
     "name": "coding-assistant",
-    "description": "Comprehensive coding assistant with specialized skills for refactoring, testing, API documentation, API design patterns, commit messages, changelog generation, time estimation, and iterative retrieval. Includes expert subagents for code review (with automatic Laravel/Shopware 6 framework detection), security scanning (OWASP Top 10, with framework-specific specialists), database review (MySQL/MariaDB/PostgreSQL), WCAG 2.2 accessibility compliance, performance auditing (Core Web Vitals), dependency auditing (CVEs, licenses), SEO analysis, CI/CD pipeline review (GitHub Actions, Docker), migration/upgrade assistance, i18n/translation checking, and PR reviewing. Features security hooks for secret file protection (configurable denylist covering .env, SSH keys, PEM files, keystores, auth configs, vault files), credential scanning, large file blocker, and a statusline integration.",
-    "version": "1.2.1",
+    "description": "Comprehensive coding assistant with specialized skills for refactoring, testing, API documentation, API design patterns, commit messages, changelog generation, time estimation, merge conflict resolution, and iterative retrieval. Includes expert subagents for code review (with automatic Laravel/Shopware 6 framework detection), security scanning (OWASP Top 10, with framework-specific specialists), database review (MySQL/MariaDB/PostgreSQL), WCAG 2.2 accessibility compliance, performance auditing (Core Web Vitals), dependency auditing (CVEs, licenses), SEO analysis, CI/CD pipeline review (GitHub Actions, Docker), migration/upgrade assistance, i18n/translation checking, and PR reviewing. Features security hooks for secret file protection (configurable denylist covering .env, SSH keys, PEM files, keystores, auth configs, vault files), credential scanning, large file blocker, and a statusline integration.",
+    "version": "1.3.0",
     "author": {
         "name": "Tobias Kokesch",
         "email": "hallo@binary-hype.com"
@@ -52,6 +52,9 @@
         "i18n",
         "internationalization",
         "pull-request",
-        "pr-review"
+        "pr-review",
+        "merge-conflict",
+        "git-merge",
+        "conflict-resolution"
     ]
 }
