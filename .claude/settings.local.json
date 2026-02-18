@@ -9,7 +9,8 @@
       "Bash(gh api:*)",
       "Bash(chmod:*)",
       "Bash(/Users/tobse/Projects/claude-marketplace/coding-assistant/hooks/protect-env.sh)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []

@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.5.0
+**Version:** 1.5.1
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -94,7 +94,7 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 ### Hooks
 
-1. **hooks.json**: Hook configuration file registering PreToolUse hooks for the plugin.
+1. **hooks.json**: Hook configuration file registering PreToolUse and PreCompact hooks for the plugin.
 
 2. **statusline.js**: Displays model, current task, directory, and context usage in the Claude Code status line.
 
@@ -112,6 +112,19 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 6. **large-file-blocker** (inline): PreToolUse hook that blocks creation of files exceeding 800 lines. Suggests splitting into smaller modules.
 
 7. **protect-env.sh** (legacy): Original `.env` protection hook, kept for backwards compatibility. Superseded by `protect-secrets.js`.
+
+8. **lint-commit-message.js**: PreToolUse hook that enforces commit message conventions. Validates subject line length (warn >50, block >72 chars), imperative mood (blocks past tense verbs like "Added", "Fixed"), no trailing period, and blank line between subject and body. Skips amend/fixup/squash commits. Features:
+   - 3-tier configuration: plugin defaults → `~/.claude/commit-rules.json` → `.claude/commit-rules.json`
+   - Supports `-m`, `--message`, and heredoc message formats
+   - Fails open on parse errors
+
+9. **check-typosquat.js**: PreToolUse hook that detects potentially typosquatted package names in install commands (npm, yarn, pnpm, bun, composer). Compares package names against a curated watchlist of ~100 popular packages using Levenshtein distance (1-2) and hyphen/underscore swap detection. Features:
+   - Supports `ddev exec` prefixed commands
+   - Handles scoped packages (`@scope/name`) and version specifiers
+   - 3-tier configuration: plugin defaults → `~/.claude/popular-packages.json` → `.claude/popular-packages.json`
+   - Fails open on errors
+
+10. **context-usage-alert.js**: PreCompact hook that alerts when auto-compaction triggers (context window full). Shows a warning message and injects `additionalContext` reminding Claude about `/handoff` for context preservation. Logs compaction events to `/tmp/claude-context-alerts.log`. Only fires on auto-compaction, not manual `/compact`.
 
 ## Project Conventions
 

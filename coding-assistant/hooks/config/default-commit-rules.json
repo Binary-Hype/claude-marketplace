@@ -1,0 +1,7 @@
+{
+  "subjectMaxLength": 72,
+  "subjectWarnLength": 50,
+  "requireImperativeMood": true,
+  "noTrailingPeriod": true,
+  "allowTypes": ["fixup", "squash", "amend"]
+}

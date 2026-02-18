@@ -10,7 +10,7 @@
             "name": "coding-assistant",
             "source": "./coding-assistant",
             "description": "A comprehensive coding assistant that helps developers in their daily work. Provides expert guidance on code quality, planning, and implementation while respecting your project's architecture and conventions.",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "author": {
                 "name": "Tobias Kokesch",
                 "email": "hallo@binary-hype.com"

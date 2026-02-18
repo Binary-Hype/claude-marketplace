@@ -1,6 +1,6 @@
 # Claude Marketplace
 
-A collection of plugins for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that extend its capabilities with specialized skills, subagents, commands, and hooks.
+Lightweight plugins for Claude Code — easy to install, zero configuration, nothing to build.
 
 ## Quick Start
 
@@ -14,59 +14,63 @@ Inside Claude Code, run:
 /plugin install coding-assistant@binary-hype-dev
 ```
 
-After installation, use skills with `/skill-name` (e.g. `/changelog-generator`), commands with `/coding-assistant:<command>` (e.g. `/coding-assistant:commit-message`), and subagents are picked up automatically by the Task tool.
+That's it. Skills, commands, subagents, and hooks are all active immediately.
 
-## Plugins
+## Lightweight by design
 
-### coding-assistant (v1.5.0)
+This plugin doesn't add process or overhead. It enhances what you already do.
 
-Comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
+- **No extra workflow to learn** — no planning frameworks, no todo mechanics, no dashboards. Just your normal Claude Code session, enhanced.
+- **Skills when you need them** — type `/skill-name` and go. Each skill is a focused expert for one task. Use it once, or use it daily.
+- **Hooks that protect you automatically** — credential scanning, secret file blocking, commit linting, typosquatting detection. They run silently on every action. You only hear from them when something is wrong.
+- **Subagents that activate on their own** — code review, security scanning, and accessibility checks are picked up by Claude automatically. No manual setup needed.
+- **Zero configuration** — sensible defaults out of the box. Override anything via `~/.claude/` if you want to, but you don't have to.
 
-**Skills** — Invoke with `/skill-name`:
+## coding-assistant (v1.5.1)
 
-| Skill | Description |
-|-------|-------------|
-| `/changelog-generator` | Transforms git commits into user-friendly release notes |
-| `/time-estimation` | Estimates development time with manual vs AI-assisted comparisons |
-| `/refactoring-assistant` | Identifies code smells and suggests improvements using design patterns |
-| `/api-documentation` | Generates OpenAPI/Swagger specs and endpoint documentation |
-| `/test-generator` | Creates comprehensive Pest tests with Laravel testing helpers |
-| `/api-design` | REST API design patterns for resource naming, pagination, error responses |
-| `/merge-conflict-resolver` | Analyzes merge conflicts and recommends resolutions with risk levels |
-| `/iterative-retrieval` | Progressive context refinement for multi-agent workflows |
-| `/seo-auditor` | Meta tags, structured data, Open Graph, sitemap analysis |
-| `/performance-auditor` | Core Web Vitals and frontend performance analysis |
-| `/i18n-checker` | Missing translations and locale file completeness |
-| `/pr-reviewer` | Diff analysis, PR descriptions, and change impact assessment |
-| `/dependency-auditor` | CVE scanning, license compliance, outdated package detection |
-| `/migration-assistant` | Framework and dependency upgrade paths |
-| `/cicd-assistant` | GitHub Actions, Docker, and deployment config review |
-| `/database-reviewer` | MySQL/MariaDB/PostgreSQL query and schema reviewer |
+### Skills
 
-**Commands** — Invoke with `/coding-assistant:<command>`:
+Invoke any skill with `/skill-name`.
 
-| Command | Description |
-|---------|-------------|
-| `/coding-assistant:commit-message` | Generates commit messages and automatically creates the commit |
-| `/coding-assistant:refactor-clean` | Identifies and removes dead code with test verification |
-| `/coding-assistant:update-docs` | Syncs documentation with the codebase |
-| `/coding-assistant:setup-statusline` | Installs statusline showing model, task, and context usage |
-| `/coding-assistant:handoff` | Generates a session handoff document for context continuity |
+**Code Quality** — `/refactoring-assistant` · `/test-generator` · `/database-reviewer`
 
-**Subagents** — Used automatically or via the Task tool:
+**API** — `/api-design` · `/api-documentation`
 
-| Subagent | Description |
-|----------|-------------|
-| `code-review` | PHP code reviewer with automatic Laravel/Shopware 6 detection |
-| `security-scanner` | OWASP Top 10 scanner with framework-specific specialists |
-| `wcag-compliance` | WCAG 2.2 accessibility checker (all 86 success criteria) |
+**Git & Releases** — `/changelog-generator` · `/merge-conflict-resolver` · `/pr-reviewer`
 
-**Hooks** — Run automatically:
+**DevOps** — `/cicd-assistant` · `/dependency-auditor` · `/migration-assistant`
 
-- **protect-secrets.js** — Blocks access to secret/credential files (.env, SSH keys, certificates, etc.)
-- **protect-credentials.sh** — Scans staged changes for leaked credentials before commits
-- **large-file-blocker** — Prevents creation of files exceeding 800 lines
-- **statusline.js** — Displays model, task, directory, and context usage in the status bar
+**Frontend** — `/performance-auditor` · `/seo-auditor` · `/i18n-checker`
+
+**Planning** — `/time-estimation` · `/iterative-retrieval`
+
+### Commands
+
+Invoke with `/coding-assistant:<command>`.
+
+- **commit-message** — generates commit messages and creates the commit
+- **refactor-clean** — finds and removes dead code with test verification
+- **update-docs** — syncs documentation with the codebase
+- **setup-statusline** — installs a statusline showing model, task, and context usage
+- **handoff** — generates a session handoff document for context continuity
+
+### Automatic protections
+
+Hooks run silently in the background — no setup, no invocation:
+
+- Secret file blocking (`.env`, SSH keys, certificates)
+- Credential leak scanning on every commit
+- Commit message linting (length, imperative mood)
+- Typosquatting detection for package installs
+- Large file prevention (800-line limit)
+
+### Code review subagents
+
+Subagents are used automatically by Claude when relevant:
+
+- **code-review** — PHP code reviewer, auto-detects Laravel and Shopware 6
+- **security-scanner** — OWASP Top 10, framework-specific checks
+- **wcag-compliance** — WCAG 2.2 accessibility checker (all 86 success criteria)
 
 ## License
 
