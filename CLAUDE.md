@@ -144,7 +144,7 @@ When working with this codebase:
 - **Owner**: Tobias Kokesch (Binary Hype)
 - **Email**: hallo@binary-hype.com
 - **Repository**: https://github.com/Binary-Hype/claude-marketplace
-- **License**: MIT
+- **License**: GPL-3.0
 
 ## Keywords
 
@@ -181,4 +181,4 @@ When working in this repository:
 3. Commands are defined as `.md` files in the `commands/` directory
 4. Hooks are defined in the `hooks/` directory with configuration in `hooks.json`
 5. Plugin metadata is in `.claude-plugin/plugin.json`
-6. All plugins are MIT licensed and maintained by Binary Hype
+6. All plugins are GPL-3.0 licensed and maintained by Binary Hype

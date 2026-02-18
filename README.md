@@ -70,4 +70,4 @@ Comprehensive coding assistant providing expert guidance on code quality, planni
 
 ## License
 
-MIT — Tobias Kokesch ([Binary Hype](https://binary-hype.com))
+GPL-3.0 — Tobias Kokesch ([Binary Hype](https://binary-hype.com))
