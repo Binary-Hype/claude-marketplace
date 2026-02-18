@@ -14,7 +14,7 @@ Inside Claude Code, run:
 /plugin install coding-assistant@binary-hype-dev
 ```
 
-After installation, use skills with `/skill-name` (e.g. `/changelog-generator`), commands with `/command-name` (e.g. `/commit-message`), and subagents are picked up automatically by the Task tool.
+After installation, use skills with `/skill-name` (e.g. `/changelog-generator`), commands with `/coding-assistant:<command>` (e.g. `/coding-assistant:commit-message`), and subagents are picked up automatically by the Task tool.
 
 ## Plugins
 
@@ -26,24 +26,24 @@ Comprehensive coding assistant providing expert guidance on code quality, planni
 
 | Skill | Description |
 |-------|-------------|
-| `changelog-generator` | Transforms git commits into user-friendly release notes |
-| `time-estimation` | Estimates development time with manual vs AI-assisted comparisons |
-| `refactoring-assistant` | Identifies code smells and suggests improvements using design patterns |
-| `api-documentation` | Generates OpenAPI/Swagger specs and endpoint documentation |
-| `test-generator` | Creates comprehensive Pest tests with Laravel testing helpers |
-| `api-design` | REST API design patterns for resource naming, pagination, error responses |
-| `merge-conflict-resolver` | Analyzes merge conflicts and recommends resolutions with risk levels |
-| `iterative-retrieval` | Progressive context refinement for multi-agent workflows |
+| `/changelog-generator` | Transforms git commits into user-friendly release notes |
+| `/time-estimation` | Estimates development time with manual vs AI-assisted comparisons |
+| `/refactoring-assistant` | Identifies code smells and suggests improvements using design patterns |
+| `/api-documentation` | Generates OpenAPI/Swagger specs and endpoint documentation |
+| `/test-generator` | Creates comprehensive Pest tests with Laravel testing helpers |
+| `/api-design` | REST API design patterns for resource naming, pagination, error responses |
+| `/merge-conflict-resolver` | Analyzes merge conflicts and recommends resolutions with risk levels |
+| `/iterative-retrieval` | Progressive context refinement for multi-agent workflows |
 
-**Commands** — Invoke with `/command-name`:
+**Commands** — Invoke with `/coding-assistant:<command>`:
 
 | Command | Description |
 |---------|-------------|
-| `commit-message` | Generates commit messages and automatically creates the commit |
-| `refactor-clean` | Identifies and removes dead code with test verification |
-| `update-docs` | Syncs documentation with the codebase |
-| `setup-statusline` | Installs statusline showing model, task, and context usage |
-| `handoff` | Generates a session handoff document for context continuity |
+| `/coding-assistant:commit-message` | Generates commit messages and automatically creates the commit |
+| `/coding-assistant:refactor-clean` | Identifies and removes dead code with test verification |
+| `/coding-assistant:update-docs` | Syncs documentation with the codebase |
+| `/coding-assistant:setup-statusline` | Installs statusline showing model, task, and context usage |
+| `/coding-assistant:handoff` | Generates a session handoff document for context continuity |
 
 **Subagents** — Used automatically or via the Task tool:
 
