@@ -2,6 +2,20 @@
 
 A collection of plugins for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that extend its capabilities with specialized skills, subagents, commands, and hooks.
 
+## Quick Start
+
+Inside Claude Code, run:
+
+```
+# 1. Add the marketplace
+/plugin marketplace add Binary-Hype/claude-marketplace
+
+# 2. Install the coding-assistant plugin
+/plugin install coding-assistant@binary-hype-dev
+```
+
+After installation, use skills with `/skill-name` (e.g. `/changelog-generator`), commands with `/command-name` (e.g. `/commit-message`), and subagents are picked up automatically by the Task tool.
+
 ## Plugins
 
 ### coding-assistant (v1.4.0)
@@ -53,14 +67,6 @@ Comprehensive coding assistant providing expert guidance on code quality, planni
 - **protect-credentials.sh** — Scans staged changes for leaked credentials before commits
 - **large-file-blocker** — Prevents creation of files exceeding 800 lines
 - **statusline.js** — Displays model, task, directory, and context usage in the status bar
-
-## Installation
-
-Add the plugin to your Claude Code configuration:
-
-```bash
-claude install-plugin /path/to/claude-marketplace/coding-assistant
-```
 
 ## License
 
