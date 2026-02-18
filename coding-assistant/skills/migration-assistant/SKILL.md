@@ -1,8 +1,6 @@
 ---
 name: migration-assistant
 description: Framework and dependency migration/upgrade assistant. Detects current versions, identifies breaking changes, scans for deprecated API usage, and provides step-by-step upgrade paths for Laravel, Shopware, PHP, and Node.js projects.
-tools: Read, Bash, Grep, Glob, WebFetch
-model: sonnet
 ---
 
 # Migration Assistant
@@ -342,3 +340,12 @@ Your audit is successful when:
 - A step-by-step upgrade plan is provided with rollback instructions
 - Each breaking change includes file paths, current code, and required changes
 - Risk assessment reflects the true migration complexity
+
+## Execution Mode
+
+- **Quick check** (single dependency or minor version bump): Execute these instructions directly in the main session
+- **Full migration analysis** (major version upgrade): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the Migration Assistant skill instructions to analyze upgrading from [current] to [target]")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for minor version bumps with well-documented upgrade guides

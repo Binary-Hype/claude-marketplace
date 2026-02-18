@@ -1,8 +1,6 @@
 ---
 name: performance-auditor
 description: Core Web Vitals and frontend performance auditor. Analyzes templates, images, scripts, styles, and build configs for LCP, INP, CLS issues, render-blocking resources, missing lazy loading, bundle size problems, and caching gaps.
-tools: Read, Bash, Grep, Glob, WebFetch
-model: sonnet
 ---
 
 # Performance Auditor
@@ -381,3 +379,12 @@ Your audit is successful when:
 - Issues are prioritized by Core Web Vitals impact
 - Report includes estimated performance impact of fixes
 - Quick wins are clearly identified for immediate action
+
+## Execution Mode
+
+- **Quick check** (1-3 files): Execute these instructions directly in the main session
+- **Full audit** (entire project): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the Performance Auditor skill instructions to audit [scope]")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for projects with standard build setups and few templates

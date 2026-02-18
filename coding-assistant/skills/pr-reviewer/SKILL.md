@@ -1,8 +1,6 @@
 ---
 name: pr-reviewer
 description: Pull request reviewer that analyzes diffs, generates PR descriptions, identifies debug code, assesses change impact and risk, categorizes modifications, and checks for common PR issues like merge conflicts and missing tests.
-tools: Read, Bash, Grep, Glob
-model: sonnet
 ---
 
 # PR Reviewer
@@ -352,3 +350,12 @@ Your review is successful when:
 - A ready-to-use PR description is generated
 - Risk assessment covers all critical areas
 - Report includes file-by-file breakdown with risk levels
+
+## Execution Mode
+
+- **Quick check** (small PR, < 10 files): Execute these instructions directly in the main session
+- **Full review** (large PR, 10+ files): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the PR Reviewer skill instructions to review the current branch against main")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for small, low-risk PRs with clear changes

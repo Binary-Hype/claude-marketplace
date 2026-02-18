@@ -1,8 +1,6 @@
 ---
 name: cicd-assistant
 description: CI/CD pipeline assistant for GitHub Actions, Docker, docker-compose, and deployment configurations. Reviews, generates, and fixes workflow files, Dockerfiles, and environment configs with security and performance best practices.
-tools: Read, Write, Edit, Bash, Grep, Glob
-model: sonnet
 ---
 
 # CI/CD Assistant
@@ -423,3 +421,12 @@ Your audit is successful when:
 - Each issue includes file path, line number, and concrete fix
 - Report includes version consistency matrix
 - Security issues are flagged as critical priority
+
+## Execution Mode
+
+- **Quick check** (single workflow or Dockerfile): Execute these instructions directly in the main session
+- **Full audit** (all CI/CD configs): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the CI/CD Assistant skill instructions to audit [scope]")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for reviewing a single, straightforward workflow file

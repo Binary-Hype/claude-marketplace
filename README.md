@@ -18,7 +18,7 @@ After installation, use skills with `/skill-name` (e.g. `/changelog-generator`),
 
 ## Plugins
 
-### coding-assistant (v1.4.2)
+### coding-assistant (v1.5.0)
 
 Comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -34,6 +34,14 @@ Comprehensive coding assistant providing expert guidance on code quality, planni
 | `/api-design` | REST API design patterns for resource naming, pagination, error responses |
 | `/merge-conflict-resolver` | Analyzes merge conflicts and recommends resolutions with risk levels |
 | `/iterative-retrieval` | Progressive context refinement for multi-agent workflows |
+| `/seo-auditor` | Meta tags, structured data, Open Graph, sitemap analysis |
+| `/performance-auditor` | Core Web Vitals and frontend performance analysis |
+| `/i18n-checker` | Missing translations and locale file completeness |
+| `/pr-reviewer` | Diff analysis, PR descriptions, and change impact assessment |
+| `/dependency-auditor` | CVE scanning, license compliance, outdated package detection |
+| `/migration-assistant` | Framework and dependency upgrade paths |
+| `/cicd-assistant` | GitHub Actions, Docker, and deployment config review |
+| `/database-reviewer` | MySQL/MariaDB/PostgreSQL query and schema reviewer |
 
 **Commands** — Invoke with `/coding-assistant:<command>`:
 
@@ -52,14 +60,6 @@ Comprehensive coding assistant providing expert guidance on code quality, planni
 | `code-review` | PHP code reviewer with automatic Laravel/Shopware 6 detection |
 | `security-scanner` | OWASP Top 10 scanner with framework-specific specialists |
 | `wcag-compliance` | WCAG 2.2 accessibility checker (all 86 success criteria) |
-| `database-reviewer` | MySQL/MariaDB/PostgreSQL query and schema reviewer |
-| `performance-auditor` | Core Web Vitals and frontend performance analysis |
-| `dependency-auditor` | CVE scanning, license compliance, outdated package detection |
-| `seo-auditor` | Meta tags, structured data, Open Graph, sitemap analysis |
-| `cicd-assistant` | GitHub Actions, Docker, and deployment config review |
-| `migration-assistant` | Framework and dependency upgrade paths |
-| `i18n-checker` | Missing translations and locale file completeness |
-| `pr-reviewer` | Diff analysis, PR descriptions, and change impact assessment |
 
 **Hooks** — Run automatically:
 

@@ -1,8 +1,6 @@
 ---
 name: database-reviewer
 description: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Use PROACTIVELY when writing SQL, creating migrations, designing schemas, or troubleshooting database performance. Includes Laravel Eloquent patterns.
-tools: Read, Write, Edit, Bash, Grep, Glob
-model: sonnet
 ---
 
 # Database Reviewer
@@ -316,3 +314,12 @@ MariaDB has some unique features worth considering:
 ---
 
 **Remember**: Database issues are often the root cause of application performance problems. Optimize queries and schema design early. Use `EXPLAIN ANALYZE` to verify assumptions. Always index foreign keys. When in doubt, benchmark with realistic data volumes.
+
+## Execution Mode
+
+- **Quick check** (single query or migration): Execute these instructions directly in the main session
+- **Full review** (entire schema, all migrations, query audit): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the Database Reviewer skill instructions to review [scope]")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for simple migration reviews or single-query optimization

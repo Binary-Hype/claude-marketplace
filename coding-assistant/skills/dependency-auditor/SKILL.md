@@ -1,8 +1,6 @@
 ---
 name: dependency-auditor
 description: Audits project dependencies for known vulnerabilities, outdated packages, license compliance, and abandoned packages. Supports Composer (PHP) and npm (Node.js) with DDEV-aware command execution.
-tools: Read, Bash, Grep, Glob, WebFetch
-model: sonnet
 ---
 
 # Dependency Auditor
@@ -318,3 +316,12 @@ Your audit is successful when:
 - DDEV environment is detected and commands are prefixed accordingly
 - Each finding includes severity, impact, and specific fix command
 - Report includes a prioritized action plan
+
+## Execution Mode
+
+- **Quick check** (single package manager): Execute these instructions directly in the main session
+- **Full audit** (Composer + npm, all checks): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the Dependency Auditor skill instructions to audit [scope]")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for projects with few dependencies and standard stacks

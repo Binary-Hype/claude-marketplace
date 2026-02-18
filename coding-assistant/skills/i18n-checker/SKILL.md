@@ -1,8 +1,6 @@
 ---
 name: i18n-checker
 description: Internationalization (i18n) checker for missing translations, hardcoded strings, locale file completeness, and placeholder consistency. Supports Laravel lang files, gettext .po, JSON translations, and Shopware snippets.
-tools: Read, Bash, Grep, Glob
-model: sonnet
 ---
 
 # Internationalization (i18n) Checker
@@ -357,3 +355,12 @@ Your audit is successful when:
 - A locale completion matrix shows percentage per locale
 - Each issue includes file path, line number, and suggested fix
 - Report includes prioritized recommendations for translation completeness
+
+## Execution Mode
+
+- **Quick check** (1-3 files or single locale pair): Execute these instructions directly in the main session
+- **Full audit** (all locales, entire project): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the i18n Checker skill instructions to audit [scope]")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for projects with few locales and standard translation patterns

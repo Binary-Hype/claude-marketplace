@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.4.2
+**Version:** 1.5.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -34,6 +34,22 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 7. **iterative-retrieval**: Pattern for progressively refining context retrieval in multi-agent workflows. Solves the subagent context problem through 4-phase DISPATCH-EVALUATE-REFINE-LOOP cycles (max 3 iterations) with relevance scoring and gap identification.
 
 8. **merge-conflict-resolver**: Analyzes git merge conflicts and recommends resolutions by examining both sides of each conflict, gathering branch context, and providing per-conflict recommendations with risk levels. Handles special cases like lock files, migrations, config files, and auto-generated files.
+
+9. **seo-auditor**: SEO auditor for meta tags, Open Graph, structured data (JSON-LD), sitemap, robots.txt, canonical URLs, heading hierarchy, and image alt text. Scans templates and public files for search engine optimization issues. Supports dynamic model delegation for cost-optimized execution.
+
+10. **performance-auditor**: Core Web Vitals and frontend performance auditor. Analyzes templates, images, scripts, styles, and build configs for LCP, INP, CLS issues, render-blocking resources, missing lazy loading, bundle size problems, and caching gaps. Supports dynamic model delegation.
+
+11. **i18n-checker**: Internationalization checker for missing translations, hardcoded strings, locale file completeness, and placeholder consistency. Supports Laravel lang files, gettext .po, JSON translations, and Shopware snippets. Supports dynamic model delegation.
+
+12. **pr-reviewer**: Pull request reviewer that analyzes diffs, generates PR descriptions, identifies debug code, assesses change impact and risk, categorizes modifications, and checks for common PR issues like merge conflicts and missing tests. Supports dynamic model delegation.
+
+13. **dependency-auditor**: Audits project dependencies for known vulnerabilities (CVEs), outdated packages, license compliance, and abandoned packages. Supports Composer (PHP) and npm (Node.js) with DDEV-aware command execution. Supports dynamic model delegation.
+
+14. **migration-assistant**: Framework and dependency migration/upgrade assistant. Detects current versions, identifies breaking changes, scans for deprecated API usage, and provides step-by-step upgrade paths for Laravel, Shopware, PHP, and Node.js projects. Supports dynamic model delegation.
+
+15. **cicd-assistant**: CI/CD pipeline assistant for GitHub Actions, Docker, docker-compose, and deployment configurations. Reviews, generates, and fixes workflow files, Dockerfiles, and environment configs with security and performance best practices. Supports dynamic model delegation.
+
+16. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes ORM patterns (Eloquent) and migration best practices. Use when writing SQL, creating migrations, or troubleshooting performance. Supports dynamic model delegation.
 
 ### Subagents
 
@@ -56,29 +72,13 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 3. **security-scanner**: Expert PHP web application security scanner with automatic framework detection. Specializes in OWASP Top 10, SQL injection, XSS, CSRF, authentication flaws, and insecure configurations. Reads `composer.json` to detect Laravel or Shopware 6 and delegates framework-specific security checks to specialist subagents. Performs comprehensive security audits with actionable remediation guidance.
 
-4. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes ORM patterns (Eloquent) and migration best practices. Use when writing SQL, creating migrations, or troubleshooting performance.
+4. **code-review-laravel**: Laravel specialist code reviewer (leaf agent). Delegated to by code-review when `laravel/framework` is detected. Reviews Eloquent/DB patterns (N+1, eager loading), controllers (thin controllers, Form Requests), Blade templates (XSS, CSRF, Livewire syntax), service providers, events/listeners, queue jobs, middleware, and config/cache compatibility.
 
-5. **code-review-laravel**: Laravel specialist code reviewer (leaf agent). Delegated to by code-review when `laravel/framework` is detected. Reviews Eloquent/DB patterns (N+1, eager loading), controllers (thin controllers, Form Requests), Blade templates (XSS, CSRF, Livewire syntax), service providers, events/listeners, queue jobs, middleware, and config/cache compatibility.
+5. **code-review-shopware**: Shopware 6 specialist code reviewer (leaf agent). Delegated to by code-review when `shopware/core` is detected. Reviews plugin architecture (lifecycle, services.xml), DAL usage (EntityDefinition, Criteria, Repository), Twig templates (sw_extends, |trans), event subscribers, migration patterns, and Shopware anti-patterns.
 
-6. **code-review-shopware**: Shopware 6 specialist code reviewer (leaf agent). Delegated to by code-review when `shopware/core` is detected. Reviews plugin architecture (lifecycle, services.xml), DAL usage (EntityDefinition, Criteria, Repository), Twig templates (sw_extends, |trans), event subscribers, migration patterns, and Shopware anti-patterns.
+6. **security-scanner-laravel**: Laravel security specialist (leaf agent). Delegated to by security-scanner when `laravel/framework` is detected. Scans for mass assignment, Eloquent injection, Blade XSS/CSRF, route protection, Sanctum/Passport token security, signed URLs, broadcasting authorization, and Laravel configuration security.
 
-7. **security-scanner-laravel**: Laravel security specialist (leaf agent). Delegated to by security-scanner when `laravel/framework` is detected. Scans for mass assignment, Eloquent injection, Blade XSS/CSRF, route protection, Sanctum/Passport token security, signed URLs, broadcasting authorization, and Laravel configuration security.
-
-8. **security-scanner-shopware**: Shopware 6 security specialist (leaf agent). Delegated to by security-scanner when `shopware/core` is detected. Scans for ACL/permissions, Store API security, Admin API authentication, plugin sandbox risks, Twig |raw abuse, DAL access control, and Shopware misconfigurations.
-
-9. **performance-auditor**: Core Web Vitals and frontend performance auditor. Analyzes templates, images, scripts, styles, and build configs for LCP, INP, CLS issues, render-blocking resources, missing lazy loading, bundle size problems, and caching gaps.
-
-10. **dependency-auditor**: Audits project dependencies for known vulnerabilities (CVEs), outdated packages, license compliance, and abandoned packages. Supports Composer (PHP) and npm (Node.js) with DDEV-aware command execution.
-
-11. **seo-auditor**: SEO auditor for meta tags, Open Graph, structured data (JSON-LD), sitemap, robots.txt, canonical URLs, heading hierarchy, and image alt text. Scans templates and public files for search engine optimization issues.
-
-12. **cicd-assistant**: CI/CD pipeline assistant for GitHub Actions, Docker, docker-compose, and deployment configurations. Reviews, generates, and fixes workflow files, Dockerfiles, and environment configs with security and performance best practices.
-
-13. **migration-assistant**: Framework and dependency migration/upgrade assistant. Detects current versions, identifies breaking changes, scans for deprecated API usage, and provides step-by-step upgrade paths for Laravel, Shopware, PHP, and Node.js projects.
-
-14. **i18n-checker**: Internationalization checker for missing translations, hardcoded strings, locale file completeness, and placeholder consistency. Supports Laravel lang files, gettext .po, JSON translations, and Shopware snippets.
-
-15. **pr-reviewer**: Pull request reviewer that analyzes diffs, generates PR descriptions, identifies debug code, assesses change impact and risk, categorizes modifications, and checks for common PR issues like merge conflicts and missing tests.
+7. **security-scanner-shopware**: Shopware 6 security specialist (leaf agent). Delegated to by security-scanner when `shopware/core` is detected. Scans for ACL/permissions, Store API security, Admin API authentication, plugin sandbox risks, Twig |raw abuse, DAL access control, and Shopware misconfigurations.
 
 ### Commands
 

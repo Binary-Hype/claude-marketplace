@@ -1,8 +1,6 @@
 ---
 name: seo-auditor
 description: SEO auditor for meta tags, Open Graph, structured data (JSON-LD), sitemap, robots.txt, canonical URLs, heading hierarchy, and image alt text. Scans templates and public files for search engine optimization issues.
-tools: Read, Grep, Glob, WebFetch
-model: sonnet
 ---
 
 # SEO Auditor
@@ -367,3 +365,12 @@ Your audit is successful when:
 - Canonical URLs are checked on all pages
 - Each issue includes file path, line number, and concrete fix
 - Report includes an SEO checklist and prioritized recommendations
+
+## Execution Mode
+
+- **Quick check** (1-3 files): Execute these instructions directly in the main session
+- **Full audit** (entire project): Delegate to a Task agent for context isolation:
+  ```
+  Task(subagent_type="general-purpose", model="sonnet", prompt="Follow the SEO Auditor skill instructions to audit [scope]")
+  ```
+- **Cost-optimized**: Use `model="haiku"` for straightforward projects with standard templates

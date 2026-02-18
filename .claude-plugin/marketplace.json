@@ -1,5 +1,6 @@
 {
     "name": "binary-hype-dev",
+    "description": "Developer productivity plugins by Binary Hype — specialized skills, subagents, and hooks for professional software engineering workflows.",
     "owner": {
         "name": "Tobias Kokesch",
         "email": "hallo@binary-hype.com"
@@ -9,7 +10,38 @@
             "name": "coding-assistant",
             "source": "./coding-assistant",
             "description": "A comprehensive coding assistant that helps developers in their daily work. Provides expert guidance on code quality, planning, and implementation while respecting your project's architecture and conventions.",
-            "version": "1.1.0"
+            "version": "1.5.0",
+            "author": {
+                "name": "Tobias Kokesch",
+                "email": "hallo@binary-hype.com"
+            },
+            "homepage": "https://github.com/Binary-Hype/claude-marketplace",
+            "repository": "https://github.com/Binary-Hype/claude-marketplace",
+            "license": "MIT",
+            "keywords": [
+                "skills",
+                "code-quality",
+                "code-review",
+                "refactoring",
+                "testing",
+                "api-documentation",
+                "api-design",
+                "security",
+                "accessibility",
+                "git",
+                "database",
+                "php",
+                "laravel",
+                "shopware",
+                "javascript",
+                "performance",
+                "seo",
+                "cicd",
+                "i18n",
+                "pull-request",
+                "merge-conflict"
+            ],
+            "category": "developer-tools"
         }
     ]
 }
