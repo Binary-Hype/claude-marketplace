@@ -18,7 +18,7 @@ After installation, use skills with `/skill-name` (e.g. `/changelog-generator`),
 
 ## Plugins
 
-### coding-assistant (v1.4.0)
+### coding-assistant (v1.4.1)
 
 Comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
