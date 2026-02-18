@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.3.0
+**Version:** 1.4.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -89,6 +89,8 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 3. **update-docs**: Syncs documentation with the codebase for PHP projects (including Laravel and Shopware). Generates from source-of-truth files like composer.json, .env.example, route definitions, and artisan commands.
 
 4. **setup-statusline**: Installs the coding-assistant statusline showing model, current task, directory, and context usage. Modifies `~/.claude/settings.json`.
+
+5. **handoff**: Generates a structured handoff document for continuing work in a fresh Claude Code session. Captures task context, git state, key decisions, and remaining work so nothing is lost when context limits are reached.
 
 ### Hooks
 
