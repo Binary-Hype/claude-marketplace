@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.5.1
+**Version:** 1.5.2
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -50,6 +50,8 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 15. **cicd-assistant**: CI/CD pipeline assistant for GitHub Actions, Docker, docker-compose, and deployment configurations. Reviews, generates, and fixes workflow files, Dockerfiles, and environment configs with security and performance best practices. Supports dynamic model delegation.
 
 16. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes ORM patterns (Eloquent) and migration best practices. Use when writing SQL, creating migrations, or troubleshooting performance. Supports dynamic model delegation.
+
+17. **codebase-summary**: Analyzes a codebase and generates a comprehensive summary document for new developers. Detects tech stack, architecture, conventions, entry points, workflows, and domain concepts across PHP, Node.js, Python, Go, Rust, and Ruby projects. Supports dynamic model delegation.
 
 ### Subagents
 
@@ -184,6 +186,7 @@ When working with this codebase:
 - Internationalization (i18n)
 - Pull Request Review
 - Merge Conflict Resolution
+- Codebase Summary (Onboarding)
 
 ## Notes for AI Assistants
 
