@@ -26,7 +26,7 @@ This plugin doesn't add process or overhead. It enhances what you already do.
 - **Subagents that activate on their own** — code review, security scanning, and accessibility checks are picked up by Claude automatically. No manual setup needed.
 - **Zero configuration** — sensible defaults out of the box. Override anything via `~/.claude/` if you want to, but you don't have to.
 
-## coding-assistant (v1.5.2)
+## coding-assistant (v1.5.3)
 
 ### Skills
 
