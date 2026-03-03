@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Installs the statusline into ~/.claude/settings.json
-// Resolves the absolute path to statusline.js at install time
+// Resolves the absolute path to statusline.sh at install time
 
 const fs = require('fs');
 const path = require('path');
@@ -32,5 +32,5 @@ settings.statusLine = {
 fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n', 'utf8');
 
 console.log('Statusline installed successfully.');
-console.log('Command: node "' + statuslinePath + '"');
+console.log('Command: "' + statuslinePath + '"');
 console.log('Restart Claude Code to see the statusline.');
