@@ -1,5 +1,5 @@
 ---
-description: Installs the coding-assistant statusline showing model, current task, directory, and context usage. Modifies ~/.claude/settings.json.
+description: Installs the coding-assistant statusline showing model, token usage, rate limits, and thinking status. Modifies ~/.claude/settings.json.
 ---
 
 # Setup Statusline
@@ -14,10 +14,15 @@ Runs the setup script that:
 
 ## What the Statusline Shows
 
-- **Model name** - which Claude model is active
-- **Current task** - the in-progress task from your todo list (if any)
-- **Directory** - current working directory name
-- **Context usage** - color-coded progress bar scaled to Claude's 80% context limit
+- **Line 1**: Model name | token usage (used/total) | % used | % remaining | thinking on/off
+- **Line 2**: 5-hour usage bar | 7-day usage bar | extra usage bar (if enabled)
+- **Line 3**: Reset times for each usage window
+
+## Requirements
+
+- `jq` must be installed
+- `curl` must be installed
+- OAuth credentials (automatically resolved from macOS Keychain, Linux credentials file, or GNOME Keyring)
 
 ## Workflow
 

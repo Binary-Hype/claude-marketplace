@@ -98,7 +98,7 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 1. **hooks.json**: Hook configuration file registering PreToolUse and PreCompact hooks for the plugin.
 
-2. **statusline.js**: Displays model, current task, directory, and context usage in the Claude Code status line.
+2. **statusline.sh**: Displays model name, token usage, rate limit progress bars (5-hour, 7-day, extra usage), reset times, and thinking status in the Claude Code status line. Fetches usage data via OAuth from the Anthropic API with caching.
 
 3. **setup-statusline.js**: Statusline setup and installation hook.
 
