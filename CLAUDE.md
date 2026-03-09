@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.5.4
+**Version:** 1.5.5
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -120,13 +120,7 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
    - Supports `-m`, `--message`, and heredoc message formats
    - Fails open on parse errors
 
-9. **check-typosquat.js**: PreToolUse hook that detects potentially typosquatted package names in install commands (npm, yarn, pnpm, bun, composer). Compares package names against a curated watchlist of ~100 popular packages using Levenshtein distance (1-2) and hyphen/underscore swap detection. Features:
-   - Supports `ddev exec` prefixed commands
-   - Handles scoped packages (`@scope/name`) and version specifiers
-   - 3-tier configuration: plugin defaults → `~/.claude/popular-packages.json` → `.claude/popular-packages.json`
-   - Fails open on errors
-
-10. **context-usage-alert.js**: PreCompact hook that alerts when auto-compaction triggers (context window full). Shows a warning message and injects `additionalContext` reminding Claude about `/handoff` for context preservation. Logs compaction events to `/tmp/claude-context-alerts.log`. Only fires on auto-compaction, not manual `/compact`.
+9. **context-usage-alert.js**: PreCompact hook that alerts when auto-compaction triggers (context window full). Shows a warning message and injects `additionalContext` reminding Claude about `/handoff` for context preservation. Logs compaction events to `/tmp/claude-context-alerts.log`. Only fires on auto-compaction, not manual `/compact`.
 
 ## Project Conventions
 

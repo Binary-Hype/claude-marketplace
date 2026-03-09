@@ -43,17 +43,6 @@
           }
         ],
         "description": "Enforce commit message conventions (length, imperative mood, formatting)"
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/check-typosquat.js",
-            "timeout": 10
-          }
-        ],
-        "description": "Detect typosquatted package names in npm/composer/yarn/pnpm/bun install commands"
       }
     ],
     "PreCompact": [

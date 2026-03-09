@@ -22,11 +22,11 @@ This plugin doesn't add process or overhead. It enhances what you already do.
 
 - **No extra workflow to learn** — no planning frameworks, no todo mechanics, no dashboards. Just your normal Claude Code session, enhanced.
 - **Skills when you need them** — type `/skill-name` and go. Each skill is a focused expert for one task. Use it once, or use it daily.
-- **Hooks that protect you automatically** — credential scanning, secret file blocking, commit linting, typosquatting detection. They run silently on every action. You only hear from them when something is wrong.
+- **Hooks that protect you automatically** — credential scanning, secret file blocking, commit linting. They run silently on every action. You only hear from them when something is wrong.
 - **Subagents that activate on their own** — code review, security scanning, and accessibility checks are picked up by Claude automatically. No manual setup needed.
 - **Zero configuration** — sensible defaults out of the box. Override anything via `~/.claude/` if you want to, but you don't have to.
 
-## coding-assistant (v1.5.4)
+## coding-assistant (v1.5.5)
 
 ### Skills
 
