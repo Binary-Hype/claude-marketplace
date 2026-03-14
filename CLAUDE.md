@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.5.6
+**Version:** 1.6.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -52,6 +52,8 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 16. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes ORM patterns (Eloquent) and migration best practices. Use when writing SQL, creating migrations, or troubleshooting performance. Supports dynamic model delegation.
 
 17. **codebase-summary**: Analyzes a codebase and generates a comprehensive summary document for new developers. Detects tech stack, architecture, conventions, entry points, workflows, and domain concepts across PHP, Node.js, Python, Go, Rust, and Ruby projects. Supports dynamic model delegation.
+
+18. **humanizer**: Removes signs of AI-generated writing from text. Based on Wikipedia's "Signs of AI writing" guide. Detects and fixes patterns including inflated symbolism, promotional language, superficial -ing analyses, vague attributions, em dash overuse, rule of three, AI vocabulary words, negative parallelisms, and excessive conjunctive phrases. Use when editing or reviewing text to make it sound more natural and human-written.
 
 ### Subagents
 
@@ -181,6 +183,7 @@ When working with this codebase:
 - Pull Request Review
 - Merge Conflict Resolution
 - Codebase Summary (Onboarding)
+- Humanizer (AI Writing Detection, Text Editing)
 
 ## Notes for AI Assistants
 

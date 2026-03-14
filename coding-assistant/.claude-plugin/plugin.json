@@ -62,6 +62,10 @@
         "onboarding",
         "codebase-analysis",
         "codebase-summary",
-        "project-overview"
+        "project-overview",
+        "humanizer",
+        "ai-writing",
+        "text-editing",
+        "writing-quality"
     ]
 }
