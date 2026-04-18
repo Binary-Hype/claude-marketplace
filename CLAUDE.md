@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.6.0
+**Version:** 1.7.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -123,6 +123,15 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
    - Fails open on parse errors
 
 9. **context-usage-alert.js**: PreCompact hook that alerts when auto-compaction triggers (context window full). Shows a warning message and injects `additionalContext` reminding Claude about `/handoff` for context preservation. Logs compaction events to `/tmp/claude-context-alerts.log`. Only fires on auto-compaction, not manual `/compact`.
+
+10. **protect-1password.js**: PreToolUse hook that blocks 1Password CLI (`op`) commands which could expose secrets. Allows metadata reads (titles, vault/item names, URLs, usernames, tags) but blocks passwords, private keys, tokens, recovery codes, and documents. Features:
+    - Allowlist of safe subcommands: `whoami`, `signin`, `signout`, `vault list/get`, `user list/get`, `account list/get`, `group list/get`, `item list/template`
+    - `op item get` requires `--fields` restricted to a known-safe set (title, name, url, website, username, email, tags, category, vault, id, uuid, createdAt, updatedAt, favorite, trashed, version)
+    - `op read "op://vault/item/field"` only allowed when the referenced field is in the safe set
+    - Always blocks: `op document`, `op inject`, `op run`, `op connect`, `op events-api`, `op service-account`
+    - `--reveal` flag is blocked on `op item get`
+    - Scans command substitutions (`$(...)` and backticks) so `op` nested in substitutions is still caught
+    - Fail-closed: unknown subcommands and unknown fields are blocked by default
 
 ## Project Conventions
 

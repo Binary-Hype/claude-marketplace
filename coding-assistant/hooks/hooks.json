@@ -23,6 +23,17 @@
         "description": "Scan staged git changes for hardcoded credentials before commit"
       },
       {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/protect-1password.js",
+            "timeout": 5
+          }
+        ],
+        "description": "Block 1Password CLI commands that would expose passwords, private keys, or other secrets (allows metadata reads)"
+      },
+      {
         "matcher": "Write",
         "hooks": [
           {
