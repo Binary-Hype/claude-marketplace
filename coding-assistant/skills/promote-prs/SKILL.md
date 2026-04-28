@@ -163,23 +163,34 @@ Keep summary bullets short — pull from commit subjects, rephrase imperative-mo
 
 ### Step 7: Idempotency Check (BEFORE Creating Anything)
 
-Query the provider for any **open** PR matching each (source, target) pair.
+Query the provider for any **open** PR matching each (source, target) pair. Use the one-shot patterns below — they print the existing PR/MR URL or print nothing.
 
-**GitHub:**
+**GitHub** — `gh pr list` accepts `--head`, `--base`, `--state` (`open` is the default but explicit is fine), `--json`, and `--jq`. Verified against `gh pr list --help`. The PR URL field is `url`.
+
 ```bash
-gh pr list --head "$SOURCE" --base "$PROD_TARGET"    --state open --json number,url,title
-gh pr list --head "$SOURCE" --base "$STAGING_TARGET" --state open --json number,url,title
+# Prints the existing PR URL, or nothing if no open PR matches
+gh pr list \
+  --head "$SOURCE" \
+  --base "$TARGET" \
+  --state open \
+  --json url \
+  --jq '.[0].url // empty'
 ```
 
-**GitLab:**
+**GitLab** — `glab mr list` does **not** have a `--state` flag. The default already returns only opened MRs (use `-c`/`--closed`, `-M`/`--merged`, or `-A`/`--all` to widen). Output format is selected with `-F`/`--output` (values: `text`, `json`). The MR URL field in the JSON is `web_url`, not `url`. Verified against `glab mr list --help`.
+
 ```bash
-glab mr list --source-branch "$SOURCE" --target-branch "$PROD_TARGET"    --state opened --output json
-glab mr list --source-branch "$SOURCE" --target-branch "$STAGING_TARGET" --state opened --output json
+# Prints the existing MR URL, or nothing if no open MR matches
+glab mr list \
+  --source-branch "$SOURCE" \
+  --target-branch "$TARGET" \
+  --output json \
+  | jq -r '.[0].web_url // empty'
 ```
 
-For each pair:
-- **PR exists** → record its URL/number, mark as "kept existing", do not create
-- **No PR exists** → mark as "to create"
+Run the corresponding query once for `$PROD_TARGET` and once for `$STAGING_TARGET`. For each pair:
+- **Output is non-empty** → a PR/MR already exists. Record its URL, mark as "kept existing", do not create.
+- **Output is empty** → mark as "to create".
 
 Possible outcomes (record which one applies for the final report):
 
@@ -215,8 +226,11 @@ glab mr create \
   --description "$(cat <<'EOF'
 <body content>
 EOF
-)"
+)" \
+  --yes
 ```
+
+`--yes` skips the final submission confirmation prompt — without it, `glab mr create` hangs waiting for interactive input. Both `--title` and `--description` are supplied, so the editor does not open.
 
 If creation of one PR fails:
 - **Do not roll back** the other PR
