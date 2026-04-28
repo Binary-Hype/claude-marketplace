@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.7.0
+**Version:** 1.8.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -55,6 +55,10 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 18. **humanizer**: Removes signs of AI-generated writing from text. Based on Wikipedia's "Signs of AI writing" guide. Detects and fixes patterns including inflated symbolism, promotional language, superficial -ing analyses, vague attributions, em dash overuse, rule of three, AI vocabulary words, negative parallelisms, and excessive conjunctive phrases. Use when editing or reviewing text to make it sound more natural and human-written.
 
+19. **handoff**: Generates a structured handoff document for continuing work in a fresh Claude Code session. Captures task context, git state, key decisions, and remaining work so nothing is lost when context limits are reached. Use when context is filling, before /compact, when pausing work, or when handing off to a colleague.
+
+20. **promote-prs**: Creates paired pull/merge requests for the current feature branch — one targeting `develop` (fallback `main`) labeled `(production)`, and one targeting `staging` (fallback `stage`, then `testing`) labeled `(staging)`. Auto-extracts JIRA ticket from the branch name (formats like `TIC-1337` and `TIC_1337` both supported), prompts only when missing. Idempotent: skips PRs that already exist for the same source→target pair. Supports GitHub (`gh`) and GitLab (`glab`), auto-detected from the origin remote URL.
+
 ### Subagents
 
 1. **code-review**: Expert PHP web application code reviewer with automatic framework detection. Reads `composer.json` to detect Laravel (`laravel/framework`) or Shopware 6 (`shopware/core`) and delegates framework-specific reviews to specialist subagents. Reviews for:
@@ -93,8 +97,6 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 3. **update-docs**: Syncs documentation with the codebase for PHP projects (including Laravel and Shopware). Generates from source-of-truth files like composer.json, .env.example, route definitions, and artisan commands.
 
 4. **setup-statusline**: Installs the coding-assistant statusline showing model, current task, directory, and context usage. Modifies `~/.claude/settings.json`.
-
-5. **handoff**: Generates a structured handoff document for continuing work in a fresh Claude Code session. Captures task context, git state, key decisions, and remaining work so nothing is lost when context limits are reached.
 
 ### Hooks
 

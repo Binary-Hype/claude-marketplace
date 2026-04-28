@@ -66,6 +66,11 @@
         "humanizer",
         "ai-writing",
         "text-editing",
-        "writing-quality"
+        "writing-quality",
+        "promote-prs",
+        "gitlab",
+        "merge-request",
+        "git-flow",
+        "jira"
     ]
 }

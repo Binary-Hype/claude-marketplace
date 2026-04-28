@@ -1,14 +1,27 @@
 ---
-description: Generates a structured handoff document for continuing work in a fresh Claude Code session. Captures task context, decisions, progress, and next steps so nothing is lost when context limits are reached.
+name: handoff
+version: 1.0.0
+description: |
+  Generates a structured handoff document for continuing work in a fresh
+  Claude Code session. Captures task context, git state, key decisions,
+  and remaining work so nothing is lost when context limits are reached.
+  Use when context is filling (~75-80%), before /compact, when pausing
+  work to resume later, or when handing off to a colleague or another
+  session.
+allowed-tools:
+  - Bash
+  - Read
+  - Glob
+  - Grep
 ---
 
 # Session Handoff Generator
 
 Generate a concise handoff document that lets a fresh Claude Code session pick up exactly where this one left off.
 
-## When to Use This Command
+## When to Use This Skill
 
-Use this command when:
+Use this skill when:
 - You're approaching context limits (~75-80% usage) and want to continue in a fresh session
 - You need to pause work and resume later without losing context
 - You want to hand off work to a colleague with full context
@@ -16,7 +29,7 @@ Use this command when:
 
 ## Workflow
 
-When this command is invoked, follow these steps:
+When this skill is invoked, follow these steps:
 
 ### Step 1: Gather Git State
 
