@@ -28,7 +28,7 @@ Use this skill when:
 - You want a re-runnable command that fills in missing PRs without disturbing existing ones
 
 Do NOT use this skill when:
-- The repo only has a single mainline branch — use `pr-reviewer` or plain `gh pr create` instead
+- The repo only has a single mainline branch — use plain `gh pr create` instead
 - The feature should NOT go to staging (e.g. hotfix-only work)
 - Staging requires cherry-picked commits rather than the full feature branch
 

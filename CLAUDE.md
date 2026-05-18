@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 1.8.1
+**Version:** 2.0.0
 
 A comprehensive coding assistant providing expert guidance on code quality, planning, and implementation.
 
@@ -23,7 +23,7 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 2. **time-estimation**: Estimates development time for features by analyzing complexity, dependencies, and project structure. Provides manual vs AI-assisted development time comparisons showing hours saved when using AI tools.
 
-3. **refactoring-assistant**: Identifies code smells and suggests refactoring improvements using proven design patterns. Includes Laravel-specific patterns but applicable to any codebase.
+3. **quality-check**: Quality screen for code changes covering design pattern appropriateness, readability, SOLID/DRY principles, common performance anti-patterns, and dead code. Defaults to scanning unstaged git changes; accepts explicit file paths or diff ranges as alternative scope. Diff-level only — not a full performance audit and not a full-codebase dead-code pipeline.
 
 4. **api-documentation**: Automatically generates comprehensive API documentation including OpenAPI/Swagger specs, endpoint descriptions, request/response examples, and integration guides. Includes Laravel route discovery support.
 
@@ -41,23 +41,21 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 11. **i18n-checker**: Internationalization checker for missing translations, hardcoded strings, locale file completeness, and placeholder consistency. Supports Laravel lang files, gettext .po, JSON translations, and Shopware snippets. Supports dynamic model delegation.
 
-12. **pr-reviewer**: Pull request reviewer that analyzes diffs, generates PR descriptions, identifies debug code, assesses change impact and risk, categorizes modifications, and checks for common PR issues like merge conflicts and missing tests. Supports dynamic model delegation.
+12. **dependency-auditor**: Audits project dependencies for known vulnerabilities (CVEs), outdated packages, license compliance, and abandoned packages. Supports Composer (PHP) and npm (Node.js) with DDEV-aware command execution. Supports dynamic model delegation.
 
-13. **dependency-auditor**: Audits project dependencies for known vulnerabilities (CVEs), outdated packages, license compliance, and abandoned packages. Supports Composer (PHP) and npm (Node.js) with DDEV-aware command execution. Supports dynamic model delegation.
+13. **migration-assistant**: Framework and dependency migration/upgrade assistant. Detects current versions, identifies breaking changes, scans for deprecated API usage, and provides step-by-step upgrade paths for Laravel, Shopware, PHP, and Node.js projects. Supports dynamic model delegation.
 
-14. **migration-assistant**: Framework and dependency migration/upgrade assistant. Detects current versions, identifies breaking changes, scans for deprecated API usage, and provides step-by-step upgrade paths for Laravel, Shopware, PHP, and Node.js projects. Supports dynamic model delegation.
+14. **cicd-assistant**: CI/CD pipeline assistant for GitHub Actions, Docker, docker-compose, and deployment configurations. Reviews, generates, and fixes workflow files, Dockerfiles, and environment configs with security and performance best practices. Supports dynamic model delegation.
 
-15. **cicd-assistant**: CI/CD pipeline assistant for GitHub Actions, Docker, docker-compose, and deployment configurations. Reviews, generates, and fixes workflow files, Dockerfiles, and environment configs with security and performance best practices. Supports dynamic model delegation.
+15. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes ORM patterns (Eloquent) and migration best practices. Use when writing SQL, creating migrations, or troubleshooting performance. Supports dynamic model delegation.
 
-16. **database-reviewer**: Database specialist for MySQL/MariaDB and PostgreSQL covering query optimization, schema design, security, and performance. Includes ORM patterns (Eloquent) and migration best practices. Use when writing SQL, creating migrations, or troubleshooting performance. Supports dynamic model delegation.
+16. **codebase-summary**: Analyzes a codebase and generates a comprehensive summary document for new developers. Detects tech stack, architecture, conventions, entry points, workflows, and domain concepts across PHP, Node.js, Python, Go, Rust, and Ruby projects. Supports dynamic model delegation.
 
-17. **codebase-summary**: Analyzes a codebase and generates a comprehensive summary document for new developers. Detects tech stack, architecture, conventions, entry points, workflows, and domain concepts across PHP, Node.js, Python, Go, Rust, and Ruby projects. Supports dynamic model delegation.
+17. **humanizer**: Removes signs of AI-generated writing from text. Based on Wikipedia's "Signs of AI writing" guide. Detects and fixes patterns including inflated symbolism, promotional language, superficial -ing analyses, vague attributions, em dash overuse, rule of three, AI vocabulary words, negative parallelisms, and excessive conjunctive phrases. Use when editing or reviewing text to make it sound more natural and human-written.
 
-18. **humanizer**: Removes signs of AI-generated writing from text. Based on Wikipedia's "Signs of AI writing" guide. Detects and fixes patterns including inflated symbolism, promotional language, superficial -ing analyses, vague attributions, em dash overuse, rule of three, AI vocabulary words, negative parallelisms, and excessive conjunctive phrases. Use when editing or reviewing text to make it sound more natural and human-written.
+18. **handoff**: Generates a structured handoff document for continuing work in a fresh Claude Code session. Captures task context, git state, key decisions, and remaining work so nothing is lost when context limits are reached. Use when context is filling, before /compact, when pausing work, or when handing off to a colleague.
 
-19. **handoff**: Generates a structured handoff document for continuing work in a fresh Claude Code session. Captures task context, git state, key decisions, and remaining work so nothing is lost when context limits are reached. Use when context is filling, before /compact, when pausing work, or when handing off to a colleague.
-
-20. **promote-prs**: Creates paired pull/merge requests for the current feature branch — one targeting `develop` (fallback `main`) labeled `(production)`, and one targeting `staging` (fallback `stage`, then `testing`) labeled `(staging)`. Auto-extracts JIRA ticket from the branch name (formats like `TIC-1337` and `TIC_1337` both supported), prompts only when missing. Idempotent: skips PRs that already exist for the same source→target pair. Supports GitHub (`gh`) and GitLab (`glab`), auto-detected from the origin remote URL.
+19. **promote-prs**: Creates paired pull/merge requests for the current feature branch — one targeting `develop` (fallback `main`) labeled `(production)`, and one targeting `staging` (fallback `stage`, then `testing`) labeled `(staging)`. Auto-extracts JIRA ticket from the branch name (formats like `TIC-1337` and `TIC_1337` both supported), prompts only when missing. Idempotent: skips PRs that already exist for the same source→target pair. Supports GitHub (`gh`) and GitLab (`glab`), auto-detected from the origin remote URL.
 
 ### Subagents
 
@@ -92,11 +90,9 @@ A comprehensive coding assistant providing expert guidance on code quality, plan
 
 1. **commit-message**: Generates well-structured git commit messages and automatically creates the commit. Analyzes staged changes to create meaningful commit messages following best practices.
 
-2. **refactor-clean**: Safely identifies and removes dead code in PHP projects (including Laravel and Shopware). Uses PHPStan, Psalm, composer-unused, and Deptrac for detection with test verification at every step.
+2. **update-docs**: Syncs documentation with the codebase for PHP projects (including Laravel and Shopware). Generates from source-of-truth files like composer.json, .env.example, route definitions, and artisan commands.
 
-3. **update-docs**: Syncs documentation with the codebase for PHP projects (including Laravel and Shopware). Generates from source-of-truth files like composer.json, .env.example, route definitions, and artisan commands.
-
-4. **setup-statusline**: Installs the coding-assistant statusline showing model, current task, directory, and context usage. Modifies `~/.claude/settings.json`.
+3. **setup-statusline**: Installs the coding-assistant statusline showing model, current task, directory, and context usage. Modifies `~/.claude/settings.json`.
 
 ### Hooks
 
@@ -152,14 +148,13 @@ When working with this codebase:
 
 ## Development Workflow
 
-1. **Planning**: Use refactoring-assistant skill to improve existing code or plan architecture
-2. **Implementation**: Follow established framework conventions and project patterns
+1. **Implementation**: Follow established framework conventions and project patterns
+2. **Self-review**: Use quality-check skill on the unstaged diff to screen for design pattern fit, readability, SOLID/DRY violations, common performance anti-patterns, and dead code
 3. **Testing**: Use test-generator skill to create comprehensive tests
 4. **Review**: Use code-review subagent to check quality (delegates to security-scanner, wcag-compliance)
 5. **Documentation**: Use api-documentation skill for API endpoints, update-docs command for project docs
 6. **Commit**: Use commit-message command for professional commit messages
 7. **Release**: Use changelog-generator skill to create user-facing release notes
-8. **Clean**: Use /refactor-clean command to identify and remove dead code
 
 ## Repository Information
 

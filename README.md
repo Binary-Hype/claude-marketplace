@@ -32,11 +32,11 @@ This plugin doesn't add process or overhead. It enhances what you already do.
 
 Invoke any skill with `/skill-name`.
 
-**Code Quality** — `/refactoring-assistant` · `/test-generator` · `/database-reviewer`
+**Code Quality** — `/quality-check` · `/test-generator` · `/database-reviewer`
 
 **API** — `/api-design` · `/api-documentation`
 
-**Git & Releases** — `/changelog-generator` · `/merge-conflict-resolver` · `/pr-reviewer`
+**Git & Releases** — `/changelog-generator` · `/merge-conflict-resolver`
 
 **DevOps** — `/cicd-assistant` · `/dependency-auditor` · `/migration-assistant`
 
@@ -49,7 +49,6 @@ Invoke any skill with `/skill-name`.
 Invoke with `/coding-assistant:<command>`.
 
 - **commit-message** — generates commit messages and creates the commit
-- **refactor-clean** — finds and removes dead code with test verification
 - **update-docs** — syncs documentation with the codebase
 - **setup-statusline** — installs a statusline showing model, task, and context usage
 - **handoff** — generates a session handoff document for context continuity

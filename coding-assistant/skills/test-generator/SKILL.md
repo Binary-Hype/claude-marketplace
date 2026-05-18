@@ -319,7 +319,7 @@ This skill works well with:
 
 - **code-review**: Understand code structure before writing tests
 - **api-documentation**: Ensure tests match documented API behavior
-- **refactoring-assistant**: Add tests before refactoring as safety net
+- **quality-check**: Screen code quality before relying on tests
 
 ## Limitations
 
