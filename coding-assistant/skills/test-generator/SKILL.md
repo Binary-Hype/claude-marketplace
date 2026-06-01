@@ -119,7 +119,7 @@ When this skill is invoked, it follows this systematic approach:
    - Validate business logic outcomes
 
 5. **Cross-Reference with Documentation**
-   - Use **api-documentation** skill to verify endpoint contracts
+   - Review route definitions or API contracts in the codebase
    - Ensure tests match documented behavior
 
 ## Output Format
@@ -318,7 +318,6 @@ describe('Post Management', function () {
 This skill works well with:
 
 - **code-review**: Understand code structure before writing tests
-- **api-documentation**: Ensure tests match documented API behavior
 - **quality-check**: Screen code quality before relying on tests
 
 ## Limitations

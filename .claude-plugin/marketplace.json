@@ -9,8 +9,8 @@
         {
             "name": "coding-assistant",
             "source": "./coding-assistant",
-            "description": "A comprehensive coding assistant that helps developers in their daily work. Provides expert guidance on code quality, planning, and implementation while respecting your project's architecture and conventions.",
-            "version": "2.2.0",
+            "description": "A lean coding assistant focused on code quality, security, and correctness. Provides expert guidance on design patterns, testing, database review, dependency health, and merge-conflict resolution while respecting your project's architecture and conventions.",
+            "version": "2.2.1",
             "author": {
                 "name": "Tobias Kokesch",
                 "email": "hallo@binary-hype.com"
@@ -24,22 +24,20 @@
                 "code-review",
                 "refactoring",
                 "testing",
-                "api-documentation",
                 "api-design",
                 "security",
-                "accessibility",
                 "git",
                 "database",
                 "php",
                 "laravel",
                 "shopware",
                 "javascript",
-                "performance",
-                "seo",
-                "cicd",
-                "i18n",
+                "dependencies",
+                "vulnerability-scanning",
                 "pull-request",
-                "merge-conflict"
+                "merge-conflict",
+                "humanizer",
+                "promote-prs"
             ],
             "category": "developer-tools"
         }

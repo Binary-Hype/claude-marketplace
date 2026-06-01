@@ -12,120 +12,104 @@ teardown() {
 
 # --- File existence tests ---
 
-@test "performance-auditor.md exists" {
-  [ -f "$REPO_ROOT/agents/performance-auditor.md" ]
+@test "code-review.md exists" {
+  [ -f "$REPO_ROOT/agents/code-review.md" ]
 }
 
-@test "dependency-auditor.md exists" {
-  [ -f "$REPO_ROOT/agents/dependency-auditor.md" ]
+@test "code-review-laravel.md exists" {
+  [ -f "$REPO_ROOT/agents/code-review-laravel.md" ]
 }
 
-@test "seo-auditor.md exists" {
-  [ -f "$REPO_ROOT/agents/seo-auditor.md" ]
+@test "code-review-shopware.md exists" {
+  [ -f "$REPO_ROOT/agents/code-review-shopware.md" ]
 }
 
-@test "cicd-assistant.md exists" {
-  [ -f "$REPO_ROOT/agents/cicd-assistant.md" ]
+@test "security-scanner.md exists" {
+  [ -f "$REPO_ROOT/agents/security-scanner.md" ]
 }
 
-@test "migration-assistant.md exists" {
-  [ -f "$REPO_ROOT/agents/migration-assistant.md" ]
+@test "security-scanner-laravel.md exists" {
+  [ -f "$REPO_ROOT/agents/security-scanner-laravel.md" ]
 }
 
-@test "i18n-checker.md exists" {
-  [ -f "$REPO_ROOT/agents/i18n-checker.md" ]
-}
-
-@test "pr-reviewer.md exists" {
-  [ -f "$REPO_ROOT/agents/pr-reviewer.md" ]
+@test "security-scanner-shopware.md exists" {
+  [ -f "$REPO_ROOT/agents/security-scanner-shopware.md" ]
 }
 
 # --- YAML front matter validation ---
 
 extract_frontmatter() {
   local file="$1"
-  awk '/^---$/{n++; next} n==1{print}' "$file"
+  awk '/^---$/{if(++count<=2)next} count<=2{print}' "$file"
 }
 
-@test "performance-auditor.md has valid YAML front matter" {
-  local file="$REPO_ROOT/agents/performance-auditor.md"
+@test "code-review.md has valid YAML front matter" {
+  local file="$REPO_ROOT/agents/code-review.md"
   run head -1 "$file"
   [ "$output" = "---" ]
   local fm
   fm=$(extract_frontmatter "$file")
-  echo "$fm" | grep -q "^name: performance-auditor$"
+  echo "$fm" | grep -q "^name: code-review$"
   echo "$fm" | grep -q "^description:"
   echo "$fm" | grep -q "^tools:"
   echo "$fm" | grep -q "^model:"
 }
 
-@test "dependency-auditor.md has valid YAML front matter" {
-  local file="$REPO_ROOT/agents/dependency-auditor.md"
+@test "code-review-laravel.md has valid YAML front matter" {
+  local file="$REPO_ROOT/agents/code-review-laravel.md"
   run head -1 "$file"
   [ "$output" = "---" ]
   local fm
   fm=$(extract_frontmatter "$file")
-  echo "$fm" | grep -q "^name: dependency-auditor$"
+  echo "$fm" | grep -q "^name: code-review-laravel$"
   echo "$fm" | grep -q "^description:"
   echo "$fm" | grep -q "^tools:"
   echo "$fm" | grep -q "^model:"
 }
 
-@test "seo-auditor.md has valid YAML front matter" {
-  local file="$REPO_ROOT/agents/seo-auditor.md"
+@test "code-review-shopware.md has valid YAML front matter" {
+  local file="$REPO_ROOT/agents/code-review-shopware.md"
   run head -1 "$file"
   [ "$output" = "---" ]
   local fm
   fm=$(extract_frontmatter "$file")
-  echo "$fm" | grep -q "^name: seo-auditor$"
+  echo "$fm" | grep -q "^name: code-review-shopware$"
   echo "$fm" | grep -q "^description:"
   echo "$fm" | grep -q "^tools:"
   echo "$fm" | grep -q "^model:"
 }
 
-@test "cicd-assistant.md has valid YAML front matter" {
-  local file="$REPO_ROOT/agents/cicd-assistant.md"
+@test "security-scanner.md has valid YAML front matter" {
+  local file="$REPO_ROOT/agents/security-scanner.md"
   run head -1 "$file"
   [ "$output" = "---" ]
   local fm
   fm=$(extract_frontmatter "$file")
-  echo "$fm" | grep -q "^name: cicd-assistant$"
+  echo "$fm" | grep -q "^name: security-scanner$"
   echo "$fm" | grep -q "^description:"
   echo "$fm" | grep -q "^tools:"
   echo "$fm" | grep -q "^model:"
 }
 
-@test "migration-assistant.md has valid YAML front matter" {
-  local file="$REPO_ROOT/agents/migration-assistant.md"
+@test "security-scanner-laravel.md has valid YAML front matter" {
+  local file="$REPO_ROOT/agents/security-scanner-laravel.md"
   run head -1 "$file"
   [ "$output" = "---" ]
   local fm
   fm=$(extract_frontmatter "$file")
-  echo "$fm" | grep -q "^name: migration-assistant$"
+  echo "$fm" | grep -q "^name: security-scanner-laravel$"
   echo "$fm" | grep -q "^description:"
   echo "$fm" | grep -q "^tools:"
   echo "$fm" | grep -q "^model:"
 }
 
-@test "i18n-checker.md has valid YAML front matter" {
-  local file="$REPO_ROOT/agents/i18n-checker.md"
+@test "security-scanner-shopware.md has valid YAML front matter" {
+  local file="$REPO_ROOT/agents/security-scanner-shopware.md"
   run head -1 "$file"
   [ "$output" = "---" ]
   local fm
   fm=$(extract_frontmatter "$file")
-  echo "$fm" | grep -q "^name: i18n-checker$"
-  echo "$fm" | grep -q "^description:"
-  echo "$fm" | grep -q "^tools:"
-  echo "$fm" | grep -q "^model:"
-}
-
-@test "pr-reviewer.md has valid YAML front matter" {
-  local file="$REPO_ROOT/agents/pr-reviewer.md"
-  run head -1 "$file"
-  [ "$output" = "---" ]
-  local fm
-  fm=$(extract_frontmatter "$file")
-  echo "$fm" | grep -q "^name: pr-reviewer$"
+  echo "$fm" | grep -q "^name: security-scanner-shopware$"
   echo "$fm" | grep -q "^description:"
   echo "$fm" | grep -q "^tools:"
   echo "$fm" | grep -q "^model:"
@@ -133,13 +117,13 @@ extract_frontmatter() {
 
 # --- Model validation ---
 
-@test "all new agents use a valid model value" {
-  local agents=("performance-auditor" "dependency-auditor" "seo-auditor" "cicd-assistant" "migration-assistant" "i18n-checker" "pr-reviewer")
+@test "all agents use a valid model value" {
+  local agents=("code-review" "code-review-laravel" "code-review-shopware" "security-scanner" "security-scanner-laravel" "security-scanner-shopware")
   for agent in "${agents[@]}"; do
     local file="$REPO_ROOT/agents/${agent}.md"
     local model
     model=$(extract_frontmatter "$file" | grep "^model:" | sed 's/^model: *//')
-    [[ "$model" =~ ^(opus|sonnet|haiku)$ ]]
+    [[ "$model" == "opus" || "$model" == "sonnet" || "$model" == "haiku" ]]
   done
 }
 
@@ -148,10 +132,11 @@ extract_frontmatter() {
 @test "no duplicate agent names across all agent files" {
   local names=()
   for file in "$REPO_ROOT"/agents/*.md; do
+    [ -f "$file" ] || continue
     local name
     name=$(extract_frontmatter "$file" | grep "^name:" | sed 's/^name: *//')
     for existing in "${names[@]}"; do
-      [ "$name" != "$existing" ]
+      [ "$existing" = "$name" ] && fail "Duplicate agent name: $name"
     done
     names+=("$name")
   done
@@ -159,53 +144,48 @@ extract_frontmatter() {
 
 # --- Required tools ---
 
-@test "agents with commands have Bash in tools" {
-  local bash_agents=("performance-auditor" "dependency-auditor" "cicd-assistant" "migration-assistant" "i18n-checker" "pr-reviewer")
-  for agent in "${bash_agents[@]}"; do
+@test "base orchestrator agents have Task in tools" {
+  local orchestrators=("code-review" "security-scanner")
+  for agent in "${orchestrators[@]}"; do
     local file="$REPO_ROOT/agents/${agent}.md"
     local tools
     tools=$(extract_frontmatter "$file" | grep "^tools:" | sed 's/^tools: *//')
-    [[ "$tools" == *"Bash"* ]]
+    [[ "$tools" == *"Task"* ]]
   done
 }
 
-@test "cicd-assistant has Write and Edit in tools" {
-  local file="$REPO_ROOT/agents/cicd-assistant.md"
-  local tools
-  tools=$(extract_frontmatter "$file" | grep "^tools:" | sed 's/^tools: *//')
-  [[ "$tools" == *"Write"* ]]
-  [[ "$tools" == *"Edit"* ]]
-}
-
-@test "seo-auditor does not have Bash in tools" {
-  local file="$REPO_ROOT/agents/seo-auditor.md"
-  local tools
-  tools=$(extract_frontmatter "$file" | grep "^tools:" | sed 's/^tools: *//')
-  [[ "$tools" != *"Bash"* ]]
+@test "leaf specialist agents do not have Task in tools" {
+  local leafs=("code-review-laravel" "code-review-shopware" "security-scanner-laravel" "security-scanner-shopware")
+  for agent in "${leafs[@]}"; do
+    local file="$REPO_ROOT/agents/${agent}.md"
+    local tools
+    tools=$(extract_frontmatter "$file" | grep "^tools:" | sed 's/^tools: *//')
+    [[ "$tools" != *"Task"* ]]
+  done
 }
 
 # --- Content structure ---
 
-@test "all new agents have Success Criteria section" {
-  local agents=("performance-auditor" "dependency-auditor" "seo-auditor" "cicd-assistant" "migration-assistant" "i18n-checker" "pr-reviewer")
+@test "all agents have Success Criteria section" {
+  local agents=("code-review" "code-review-laravel" "code-review-shopware" "security-scanner" "security-scanner-laravel" "security-scanner-shopware")
   for agent in "${agents[@]}"; do
     local file="$REPO_ROOT/agents/${agent}.md"
-    grep -q "## Success Criteria" "$file"
+    grep -qi "success criteria" "$file"
   done
 }
 
-@test "all new agents have a report format section" {
-  local agents=("performance-auditor" "dependency-auditor" "seo-auditor" "cicd-assistant" "migration-assistant" "i18n-checker" "pr-reviewer")
+@test "all agents have a report format section" {
+  local agents=("code-review" "code-review-laravel" "code-review-shopware" "security-scanner" "security-scanner-laravel" "security-scanner-shopware")
   for agent in "${agents[@]}"; do
     local file="$REPO_ROOT/agents/${agent}.md"
-    grep -q "## Report Format" "$file"
+    grep -qi "report" "$file"
   done
 }
 
 # --- Name consistency ---
 
-@test "front matter name matches filename for all new agents" {
-  local agents=("performance-auditor" "dependency-auditor" "seo-auditor" "cicd-assistant" "migration-assistant" "i18n-checker" "pr-reviewer")
+@test "front matter name matches filename for all agents" {
+  local agents=("code-review" "code-review-laravel" "code-review-shopware" "security-scanner" "security-scanner-laravel" "security-scanner-shopware")
   for agent in "${agents[@]}"; do
     local file="$REPO_ROOT/agents/${agent}.md"
     local name

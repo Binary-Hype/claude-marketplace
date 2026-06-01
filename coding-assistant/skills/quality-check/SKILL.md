@@ -18,7 +18,7 @@ Use this skill when:
 - A reviewer asked "is this readable?" and you want concrete signals to check
 - You're learning SOLID/DRY and want feedback grounded in your actual code
 
-For framework-deep review, defer to `code-review-laravel` or `code-review-shopware`. For security, defer to `security-scanner`. For accessibility, defer to `wcag-compliance`.
+For framework-deep review, defer to `code-review-laravel` or `code-review-shopware`. For security, defer to `security-scanner`.
 
 ## Default Scope: Unstaged Git Changes
 
@@ -171,7 +171,6 @@ If a dimension produced no findings, say so explicitly (e.g. `Performance: no an
 
 - **Full performance profiling or benchmarking** — flame graphs, micro-benchmarks, and real load testing are out of scope.
 - **Security review** — defer to `security-scanner` (and its Laravel / Shopware specialists).
-- **Accessibility review** — defer to `wcag-compliance`.
 - **Framework-deep review** — defer to `code-review-laravel` / `code-review-shopware`.
 - **Cross-file / codebase-wide dead-code analysis** — PHPStan, Psalm, composer-unused, and Deptrac do this better; this skill stays diff-level.
 - **PR-description generation, debug-code scanning, test-coverage gating** — out of scope by design.

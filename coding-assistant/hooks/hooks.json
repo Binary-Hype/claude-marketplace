@@ -17,7 +17,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/protect-credentials.sh"
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/protect-credentials.sh",
+            "timeout": 10
           }
         ],
         "description": "Scan staged git changes for hardcoded credentials before commit"
@@ -43,30 +44,6 @@
           }
         ],
         "description": "Block creation of files exceeding 800 lines"
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/lint-commit-message.js",
-            "timeout": 5
-          }
-        ],
-        "description": "Enforce commit message conventions (length, imperative mood, formatting)"
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "auto",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/context-usage-alert.js",
-            "timeout": 5
-          }
-        ],
-        "description": "Alert when context window is full and auto-compaction starts"
       }
     ]
   }
