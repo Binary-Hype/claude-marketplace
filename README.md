@@ -50,7 +50,6 @@ Invoke with `/coding-assistant:<command>`.
 
 - **commit-message** — generates commit messages and creates the commit
 - **update-docs** — syncs documentation with the codebase
-- **setup-statusline** — installs a statusline showing model, task, and context usage
 - **handoff** — generates a session handoff document for context continuity
 
 ### Automatic protections
