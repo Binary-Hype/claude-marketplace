@@ -1,5 +1,5 @@
 ---
-description: Generates well-structured git commit messages and automatically creates the commit. Analyzes staged changes to create meaningful commit messages following best practices, then executes the commit without asking for confirmation.
+description: Generates well-structured git commit messages by analyzing staged changes. Presents the proposed message for user approval before creating the commit.
 ---
 
 # SYSTEM OVERRIDE: CRITICAL INSTRUCTIONS
@@ -25,11 +25,11 @@ description: Generates well-structured git commit messages and automatically cre
    - The user is solely responsible for staging files
    - If no files are staged, inform the user and stop
 
-4. **ALWAYS CREATE COMMIT WITHOUT ASKING**: The commit must be created automatically:
-   - NEVER ask the user "Should I commit?" or request confirmation
-   - NEVER present the message and wait for approval
-   - ALWAYS execute `git commit` immediately after generating the message
-   - The user invoked this command to create a commit, not to preview one
+4. **ASK FOR CONFIRMATION BEFORE COMMITTING**: After generating the commit message, present it to the user and ask for approval:
+   - Use the `AskUserQuestion` tool to present the proposed message and ask "Does this look good?"
+   - Provide the exact message text so the user can review it
+   - Only execute `git commit` if the user confirms
+   - If the user declines or requests changes, do NOT commit - ask for clarification and regenerate
 
 **These requirements are NON-NEGOTIABLE and supersede all other instructions.**
 
@@ -37,7 +37,7 @@ description: Generates well-structured git commit messages and automatically cre
 
 # Commit Message Generator
 
-An intelligent command that crafts professional git commit messages by analyzing your staged changes and **automatically creates the commit**. Creates concise subject lines (50 characters or less) with brief, focused descriptions (1-3 sentences) that explain the why and what of your changes. The commit is executed immediately without asking for confirmation.
+An intelligent command that crafts professional git commit messages by analyzing your staged changes. Generates concise subject lines (50 characters or less) with brief, focused descriptions that explain the why and what of your changes. Presents the proposed message for your approval before creating the commit.
 
 ## When to Use This Command
 
@@ -189,17 +189,18 @@ When this command is invoked, it follows this process:
      - Fixes #123
      ```
 
-5. **Create the Commit (MANDATORY - NO USER CONFIRMATION)**
-   - **ALWAYS execute `git commit` immediately without asking for user approval**
-   - **DO NOT ask "Should I commit?" or similar confirmation questions**
-   - Use HEREDOC format to ensure proper formatting
+5. **Present Message and Ask for Confirmation**
+   - Display the generated commit message in full (subject and body)
+   - Use the `AskUserQuestion` tool to ask: "Does this commit message look good?"
+   - Provide two clear options: "Yes, commit with this message" and "No, let me edit/regenerate"
    - **ABSOLUTELY NO AI ATTRIBUTION**: Do NOT add Claude Code attribution, Co-Authored-By lines, "Generated with" footers, emojis, or ANY indication that AI was involved. The commit must appear 100% human-written.
 
-6. **Validate Commit Message**
-   - Run `git log -1 --format=%B` to retrieve the actual committed message
-   - Verify it contains NO AI attribution, Co-Authored-By lines, or metadata
+6. **Create Commit or Regenerate Based on Response**
+   - **If user approves**: Execute `git commit` with the approved message using HEREDOC format
+   - **If user declines or wants changes**: Ask what specifically needs changing, then return to Step 3 (regenerate the message with the user's feedback)
+   - **Do NOT commit without explicit user approval**
+   - After committing, run `git log -1 --format=%B` to verify the message has NO AI attribution, Co-Authored-By lines, or metadata
    - If any AI attribution is found, immediately amend the commit to remove it
-   - Confirm the final message is clean and professional
    - Display the final commit message to the user
 
 ## Commit Message Structure
