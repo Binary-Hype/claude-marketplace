@@ -1,6 +1,6 @@
 {
   "name": "coding-assistant",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Lean coding assistant focused on code quality, security, and correctness.",
   "license": "GPL-3.0",
   "private": true,

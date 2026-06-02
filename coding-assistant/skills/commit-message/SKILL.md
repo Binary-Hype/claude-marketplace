@@ -1,4 +1,5 @@
 ---
+name: commit-message
 description: Generates well-structured git commit messages by analyzing staged changes. Presents the proposed message for user approval before creating the commit.
 ---
 
@@ -19,7 +20,7 @@ description: Generates well-structured git commit messages by analyzing staged c
    - Do NOT rely on cached git command outputs
    - Each invocation must fetch current repository state
 
-3. **NEVER STAGE FILES**: The command ONLY analyzes already-staged changes:
+3. **NEVER STAGE FILES**: The skill ONLY analyzes already-staged changes:
    - NEVER run `git add` commands
    - NEVER stage files on behalf of the user
    - The user is solely responsible for staging files
@@ -37,11 +38,11 @@ description: Generates well-structured git commit messages by analyzing staged c
 
 # Commit Message Generator
 
-An intelligent command that crafts professional git commit messages by analyzing your staged changes. Generates concise subject lines (50 characters or less) with brief, focused descriptions that explain the why and what of your changes. Presents the proposed message for your approval before creating the commit.
+An intelligent skill that crafts professional git commit messages by analyzing your staged changes. Generates concise subject lines (50 characters or less) with brief, focused descriptions that explain the why and what of your changes. Presents the proposed message for your approval before creating the commit.
 
-## When to Use This Command
+## When to Use This Skill
 
-Use this command when:
+Use this skill when:
 - You're ready to commit changes but need help writing a clear commit message
 - You want to follow git commit message best practices
 - You have complex changes that need proper documentation
@@ -51,7 +52,7 @@ Use this command when:
 
 ## CRITICAL: Keep Commits Clean and Professional
 
-**This command generates CLEAN, PROFESSIONAL commit messages WITHOUT any AI attribution or metadata.**
+**This skill generates CLEAN, PROFESSIONAL commit messages WITHOUT any AI attribution or metadata.**
 
 **Absolutely NO:**
 - Co-Authored-By lines (Claude, AI assistants, etc.)
@@ -62,9 +63,9 @@ Use this command when:
 
 **Why?** Your commit messages should appear as if written by a human developer. They become part of your project's permanent history and should maintain professionalism and authenticity.
 
-## What This Command Does
+## What This Skill Does
 
-This command provides comprehensive commit message support by:
+This skill provides comprehensive commit message support by:
 
 1. **Change Analysis**
    - Reviews git diff to understand what changed
@@ -97,7 +98,7 @@ This command provides comprehensive commit message support by:
 
 ## How to Use
 
-Simply invoke the command when you're ready to commit:
+Simply invoke the skill when you're ready to commit:
 
 ```
 /commit-message
@@ -143,7 +144,7 @@ I've staged changes to the user model and auth controller. Help me write a commi
 
 ## Workflow
 
-When this command is invoked, it follows this process:
+When this skill is invoked, it follows this process:
 
 1. **Analyze Staged Changes (MUST RUN FRESH)**
    - Run `git status --porcelain` to get unambiguous staged file list
@@ -386,10 +387,10 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 **Before Committing:**
 ```bash
-# Step 1: YOU stage the files (the command will NOT do this)
+# Step 1: YOU stage the files (the skill will NOT do this)
 git add .
 
-# Step 2: Invoke the command to generate commit message
+# Step 2: Invoke the skill to generate commit message
 /commit-message
 ```
 
@@ -407,7 +408,7 @@ git add src/auth/*
 I've staged my changes. What would be a good commit message?
 ```
 
-**Important:** Always stage files yourself with `git add` before invoking this command. The command will NOT stage files for you.
+**Important:** Always stage files yourself with `git add` before invoking this skill. The skill will NOT stage files for you.
 
 ## Tips for Best Results
 
@@ -462,7 +463,7 @@ Optimize [what] for [improvement]
 - [What changed to achieve this]
 ```
 
-## What This Command Won't Do
+## What This Skill Won't Do
 
 - Won't stage files (you must run `git add` yourself first)
 - Won't modify your staged changes
@@ -480,11 +481,11 @@ Optimize [what] for [improvement]
 
 ## Technical Implementation
 
-This command:
+This skill:
 1. Uses `git status` and `git diff --staged` to analyze changes
 2. Reviews `git log` for wording patterns ONLY (NEVER to change structure)
 3. Applies commit message best practices with mandatory bullet list format
 4. Generates structured messages with subject and bulleted body
 5. Presents messages in proper format for direct use
 
-The command ensures you always have professional, informative commit messages that make your git history a valuable resource for your team.
+The skill ensures you always have professional, informative commit messages that make your git history a valuable resource for your team.

@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.2.1
+**Version:** 2.3.0
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -36,6 +36,7 @@ A lean coding assistant providing expert guidance on code quality, security, and
 8. **promote-prs**: Creates paired pull/merge requests for the current feature branch — one targeting `develop` (fallback `main`) labeled `(production)`, and one targeting `staging` (fallback `stage`, then `testing`) labeled `(staging)`. Auto-extracts JIRA ticket from the branch name (formats like `TIC-1337` and `TIC_1337` both supported), prompts only when missing. Idempotent: skips PRs that already exist for the same source→target pair. Supports GitHub (`gh`) and GitLab (`glab`), auto-detected from the origin remote URL.
 
 9. **grill-me**: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions "grill me".
+10. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Presents the proposed message for user approval before creating the commit. Follows best practices: imperative mood, 50-character subjects, bulleted body, no AI attribution.
 
 ### Subagents
 
@@ -58,9 +59,6 @@ A lean coding assistant providing expert guidance on code quality, security, and
 6. **security-scanner-shopware**: Shopware 6 security specialist (leaf agent). Delegated to by security-scanner when `shopware/core` is detected. Scans for ACL/permissions, Store API security, Admin API authentication, plugin sandbox risks, Twig |raw abuse, DAL access control, and Shopware misconfigurations.
 
 ### Commands
-
-1. **commit-message**: Generates well-structured git commit messages and automatically creates the commit. Analyzes staged changes to create meaningful commit messages following best practices.
-
 ### Hooks
 
 1. **hooks.json**: Hook configuration file registering PreToolUse hooks for the plugin.
@@ -115,7 +113,7 @@ When working with this codebase:
 2. **Self-review**: Use quality-check skill on the unstaged diff to screen for design pattern fit, readability, SOLID/DRY violations, common performance anti-patterns, and dead code
 3. **Testing**: Use test-generator skill to create comprehensive tests
 4. **Review**: Use code-review subagent to check quality (delegates to security-scanner)
-5. **Commit**: Use commit-message command for professional commit messages
+5. **Commit**: Use commit-message skill for professional commit messages
 
 ## Repository Information
 
