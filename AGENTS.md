@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.2
+**Version:** 2.3.3
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -84,15 +84,6 @@ A lean coding assistant providing expert guidance on code quality, security, and
 
 5. **large-file-blocker** (inline): PreToolUse hook that blocks creation of files exceeding 800 lines. Suggests splitting into smaller modules.
 
-### Oh My Pi Compatibility
-
-The plugin also supports Oh My Pi via:
-- `plugin.json` at the plugin root for metadata discovery
-- `package.json` for current OMP local install/link compatibility
-- `skills/<name>/SKILL.md` and `commands/<name>.md` (same layout as Claude Code)
-- `hooks/pre/core-safety.ts` — TypeScript port of the core safety behaviors (secret-file blocking, credential commit gate, 1Password guard, large-file blocker)
-
-Claude Code agents (`agents/*.md`) are not auto-loaded by OMP. To use them in Oh My Pi, copy them manually to `~/.omp/agent/agents/` or `.omp/agents/`.
 
 ## Project Conventions
 
@@ -147,7 +138,6 @@ When working in this repository:
 
 1. Each plugin is self-contained in its own directory
 2. Skills are defined in `SKILL.md` files within each plugin
-3. Commands are defined as `.md` files in the `commands/` directory
 4. Hooks are defined in the `hooks/` directory with configuration in `hooks.json`
-5. Plugin metadata is in `.claude-plugin/plugin.json` (Claude Code), `plugin.json` (Oh My Pi), and `package.json` (OMP local install/link compatibility)
+5. Plugin metadata is in `.claude-plugin/plugin.json`
 6. All plugins are GPL-3.0 licensed and maintained by Binary Hype

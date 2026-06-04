@@ -14,7 +14,7 @@ Inside Claude Code, run:
 /plugin install coding-assistant@binary-hype-dev
 ```
 
-That's it. Skills, commands, subagents, and hooks are all active immediately.
+That's it. Skills, subagents, and hooks are all active immediately.
 
 ## Lightweight by design
 
@@ -26,7 +26,7 @@ This plugin doesn't add process or overhead. It enhances what you already do.
 - **Subagents that activate on their own** — code review and security scanning are picked up by Claude automatically. No manual setup needed.
 - **Zero configuration** — sensible defaults out of the box. Override anything via `~/.claude/` if you want to, but you don't have to.
 
-## coding-assistant (v2.3.2)
+## coding-assistant (v2.3.3)
 
 ### Skills
 
@@ -44,11 +44,6 @@ Invoke any skill with `/skill-name`.
 
 **Planning** — `/grill-me`
 
-### Commands
-
-Invoke with `/coding-assistant:<command>`.
-
-- **commit-message** — generates commit messages and creates the commit
 
 ### Automatic protections
 
@@ -65,16 +60,6 @@ Subagents are used automatically by Claude when relevant:
 
 - **code-review** — PHP code reviewer, auto-detects Laravel and Shopware 6
 - **security-scanner** — OWASP Top 10, framework-specific checks
-
-### Oh My Pi compatibility
-
-This plugin also works with [Oh My Pi](https://omp.sh/docs). The following surfaces are compatible:
-
-- **Metadata** — root `plugin.json` plus `package.json` for current OMP local install/link compatibility
-- **Skills** — discovered automatically from `skills/<name>/SKILL.md`
-- **Commands** — discovered automatically from `commands/<name>.md`
-- **Hooks** — the core safety hooks are ported to TypeScript under `hooks/pre/core-safety.ts` (secret-file blocking, credential commit gate, 1Password guard, large-file blocker)
-- **Agents** — Claude Code continues to use `agents/*.md` automatically. Oh My Pi does not load plugin-bundled agents; if you want the `code-review` or `security-scanner` agents in OMP, copy them manually to `~/.omp/agent/agents/` or `.omp/agents/`.
 
 ## License
 
