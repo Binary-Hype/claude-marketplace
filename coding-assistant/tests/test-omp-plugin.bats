@@ -31,19 +31,23 @@ teardown() {
   [ "$status" -eq 0 ]
 }
 
-@test "OMP manifest points to the core safety hook" {
+@test "OMP manifest points to the core safety extension" {
   run node -e '
     const fs = require("fs");
     const path = require("path");
     const root = process.argv[1];
     const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-    if (pkg.omp?.hooks !== "hooks/pre/core-safety.ts") {
-      console.error(`unexpected omp.hooks: ${pkg.omp?.hooks}`);
+    if (!Array.isArray(pkg.omp?.extensions) || pkg.omp.extensions.length !== 1) {
+      console.error(`unexpected omp.extensions: ${JSON.stringify(pkg.omp?.extensions)}`);
       process.exit(1);
     }
-    const hookPath = path.join(root, pkg.omp.hooks);
+    if (pkg.omp.extensions[0] !== "./hooks/pre/core-safety.ts") {
+      console.error(`unexpected omp.extensions[0]: ${pkg.omp.extensions[0]}`);
+      process.exit(1);
+    }
+    const hookPath = path.join(root, pkg.omp.extensions[0]);
     if (!fs.existsSync(hookPath)) {
-      console.error(`missing hook file: ${hookPath}`);
+      console.error(`missing extension file: ${hookPath}`);
       process.exit(1);
     }
   ' "$REPO_ROOT"
