@@ -10,7 +10,7 @@
             "name": "coding-assistant",
             "source": "./coding-assistant",
             "description": "A lean coding assistant focused on code quality, security, and correctness. Provides expert guidance on design patterns, testing, database review, dependency health, and merge-conflict resolution while respecting your project's architecture and conventions.",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "author": {
                 "name": "Tobias Kokesch",
                 "email": "hallo@binary-hype.com"

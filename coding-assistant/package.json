@@ -1,6 +1,6 @@
 {
   "name": "coding-assistant",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Lean coding assistant focused on code quality, security, and correctness.",
   "license": "GPL-3.0",
   "private": true,
@@ -15,5 +15,10 @@
     "merge-conflict",
     "humanizer",
     "promote-prs"
-  ]
+  ],
+  "omp": {
+    "name": "coding-assistant",
+    "description": "Lean coding assistant focused on code quality, security, and correctness.",
+    "hooks": "hooks/pre/core-safety.ts"
+  }
 }
