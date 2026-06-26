@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.3
+**Version:** 2.3.4
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -37,6 +37,8 @@ A lean coding assistant providing expert guidance on code quality, security, and
 
 9. **grill-me**: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions "grill me".
 10. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Presents the proposed message for user approval before creating the commit. Follows best practices: imperative mood, 50-character subjects, bulleted body, no AI attribution.
+
+11. **handoff**: Compacts the current conversation into a temporary handoff document for another agent, including suggested skills and references to existing artifacts while redacting sensitive information.
 
 ### Subagents
 
