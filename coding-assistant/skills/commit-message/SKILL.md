@@ -385,12 +385,16 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 ## Integration with Your Workflow
 
+The skill stages nothing, but it *does* create the commit for you — after
+generating the message and getting your explicit approval. You stage, the
+skill writes and commits.
+
 **Before Committing:**
 ```bash
 # Step 1: YOU stage the files (the skill will NOT do this)
 git add .
 
-# Step 2: Invoke the skill to generate commit message
+# Step 2: Invoke the skill to generate the message and commit after approval
 /commit-message
 ```
 
@@ -399,7 +403,7 @@ git add .
 # Step 1: YOU stage specific files
 git add src/auth/*
 
-# Step 2: Ask for commit message
+# Step 2: Ask for a message, then approve to commit
 /commit-message Help me write a message for these auth changes
 ```
 
