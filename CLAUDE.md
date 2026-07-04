@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.4
+**Version:** 2.3.5
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -39,6 +39,8 @@ A lean coding assistant providing expert guidance on code quality, security, and
 10. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Presents the proposed message for user approval before creating the commit. Follows best practices: imperative mood, 50-character subjects, bulleted body, no AI attribution.
 
 11. **handoff**: Compacts the current conversation into a temporary handoff document for another agent, including suggested skills and references to existing artifacts while redacting sensitive information.
+
+12. **jira**: Reads and writes Jira Cloud tickets from the terminal using the Atlassian CLI (`acli`) instead of MCP or WebFetch. Triggers on Jira/Atlassian URLs, ticket keys (`TIC-214`), and filter links; parses the key/filter-id from the reference, preflights `acli` availability and auth, then performs full read+write via `acli jira workitem` (view, search, edit, comment, transition, create) and `acli jira filter`. Falls back to install/auth guidance or pasted content when `acli` is unavailable, and guards destructive ops (delete/archive) behind confirmation.
 
 ### Subagents
 

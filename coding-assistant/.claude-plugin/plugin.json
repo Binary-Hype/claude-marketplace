@@ -1,6 +1,6 @@
 {
     "name": "coding-assistant",
-    "version": "2.3.4",
+    "version": "2.3.5",
     "description": "Lean coding assistant focused on code quality, security, and correctness. Skills cover design patterns, testing, database review, dependency health, merge-conflict resolution, and handoffs. Subagents provide automated code review and security scanning with framework detection for Laravel and Shopware 6. Hooks guard against credential leaks, secret file access, and unsafe 1Password CLI usage.",
     "author": {
         "name": "Tobias Kokesch",
@@ -47,6 +47,7 @@
         "merge-request",
         "git-flow",
         "jira",
+        "acli",
         "handoff"
     ]
 }
