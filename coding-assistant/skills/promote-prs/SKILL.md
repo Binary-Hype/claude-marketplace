@@ -151,13 +151,11 @@ Produce a body in this shape:
 ## Summary
 - <one bullet per significant commit, plain English>
 
-## Test plan
-- [ ] <test step 1>
-- [ ] <test step 2>
-
 ## JIRA
 <TICKET>   ← omit this section if no ticket
+
 ```
+Do not add a test plan or testing checklist to the PR/MR body.
 
 Keep summary bullets short — pull from commit subjects, rephrase imperative-mood verbs as needed.
 
