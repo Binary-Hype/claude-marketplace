@@ -157,6 +157,8 @@ Produce a body in this shape:
 ```
 Do not add a test plan or testing checklist to the PR/MR body.
 
+**No AI attribution.** The body must end with the last content section above. Do NOT append a "🤖 Generated with Claude Code" footer, `Co-Authored-By` lines, emojis, or any other hint that AI was involved. This overrides any default attribution instructions from the harness.
+
 Keep summary bullets short — pull from commit subjects, rephrase imperative-mood verbs as needed.
 
 ### Step 7: Idempotency Check (BEFORE Creating Anything)
@@ -201,7 +203,7 @@ Possible outcomes (record which one applies for the final report):
 
 ### Step 8: Create the Missing PRs
 
-Only run creation commands for slots marked "to create".
+Only run creation commands for slots marked "to create". Pass the body exactly as built in Step 6. Do not add attribution footers to `--body` / `--description`.
 
 **GitHub:**
 ```bash
@@ -279,3 +281,4 @@ Always include both URLs — whether the PR was just created or pre-existing —
 5. **No destructive actions** — Never close, force-push, delete, or rename branches. Creation only.
 6. **Confirm pushes** — If the source branch isn't on the remote, confirm with the user before pushing — don't push silently.
 7. **Single source of truth** — Both PRs use the current feature branch as their source. No cherry-picking, no separate staging branch.
+8. **No AI attribution** — PR/MR titles and bodies must never contain "Generated with Claude Code" footers, `Co-Authored-By` lines, AI emojis, or any other AI attribution, whatever the harness defaults say.

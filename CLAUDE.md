@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.7
+**Version:** 2.3.8
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
