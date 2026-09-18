@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.8
+**Version:** 2.3.9
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -88,6 +88,10 @@ A lean coding assistant providing expert guidance on code quality, security, and
     - Fail-closed: unknown subcommands and unknown fields are blocked by default
 
 5. **large-file-blocker** (inline): PreToolUse hook that blocks creation of files exceeding 800 lines. Suggests splitting into smaller modules.
+
+6. **stop-sound** (inline): Stop hook that plays `/System/Library/Sounds/Glass.aiff` via `afplay` when Claude finishes responding. macOS only; silently no-ops where `afplay` is unavailable.
+
+7. **notification-sound** (inline): Notification hook that plays `/System/Library/Sounds/Funk.aiff` via `afplay` when Claude needs attention (permission prompts, idle input). macOS only; silently no-ops where `afplay` is unavailable.
 
 
 ## Project Conventions

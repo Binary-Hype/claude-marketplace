@@ -45,6 +45,30 @@
         ],
         "description": "Block creation of files exceeding 800 lines"
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay >/dev/null 2>&1 && afplay /System/Library/Sounds/Glass.aiff || true",
+            "timeout": 5
+          }
+        ],
+        "description": "Play a sound when Claude finishes responding (macOS only)"
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay >/dev/null 2>&1 && afplay /System/Library/Sounds/Funk.aiff || true",
+            "timeout": 5
+          }
+        ],
+        "description": "Play a sound when Claude needs attention (macOS only)"
+      }
     ]
   }
 }
