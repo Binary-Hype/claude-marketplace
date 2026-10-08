@@ -30,6 +30,7 @@ function summarize(graph, top = 15) {
     const lines = [];
     const m = graph.meta;
     lines.push(`Repo: ${m.repo} | Frameworks: ${m.frameworks.join(', ') || 'none detected'} | Files: ${m.files}`);
+    if (m.commit) lines.push(`Commit: ${m.commit.short} ${m.commit.subject}${m.commit.dirty ? ' (+ uncommitted changes in scope)' : ''}`);
     lines.push(`Scope: ${m.includes.join(', ')}${m.excludes.length ? ` | excluded: ${m.excludes.join(', ')}` : ''}${m.withTests ? ' | tests included' : ''}`);
     lines.push(`Nodes: ${m.nodeCount} | Internal edges: ${m.edgeCount} | Externals: ${m.externalCount} | Skipped generated: ${m.skippedGenerated}, large: ${m.skippedLarge}`);
 

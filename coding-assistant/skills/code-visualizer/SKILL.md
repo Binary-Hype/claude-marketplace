@@ -6,7 +6,9 @@ argument-hint: "Optional: sub-path to analyze instead of the repo root"
 
 # Code Visualizer
 
-Builds `code-map.html` in the repository root: an offline, self-contained page with rankings (most used, biggest, hubs, entry points), an interactive dependency graph, and data flows that you trace and describe.
+Builds `code-map.html` in the repository root: an offline, self-contained page with rankings (most used, biggest, hubs, entry points), an interactive dependency graph, and data flows that you trace and describe. The page names the commit (short hash and title) it was built from.
+
+Running the skill again is an update: it rebuilds the map from the current code and overwrites the existing `code-map.html`, reusing the earlier scope and annotations where they still hold.
 
 The work is split so framework code can never pollute the result:
 
@@ -21,6 +23,7 @@ The scripts live next to this file. Claude Code prints the skill's base director
 - `node "$SKILL_DIR/scripts/analyze.js" detect <repo>`
 - `node "$SKILL_DIR/scripts/analyze.js" scan <repo> --include <path> [--include <path>…] [--exclude <path>…] [--with-tests] --out <graph.json>`
 - `node "$SKILL_DIR/scripts/analyze.js" summary <graph.json> [--top 15]`
+- `node "$SKILL_DIR/scripts/analyze.js" previous <code-map.html> [--annotations <out.json>]`
 - `node "$SKILL_DIR/scripts/render.js" <graph.json> <annotations.json> <out.html>`
 
 All paths passed to `--include`/`--exclude` are relative to the repo.
@@ -30,6 +33,7 @@ All paths passed to `--include`/`--exclude` are relative to the repo.
 1. Run `node --version`. If Node is missing, stop and tell the user to install Node.js 18 or newer. Do not fall back to reading the whole repo yourself.
 2. Resolve the repo root with `git rev-parse --show-toplevel`. Fall back to the current directory when it isn't a git repo. If the user passed a sub-path, use it as the only include root later, and skip the plugin question unless the sub-path contains plugins.
 3. Create a work directory outside the repo with `mktemp -d`. `graph.json` and `annotations.json` go there, never into the repo.
+4. Check for an earlier map: `node "$SKILL_DIR/scripts/analyze.js" previous "<repo>/code-map.html" --annotations "$WORK/previous.json"`. With `"exists": false` this is a first run. Otherwise it is an **update**: the output holds the earlier scope (`includes`, `excludes`, `withTests`), `commit`, `generatedAt` and counts, and `previous.json` holds the earlier overview, summaries and flows. Keep this output for Steps 3, 5 and 7. If the command fails (the file isn't a code map), tell the user and ask before overwriting it.
 
 ## Step 2: Detect
 
@@ -42,7 +46,9 @@ Run `detect`. It returns:
 
 ## Step 3: Agree on the scope
 
-Default scope = every root with `suggested: true`.
+**Update:** reuse the earlier `includes`, `excludes` and `withTests` without asking. Drop includes that no longer exist and say so. Ask again, as below, only when no earlier include is left, or when the user asks for a different scope. Plugins or roots that `detect` reports and the earlier scope doesn't cover are mentioned in the report, not asked about. Show the reused include list in one line and continue with Step 4.
+
+**First run:** default scope = every root with `suggested: true`.
 
 **Plugin and theme folders** (`custom/plugins`, `custom/static-plugins`, `custom/apps`, `wp-content/plugins`, `wp-content/themes`, …): if `pluginFolders` is non-empty, ask with AskUserQuestion, one question per plugin folder:
 
@@ -61,11 +67,13 @@ If `roots` is empty, ask the user which folders contain their code.
 
 ## Step 4: Scan
 
-Run `scan` with the agreed `--include` roots and `--out "$WORK/graph.json"`. The JSON on stdout reports file, node, edge, external and entry-point counts, plus any files that failed to parse.
+Run `scan` with the agreed `--include` roots (and `--exclude`/`--with-tests` when the earlier scope used them) and `--out "$WORK/graph.json"`. The JSON on stdout reports file, node, edge, external and entry-point counts, plus any files that failed to parse.
 
 - If `nodes` is 0, the scope is wrong. Show the include list and ask again.
 - If `nodes` is above 3000, suggest narrowing the scope (fewer plugins, or excluding generated or legacy folders with `--exclude`) before continuing. The viewer copes, but the overview gets less useful.
 - Mention any `failed` files in the final report. They are skipped, not fatal.
+
+The output also has `commit`: `hash`, `short`, `subject` (the commit title) and `dirty` (uncommitted changes inside the scope), or `null` outside a git repo. It is stored in the graph and shown in the page header; you don't pass it anywhere.
 
 ## Step 5: Understand and annotate
 
@@ -101,21 +109,32 @@ Rules:
 - Hops without a graph edge are marked as inferred in the viewer. Keep them rare. They are acceptable only where the code really connects things indirectly (container lookups, string-based dispatch), and you verified that connection in the source.
 - Small codebases may only have one or two real flows. Don't invent more.
 
+**Update:** start from `$WORK/previous.json` instead of an empty file, and refresh only what changed:
+
+1. List the changed files: `git diff --name-only <previous commit hash>` plus `git status --porcelain` for uncommitted and untracked ones. If the earlier map has no commit, or its hash is no longer in the history (`git cat-file -e <hash>` fails), treat every file as changed and annotate as on a first run.
+2. Re-read and rewrite the summaries of components whose file changed. Keep the others as they are.
+3. Add summaries for components that are new in the top ~15 or are new flow steps.
+4. Check every flow that touches a changed file, a removed component or a new entry point: fix its steps and text, drop it if it no longer exists, and add flows for new entry points.
+5. Rewrite the overview only if the changes alter what it says.
+
+`render.js` drops summaries and steps for components that no longer exist and warns about each one. In an update these warnings are expected for removed code: fix the affected flows, delete the stale entries, and render again until it is clean.
+
 ## Step 6: Render and open
 
 ```bash
 node "$SKILL_DIR/scripts/render.js" "$WORK/graph.json" "$WORK/annotations.json" "<repo>/code-map.html"
 ```
 
-If it prints warnings, fix `annotations.json` and render again. Then open the page with `open "<repo>/code-map.html"` on macOS or `xdg-open` on Linux.
+This overwrites an existing `code-map.html` without asking; a re-run is an update. If it prints warnings, fix `annotations.json` and render again. Then open the page with `open "<repo>/code-map.html"` on macOS or `xdg-open` on Linux.
 
-If `code-map.html` is not covered by `.gitignore` (check with `git check-ignore -q code-map.html`), offer to add it. Don't add it on your own. Nothing is committed.
+On a first run, if `code-map.html` is not covered by `.gitignore` (check with `git check-ignore -q code-map.html`), offer to add it. Don't offer it again on updates. Don't add it on your own. Nothing is committed.
 
 ## Step 7: Report
 
 Keep the report short:
 
-- Framework(s) detected and the scope: what was included, and which plugins and folders were left out.
+- Framework(s) detected, the commit (short hash and title, plus "uncommitted changes" when `dirty`), and the scope: what was included, and which plugins and folders were left out.
+- **Update only:** the earlier map's commit and date, how files, components, links and flows changed (old → new), and which summaries and flows you rewrote, added or dropped.
 - Counts: files, components, links, entry points.
 - Top 5 most used and top 5 biggest components, by short name.
 - Flow names, one line each.
@@ -124,6 +143,8 @@ Keep the report short:
 ## What the viewer shows
 
 So you can explain the page to the user:
+
+- **Header:** repo name, framework, counts, scope, the commit (short hash and title; hover for the full hash, marked when the scope had uncommitted changes) and the build time.
 
 - **Left: rankings.** Most used (fan-in), Biggest (lines of code), Hubs (fan-in × fan-out), Entry points, and Flows. Clicking an entry focuses that component.
 - **Center: graph.**

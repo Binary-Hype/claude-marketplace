@@ -107,7 +107,7 @@ function loadAliases(repo) {
     return aliases;
 }
 
-function buildGraph({ repo, includes, excludes, withTests, frameworks, parsed, stats }) {
+function buildGraph({ repo, includes, excludes, withTests, frameworks, commit, parsed, stats }) {
     const nodes = new Map();
     const lowerIndex = new Map();
     const fileToIds = new Map();
@@ -279,6 +279,7 @@ function buildGraph({ repo, includes, excludes, withTests, frameworks, parsed, s
             includes,
             excludes,
             withTests: Boolean(withTests),
+            commit: commit || null,
             generatedAt: new Date().toISOString(),
             files: parsed.length,
             skippedGenerated: stats.skippedGenerated.length,

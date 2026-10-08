@@ -35,6 +35,7 @@ code { font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; overflow
 .meta { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
 .chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--muted); font-size: 12px; white-space: nowrap; }
 .chip b { color: var(--ink); font-weight: 600; }
+.chip .subject { max-width: 42ch; overflow: hidden; text-overflow: ellipsis; color: var(--ink); }
 .btn { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 5px 12px; }
 .btn:hover { background: var(--soft); }
 .overview { padding: 12px 20px; line-height: 1.6; border-bottom: 1px solid var(--line); background: var(--panel); color: var(--ink); max-height: 120px; overflow: auto; }
@@ -205,6 +206,7 @@ $('#meta').innerHTML = [
     `<span class="chip"><b>${fmt(m.edgeCount)}</b> links</span>`,
     `<span class="chip"><b>${fmt(m.externalCount)}</b> externals</span>`,
     `<span class="chip" title="${esc(m.includes.join('\n'))}">Scope <b>${esc(m.includes.length > 2 ? `${m.includes.length} roots` : m.includes.join(', '))}</b></span>`,
+    m.commit ? `<span class="chip" title="${esc(`${m.commit.hash}\n${m.commit.subject}`)}">Commit <b>${esc(m.commit.short)}</b><span class="subject">${esc(m.commit.subject)}</span>${m.commit.dirty ? ' · uncommitted changes' : ''}</span>` : '',
     `<span class="chip">${esc(new Date(m.generatedAt).toLocaleString())}</span>`,
 ].join('');
 if (ann.overview) { $('#overview').hidden = false; $('#overview').innerHTML = `<p>${esc(ann.overview)}</p>`; }
