@@ -1,6 +1,6 @@
 {
   "name": "coding-assistant",
-  "version": "2.3.7",
+  "version": "2.3.11",
   "description": "Lean coding assistant focused on code quality, security, and correctness.",
   "license": "GPL-3.0",
   "private": true,
@@ -16,6 +16,9 @@
     "humanizer",
     "promote-prs",
     "handoff",
-    "maintenance"
+    "maintenance",
+    "visualization",
+    "architecture",
+    "dependency-graph"
   ]
 }

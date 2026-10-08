@@ -1,0 +1,15 @@
+{
+    "name": "acme/erp",
+    "type": "shopware-platform-plugin",
+    "autoload": {
+        "psr-4": {
+            "Acme\\Erp\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Acme\\Erp\\AcmeErp",
+        "label": {
+            "en-GB": "ERP connector"
+        }
+    }
+}

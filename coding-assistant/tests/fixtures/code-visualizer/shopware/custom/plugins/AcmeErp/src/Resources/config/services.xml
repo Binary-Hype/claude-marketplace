@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service id="Acme\Erp\Subscriber\OrderSubscriber">
+            <argument type="service" id="Acme\Erp\Service\ErpExportService"/>
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="Acme\Erp\Service\ErpExportService">
+            <argument type="service" id="Acme\Erp\Service\ErpClient"/>
+            <argument type="service" id="order.repository"/>
+        </service>
+    </services>
+</container>

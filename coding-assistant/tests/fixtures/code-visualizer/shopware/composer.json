@@ -1,0 +1,7 @@
+{
+    "name": "acme/shop",
+    "type": "project",
+    "require": {
+        "shopware/core": "6.6.*"
+    }
+}

@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.7
+**Version:** 2.3.11
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -43,6 +43,8 @@ A lean coding assistant providing expert guidance on code quality, security, and
 12. **jira**: Reads and writes Jira Cloud tickets from the terminal using the Atlassian CLI (`acli`) instead of MCP or WebFetch. Triggers on Jira/Atlassian URLs, ticket keys (`TIC-214`), and filter links; parses the key/filter-id from the reference, preflights `acli` availability and auth, then performs full read+write via `acli jira workitem` (view, search, edit, comment, transition, create) and `acli jira filter`. Falls back to install/auth guidance or pasted content when `acli` is unavailable, and guards destructive ops (delete/archive) behind confirmation.
 
 13. **maintenance-turn**: Runs a full maintenance pass over one or more projects in a fixed order — update packages, baseline tests, cleanup, full tests, manual browser test on a freshly reset and seeded local environment. Cleanup fans out read-only surveys (dead code, inconsistencies, DRY, readability) with `file:line` evidence, handles user-named inconsistencies directly, verifies each premise, and applies fixes through scoped fork agents with disjoint file ownership. DDEV-aware, respects committed project rules and cross-repo mirror regions, never types passwords in the browser, and leaves everything uncommitted.
+
+14. **code-visualizer**: Builds an interactive, offline `code-map.html` in the repo root showing the project's own code — most used, biggest and most connected classes/files, dependency links, entry points (routes, commands, subscribers, jobs) and Claude-traced data flows. A bundled zero-dependency Node script detects frameworks from manifests only, then scans strictly the include roots agreed with the user; `vendor/`, `node_modules/`, build output, tests and secret files are always skipped and framework references fold into external nodes. Asks whether third-party plugins (Shopware `custom/plugins`, WordPress plugins/themes) should be included, with a one-click option to ignore the whole folder. Supports PHP and JS/TS/Vue.
 
 ### Subagents
 
@@ -137,6 +139,7 @@ When working with this codebase:
 - Pull Request Review
 - Merge Conflict Resolution
 - Humanizer (AI Writing Detection, Text Editing)
+- Code Visualization (Dependency Graph, Architecture Overview)
 
 ## Notes for AI Assistants
 

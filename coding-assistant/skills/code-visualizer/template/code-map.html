@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code map · __CODE_MAP_TITLE__</title>
+<style>
+:root {
+    --bg: #f6f6f4; --panel: #ffffff; --ink: #1d1d1f; --muted: #6b6b72; --line: #e2e2de; --soft: #f0f0ec;
+    --accent: #e11d48; --ext: #c9c9ce; --e-inherit: #8b5cf6; --e-dep: #7c8798; --e-event: #ea580c; --e-route: #16a34a;
+    --bar: #4e79a7;
+    color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #131315; --panel: #1b1b1e; --ink: #ececef; --muted: #9b9ba3; --line: #2d2d32; --soft: #232327;
+        --accent: #fb7185; --ext: #4a4a51; --e-inherit: #a78bfa; --e-dep: #8792a6; --e-event: #fb923c; --e-route: #4ade80;
+        --bar: #7aa6d6; color-scheme: dark;
+    }
+}
+:root[data-theme="dark"] {
+    --bg: #131315; --panel: #1b1b1e; --ink: #ececef; --muted: #9b9ba3; --line: #2d2d32; --soft: #232327;
+    --accent: #fb7185; --ext: #4a4a51; --e-inherit: #a78bfa; --e-dep: #8792a6; --e-event: #fb923c; --e-route: #4ade80;
+    --bar: #7aa6d6; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 13px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; display: flex; flex-direction: column; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+.top { display: flex; align-items: center; gap: 16px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.top h1 { font-size: 15px; margin: 0; font-weight: 650; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--muted); font-size: 12px; white-space: nowrap; }
+.chip b { color: var(--ink); font-weight: 600; }
+.btn { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 10px; }
+.btn:hover { background: var(--soft); }
+.overview { padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); color: var(--ink); max-height: 120px; overflow: auto; }
+.overview p { margin: 0; max-width: 110ch; }
+.layout { flex: 1; min-height: 0; display: grid; grid-template-columns: 300px minmax(0, 1fr) 340px; }
+.side, .details { background: var(--panel); overflow: auto; min-height: 0; }
+.side { border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+.details { border-left: 1px solid var(--line); padding: 14px 16px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 2px; padding: 8px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel); z-index: 1; }
+.tabs button { border: 0; background: none; padding: 4px 8px; border-radius: 6px; color: var(--muted); }
+.tabs button[aria-selected="true"] { background: var(--soft); color: var(--ink); font-weight: 600; }
+.list { padding: 6px; }
+.list-head { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; color: var(--muted); font-size: 12px; }
+.row { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 6px 8px; border-radius: 6px; }
+.row:hover, .row.active { background: var(--soft); }
+.row .name { display: flex; justify-content: space-between; gap: 8px; font-weight: 550; }
+.row .name span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row .sub { color: var(--muted); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row .bar { height: 3px; background: var(--line); border-radius: 2px; margin-top: 4px; }
+.row .bar i { display: block; height: 100%; background: var(--bar); border-radius: 2px; }
+.stage { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.toolbar input[type="search"] { flex: 1; min-width: 160px; padding: 5px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.toolbar label { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+.toolbar output { min-width: 3ch; color: var(--ink); font-variant-numeric: tabular-nums; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 12px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.chips button.off, .legend button.off { opacity: .4; text-decoration: line-through; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
+.canvas-wrap { position: relative; flex: 1; min-height: 300px; }
+canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+canvas.dragging { cursor: grabbing; }
+.tooltip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; box-shadow: 0 4px 14px rgb(0 0 0 / .12); max-width: 360px; font-size: 12px; }
+.tooltip .sub { color: var(--muted); }
+.flow-banner { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 6px 4px 14px; display: flex; gap: 10px; align-items: center; box-shadow: 0 4px 14px rgb(0 0 0 / .12); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; border-top: 1px solid var(--line); background: var(--panel); max-height: 92px; overflow: auto; }
+.legend button { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 2px 8px; font-size: 12px; }
+.details h2 { font-size: 15px; margin: 0; word-break: break-word; }
+.details h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 6px; }
+.d-head { display: flex; gap: 10px; align-items: flex-start; }
+.d-head .dot { width: 12px; height: 12px; margin-top: 4px; }
+.sub-id { color: var(--muted); font-size: 12px; word-break: break-all; }
+.badges { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+.badge { padding: 1px 7px; border-radius: 4px; background: var(--soft); border: 1px solid var(--line); font-size: 11.5px; }
+.badge.entry { border-color: var(--e-route); color: var(--e-route); }
+.badge.warn { border-color: var(--e-event); color: var(--e-event); }
+.summary { margin: 8px 0; }
+.muted { color: var(--muted); }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.metric { background: var(--soft); border-radius: 6px; padding: 6px 8px; }
+.metric b { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
+.metric span { color: var(--muted); font-size: 11px; }
+.links { list-style: none; margin: 0; padding: 0; }
+.links li { margin: 2px 0; }
+.links button { border: 0; background: none; padding: 2px 0; text-align: left; color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; word-break: break-all; }
+.links button:hover { text-decoration-color: var(--ink); }
+.type-label { color: var(--muted); font-size: 11.5px; margin-top: 8px; }
+ol.steps { padding-left: 20px; margin: 6px 0; }
+ol.steps li { margin: 6px 0; }
+.hop { color: var(--muted); font-size: 11.5px; }
+.hop.inferred { color: var(--e-event); }
+.layer-bars .row { cursor: default; }
+@media (max-width: 1000px) {
+    .layout { grid-template-columns: 1fr; overflow: auto; }
+    .side { max-height: 320px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .stage { height: 70vh; }
+    .details { border-left: 0; border-top: 1px solid var(--line); }
+    .top { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+    <h1>Code map · <span id="repo"></span></h1>
+    <div class="meta" id="meta"></div>
+    <button class="btn" id="themeBtn" type="button" title="Switch theme">Theme: auto</button>
+</header>
+<section class="overview" id="overview" hidden></section>
+<main class="layout">
+    <aside class="side">
+        <nav class="tabs" role="tablist" id="tabs">
+            <button role="tab" data-tab="used">Most used</button>
+            <button role="tab" data-tab="biggest">Biggest</button>
+            <button role="tab" data-tab="hubs">Hubs</button>
+            <button role="tab" data-tab="entry">Entry points</button>
+            <button role="tab" data-tab="flows">Flows</button>
+        </nav>
+        <div class="list" id="list"></div>
+    </aside>
+    <section class="stage">
+        <div class="toolbar">
+            <input id="search" type="search" placeholder="Find a class, file or component…" list="names" autocomplete="off">
+            <datalist id="names"></datalist>
+            <label>Top <input id="topN" type="range" min="1" step="1"> <output id="topNOut"></output></label>
+            <label><input id="showExt" type="checkbox"> Externals</label>
+            <label><input id="groupView" type="checkbox"> Group view</label>
+            <button class="btn" id="fitBtn" type="button">Fit</button>
+        </div>
+        <div class="chips" id="edgeChips"></div>
+        <div class="canvas-wrap" id="wrap">
+            <canvas id="graph" aria-label="Dependency graph"></canvas>
+            <div class="tooltip" id="tooltip" hidden></div>
+            <div class="flow-banner" id="flowBanner" hidden></div>
+        </div>
+        <div class="legend" id="legend"></div>
+    </section>
+    <aside class="details" id="details"></aside>
+</main>
+<script>
+const DATA = /*__CODE_MAP_DATA__*/null;
+(() => {
+'use strict';
+if (!DATA) { document.body.innerHTML = '<p style="padding:2rem">No graph data embedded. Generate this file with render.js.</p>'; return; }
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = (n) => Number(n || 0).toLocaleString();
+const kb = (b) => (b >= 1024 ? `${(b / 1024).toFixed(1)} KB` : `${b} B`);
+const push = (map, key, val) => { if (!map.has(key)) map.set(key, []); map.get(key).push(val); };
+
+const ann = DATA.annotations || { overview: '', summaries: {}, flows: [] };
+const nodes = DATA.nodes;
+const byId = new Map(nodes.map((n) => [n.id, n]));
+for (const e of DATA.externals) byId.set(e.id, { ...e, group: 'external', layer: 'External', loc: 0, bytes: 0, methods: 0, fanIn: 0, fanOut: 0, externalDeps: 0, score: 0, entry: [], routes: [], listensTo: [], dispatches: [], hooks: [], dataAccess: [] });
+const outE = new Map(); const inE = new Map();
+for (const e of DATA.edges) { push(outE, e.source, e); push(inE, e.target, e); }
+
+const groupCounts = new Map();
+for (const n of nodes) groupCounts.set(n.group, (groupCounts.get(n.group) || 0) + 1);
+const groups = [...groupCounts.keys()].sort((a, b) => groupCounts.get(b) - groupCounts.get(a));
+const PALETTE = ['#4e79a7', '#f28e2b', '#59a14f', '#e15759', '#76b7b2', '#edc948', '#b07aa1', '#ff9da7', '#9c755f', '#86bcb6', '#d37295', '#a0cbe8'];
+const groupColor = new Map(groups.map((g, i) => [g, PALETTE[i % PALETTE.length]]));
+const EDGE_CAT = { extends: 'inherit', implements: 'inherit', 'uses-trait': 'inherit', injects: 'dep', uses: 'dep', instantiates: 'dep', 'static-call': 'dep', imports: 'dep', includes: 'dep', dispatches: 'event', listens: 'event', routes: 'route', calls: 'route', group: 'dep' };
+const edgeTypeCounts = new Map();
+for (const e of DATA.edges) if (byId.has(e.target) && !e.target.startsWith('ext:')) edgeTypeCounts.set(e.type, (edgeTypeCounts.get(e.type) || 0) + 1);
+const flowsOf = (id) => ann.flows.map((f, i) => [f, i]).filter(([f]) => f.steps.includes(id));
+
+const state = { tab: 'used', bigBy: 'loc', selected: null, hover: null, flow: null, topN: Math.min(150, nodes.length), showExt: false, groupView: false, hiddenGroups: new Set(), hiddenTypes: new Set() };
+let colors = {};
+function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    for (const k of ['bg', 'panel', 'ink', 'muted', 'line', 'accent', 'ext', 'e-inherit', 'e-dep', 'e-event', 'e-route']) colors[k] = cs.getPropertyValue(`--${k}`).trim();
+}
+const edgeColor = (type) => colors[`e-${EDGE_CAT[type] || 'dep'}`];
+const nodeColor = (n) => (n.external ? colors.ext : n.layer === 'Group' ? groupColor.get(n.group) : groupColor.get(n.group) || colors.muted);
+const radius = (n) => (n.layer === 'Group' ? Math.min(60, 10 + Math.sqrt(n.loc) * 0.35) : n.external ? 6 + Math.min(10, Math.sqrt(n.refs || 1)) : Math.min(34, 5 + Math.sqrt(n.loc || 1) * 0.9));
+
+/* ---------- header, overview, toolbar ---------- */
+const m = DATA.meta;
+$('#repo').textContent = m.repo;
+$('#meta').innerHTML = [
+    m.frameworks.length ? `<span class="chip">Framework <b>${esc(m.frameworks.join(', '))}</b></span>` : '',
+    `<span class="chip"><b>${fmt(m.files)}</b> files</span>`,
+    `<span class="chip"><b>${fmt(m.nodeCount)}</b> components</span>`,
+    `<span class="chip"><b>${fmt(m.edgeCount)}</b> links</span>`,
+    `<span class="chip"><b>${fmt(m.externalCount)}</b> externals</span>`,
+    `<span class="chip" title="${esc(m.includes.join('\n'))}">Scope <b>${esc(m.includes.length > 2 ? `${m.includes.length} roots` : m.includes.join(', '))}</b></span>`,
+    `<span class="chip">${esc(new Date(m.generatedAt).toLocaleString())}</span>`,
+].join('');
+if (ann.overview) { $('#overview').hidden = false; $('#overview').innerHTML = `<p>${esc(ann.overview)}</p>`; }
+const topN = $('#topN');
+topN.max = String(Math.max(1, nodes.length)); topN.value = String(state.topN); $('#topNOut').textContent = state.topN;
+$('#names').innerHTML = nodes.slice(0, 3000).map((n) => `<option value="${esc(n.id)}">${esc(n.name)}</option>`).join('');
+
+function renderChips() {
+    $('#edgeChips').innerHTML = [...edgeTypeCounts].sort((a, b) => b[1] - a[1]).map(([t, c]) =>
+        `<button class="chip ${state.hiddenTypes.has(t) ? 'off' : ''}" data-type="${esc(t)}"><span class="dot" style="background:${edgeColor(t)}"></span>${esc(t)} <b>${fmt(c)}</b></button>`).join('');
+}
+function renderLegend() {
+    $('#legend').innerHTML = groups.map((g) =>
+        `<button class="${state.hiddenGroups.has(g) ? 'off' : ''}" data-group="${esc(g)}"><span class="dot" style="background:${groupColor.get(g)}"></span>${esc(g)} <span class="muted">${groupCounts.get(g)}</span></button>`).join('')
+        + (state.showExt ? `<button disabled><span class="dot" style="background:${colors.ext}"></span>external (not scanned)</button>` : '');
+}
+
+/* ---------- side lists ---------- */
+function rowHtml(n, value, max, sub) {
+    const pct = max ? Math.max(2, Math.round((value / max) * 100)) : 0;
+    return `<button class="row ${state.selected === n.id ? 'active' : ''}" data-id="${esc(n.id)}"><div class="name"><span>${esc(n.name)}</span><span class="muted">${esc(fmt(value))}</span></div>`
+        + `<div class="sub">${esc(sub || `${n.layer} · ${n.group}`)}</div><div class="bar"><i style="width:${pct}%"></i></div></button>`;
+}
+function renderList() {
+    for (const b of document.querySelectorAll('#tabs button')) b.setAttribute('aria-selected', String(b.dataset.tab === state.tab));
+    const el = $('#list');
+    const top = (arr, key) => arr.slice().sort((a, b) => key(b) - key(a)).slice(0, 40).filter((n) => key(n) > 0);
+    if (state.tab === 'used') {
+        const list = top(nodes, (n) => n.fanIn);
+        el.innerHTML = `<div class="list-head">Used by most other components</div>${list.map((n) => rowHtml(n, n.fanIn, list[0] && list[0].fanIn)).join('') || '<p class="muted">No internal links found.</p>'}`;
+    } else if (state.tab === 'biggest') {
+        const key = state.bigBy === 'loc' ? (n) => n.loc : (n) => n.bytes;
+        const list = top(nodes, key);
+        el.innerHTML = `<div class="list-head"><span>Largest components</span><button class="btn" data-bigby>${state.bigBy === 'loc' ? 'by lines' : 'by bytes'}</button></div>`
+            + list.map((n) => rowHtml(n, key(n), key(list[0]))).join('');
+    } else if (state.tab === 'hubs') {
+        const key = (n) => n.fanIn * n.fanOut;
+        const list = top(nodes, key);
+        el.innerHTML = `<div class="list-head">Many in- and outgoing links (fan-in × fan-out)</div>${list.map((n) => rowHtml(n, key(n), key(list[0]), `${n.layer} · in ${n.fanIn} / out ${n.fanOut}`)).join('') || '<p class="muted">No hubs.</p>'}`;
+    } else if (state.tab === 'entry') {
+        const list = nodes.filter((n) => n.entry.length);
+        el.innerHTML = `<div class="list-head">Where execution starts</div>${list.map((n) => rowHtml(n, n.fanOut, 0, `${n.entry.join(', ')} · ${[...n.routes, ...n.listensTo, ...n.hooks][0] || n.group}`)).join('') || '<p class="muted">No entry points detected.</p>'}`;
+    } else {
+        el.innerHTML = `<div class="list-head">Data flows traced by Claude</div>${ann.flows.map((f, i) =>
+            `<button class="row ${state.flow === i ? 'active' : ''}" data-flow="${i}"><div class="name"><span>${esc(f.name)}</span><span class="muted">${f.steps.length} steps</span></div><div class="sub">${esc(f.data || f.description)}</div></button>`).join('') || '<p class="muted">No flows were annotated for this map.</p>'}`;
+    }
+}
+
+/* ---------- details ---------- */
+function linkList(list, key) {
+    const byType = new Map();
+    for (const e of list) push(byType, e.type, e);
+    return [...byType].map(([type, es]) => `<div class="type-label"><span class="dot" style="background:${edgeColor(type)}"></span> ${esc(type)}</div><ul class="links">${es.map((e) => {
+        const n = byId.get(e[key]);
+        return `<li><button data-id="${esc(e[key])}">${esc(n ? n.name : e[key])}</button>${n && n.external ? ' <span class="muted">external</span>' : ''}</li>`;
+    }).join('')}</ul>`).join('');
+}
+function renderOverviewPanel() {
+    const layers = new Map();
+    for (const n of nodes) layers.set(n.layer, (layers.get(n.layer) || 0) + 1);
+    const list = [...layers].sort((a, b) => b[1] - a[1]);
+    const max = list.length ? list[0][1] : 1;
+    const entries = nodes.filter((n) => n.entry.length).length;
+    $('#details').innerHTML = `<h2>Overview</h2><p class="muted">Click a node or a list entry for details. Drag to pan, scroll to zoom, drag nodes to rearrange. Node size = lines of code, color = group, ring = entry point.</p>
+        <div class="metrics"><div class="metric"><b>${fmt(m.nodeCount)}</b><span>components</span></div><div class="metric"><b>${fmt(entries)}</b><span>entry points</span></div><div class="metric"><b>${fmt(ann.flows.length)}</b><span>flows</span></div></div>
+        <h3>Layers</h3><div class="layer-bars">${list.map(([l, c]) => `<div class="row"><div class="name"><span>${esc(l)}</span><span class="muted">${c}</span></div><div class="bar"><i style="width:${Math.round((c / max) * 100)}%"></i></div></div>`).join('')}</div>
+        <h3>Framework &amp; libraries (not scanned)</h3><ul class="links">${DATA.externals.slice(0, 12).map((e) => `<li><button data-id="${esc(e.id)}">${esc(e.name)}</button> <span class="muted">${fmt(e.refs)} refs</span></li>`).join('') || '<li class="muted">None</li>'}</ul>`;
+}
+function renderNodePanel(n) {
+    const summary = ann.summaries[n.id];
+    const info = [['Routes', n.routes], ['Listens to', n.listensTo], ['Hooks', n.hooks], ['Dispatches', n.dispatches], ['Data access', n.dataAccess]].filter(([, v]) => v && v.length);
+    const flows = flowsOf(n.id);
+    const ins = (inE.get(n.id) || []).filter((e) => byId.has(e.source));
+    const outs = (outE.get(n.id) || []).filter((e) => byId.has(e.target));
+    $('#details').innerHTML = `<div class="d-head"><span class="dot" style="background:${nodeColor(n)}"></span><div><h2>${esc(n.name)}</h2>${n.id !== n.name ? `<div class="sub-id">${esc(n.id)}</div>` : ''}</div></div>
+        <div class="badges"><span class="badge">${esc(n.layer)}</span>${n.kind && n.kind !== 'external' ? `<span class="badge">${esc(n.kind)}</span>` : ''}${n.group ? `<span class="badge">${esc(n.group)}</span>` : ''}${(n.entry || []).map((e) => `<span class="badge entry">${esc(e)}</span>`).join('')}</div>
+        ${summary ? `<p class="summary">${esc(summary)}</p>` : n.external ? '<p class="muted">Framework or library code. Only references are counted; nothing inside it was scanned.</p>' : '<p class="muted">No summary — not among the components Claude annotated.</p>'}
+        ${n.file ? `<p><code>${esc(n.file)}:${n.line}</code> <button class="btn" data-copy="${esc(`${n.file}:${n.line}`)}">Copy</button></p>` : ''}
+        ${n.external ? `<div class="metrics"><div class="metric"><b>${fmt(n.refs)}</b><span>references</span></div></div>` : `<div class="metrics">
+            <div class="metric"><b>${fmt(n.loc)}</b><span>lines of code</span></div><div class="metric"><b>${kb(n.bytes)}</b><span>file size</span></div><div class="metric"><b>${fmt(n.methods)}</b><span>functions</span></div>
+            <div class="metric"><b>${fmt(n.fanIn)}</b><span>used by</span></div><div class="metric"><b>${fmt(n.fanOut)}</b><span>uses</span></div><div class="metric"><b>${fmt(n.externalDeps)}</b><span>external deps</span></div></div>`}
+        ${info.map(([label, v]) => `<h3>${label}</h3><ul class="links">${v.slice(0, 20).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`).join('')}
+        ${flows.length ? `<h3>Part of flows</h3><ul class="links">${flows.map(([f, i]) => `<li><button data-flow="${i}">${esc(f.name)}</button></li>`).join('')}</ul>` : ''}
+        ${ins.length ? `<h3>Used by (${ins.length})</h3>${linkList(ins, 'source')}` : ''}
+        ${outs.length ? `<h3>Uses (${outs.length})</h3>${linkList(outs, 'target')}` : ''}`;
+}
+function renderGroupPanel(g) {
+    const members = nodes.filter((n) => n.group === g.group);
+    $('#details').innerHTML = `<div class="d-head"><span class="dot" style="background:${nodeColor(g)}"></span><div><h2>${esc(g.group)}</h2><div class="sub-id">group</div></div></div>
+        <div class="metrics" style="margin-top:10px"><div class="metric"><b>${fmt(members.length)}</b><span>components</span></div><div class="metric"><b>${fmt(g.loc)}</b><span>lines of code</span></div><div class="metric"><b>${fmt(members.filter((n) => n.entry.length).length)}</b><span>entry points</span></div></div>
+        <h3>Top members</h3><ul class="links">${members.slice(0, 25).map((n) => `<li><button data-id="${esc(n.id)}">${esc(n.name)}</button> <span class="muted">${esc(n.layer)}</span></li>`).join('')}</ul>`;
+}
+function renderFlowPanel(i) {
+    const f = ann.flows[i];
+    $('#details').innerHTML = `<h2>${esc(f.name)}</h2><p class="summary">${esc(f.description)}</p>${f.data ? `<p><span class="badge">data</span> ${esc(f.data)}</p>` : ''}
+        <h3>Steps</h3><ol class="steps">${f.steps.map((id, k) => {
+            const n = byId.get(id);
+            const hop = f.hops[k - 1];
+            return `${hop ? `<div class="hop ${hop.inferred ? 'inferred' : ''}">${hop.inferred ? '↓ inferred, no direct edge in the graph' : '↓'}</div>` : ''}<li><button class="btn" data-id="${esc(id)}">${esc(n.name)}</button> <span class="muted">${esc(n.layer)}</span>${ann.summaries[id] ? `<div class="muted">${esc(ann.summaries[id])}</div>` : ''}</li>`;
+        }).join('')}</ol><p><button class="btn" data-exitflow>Exit flow</button></p>`;
+}
+function renderDetails() {
+    if (state.flow !== null) return renderFlowPanel(state.flow);
+    const n = state.selected && (byId.get(state.selected) || view.byId.get(state.selected));
+    if (!n) return renderOverviewPanel();
+    return n.layer === 'Group' ? renderGroupPanel(n) : renderNodePanel(n);
+}
+
+/* ---------- visible graph ---------- */
+const pos = new Map();
+let view = { nodes: [], edges: [], byId: new Map(), deg: new Map() };
+function buildView() {
+    let vnodes; let vedges;
+    if (state.groupView) {
+        const agg = new Map();
+        for (const n of nodes) {
+            if (state.hiddenGroups.has(n.group)) continue;
+            const g = agg.get(n.group) || { id: `group:${n.group}`, name: n.group, group: n.group, layer: 'Group', loc: 0, entry: [] };
+            g.loc += n.loc; agg.set(n.group, g);
+        }
+        const links = new Map();
+        for (const e of DATA.edges) {
+            const a = byId.get(e.source); const b = byId.get(e.target);
+            if (!a || !b || b.external || a.group === b.group || !agg.has(a.group) || !agg.has(b.group) || state.hiddenTypes.has(e.type)) continue;
+            const key = `${a.group}|${b.group}`;
+            const l = links.get(key) || { source: `group:${a.group}`, target: `group:${b.group}`, type: 'group', weight: 0 };
+            l.weight += e.weight; links.set(key, l);
+        }
+        vnodes = [...agg.values()]; vedges = [...links.values()];
+    } else {
+        const ids = new Set();
+        for (const n of nodes) { if (ids.size >= state.topN) break; if (!state.hiddenGroups.has(n.group)) ids.add(n.id); }
+        if (state.showExt) for (const e of DATA.edges) if (ids.has(e.source) && e.target.startsWith('ext:')) ids.add(e.target);
+        if (state.selected && byId.has(state.selected)) ids.add(state.selected);
+        if (state.flow !== null) for (const id of ann.flows[state.flow].steps) ids.add(id);
+        vnodes = [...ids].map((id) => byId.get(id)).filter(Boolean);
+        vedges = DATA.edges.filter((e) => ids.has(e.source) && ids.has(e.target) && !state.hiddenTypes.has(e.type));
+    }
+    const deg = new Map(vnodes.map((n) => [n.id, 0]));
+    for (const e of vedges) { deg.set(e.source, (deg.get(e.source) || 0) + 1); deg.set(e.target, (deg.get(e.target) || 0) + 1); }
+    view = { nodes: vnodes, edges: vedges, byId: new Map(vnodes.map((n) => [n.id, n])), deg };
+    const gi = new Map(groups.map((g, i) => [g, i]));
+    for (const n of vnodes) {
+        if (pos.has(n.id)) continue;
+        const nb = [...(outE.get(n.id) || []), ...(inE.get(n.id) || [])].map((e) => pos.get(e.source === n.id ? e.target : e.source)).find(Boolean);
+        const a = ((gi.get(n.group) ?? groups.length) / Math.max(1, groups.length)) * Math.PI * 2;
+        const base = nb ? { x: nb.x, y: nb.y } : { x: Math.cos(a) * 320, y: Math.sin(a) * 320 };
+        pos.set(n.id, { x: base.x + (Math.random() - 0.5) * 80, y: base.y + (Math.random() - 0.5) * 80, vx: 0, vy: 0, fixed: false });
+    }
+    alpha = Math.max(alpha, 0.6);
+    kick();
+}
+
+/* ---------- physics ---------- */
+let alpha = 1;
+function tick() {
+    const vn = view.nodes; const cell = 240; const grid = new Map();
+    for (const n of vn) { const p = pos.get(n.id); p.r = radius(n); push(grid, `${Math.floor(p.x / cell)},${Math.floor(p.y / cell)}`, n.id); }
+    for (const n of vn) {
+        const p = pos.get(n.id); const cx = Math.floor(p.x / cell); const cy = Math.floor(p.y / cell);
+        for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+            for (const id of grid.get(`${cx + dx},${cy + dy}`) || []) {
+                if (id <= n.id) continue;
+                const q = pos.get(id); let x = p.x - q.x; let y = p.y - q.y; let d2 = x * x + y * y;
+                if (d2 < 0.01) { x = Math.random() - 0.5; y = Math.random() - 0.5; d2 = 0.5; }
+                const d = Math.sqrt(d2); const min = p.r + q.r + 6;
+                let f = (7000 / Math.max(d2, 400)) * alpha; if (d < min) f += Math.min(8, (min - d) * 0.5);
+                p.vx += (x / d) * f; p.vy += (y / d) * f; q.vx -= (x / d) * f; q.vy -= (y / d) * f;
+            }
+        }
+    }
+    for (const e of view.edges) {
+        const p = pos.get(e.source); const q = pos.get(e.target); if (!p || !q) continue;
+        const x = q.x - p.x; const y = q.y - p.y; const d = Math.sqrt(x * x + y * y) || 1;
+        const f = ((d - (80 + p.r + q.r)) * 0.25 * alpha) / Math.min(view.deg.get(e.source), view.deg.get(e.target));
+        p.vx += (x / d) * f; p.vy += (y / d) * f; q.vx -= (x / d) * f; q.vy -= (y / d) * f;
+    }
+    const centroid = new Map();
+    for (const n of vn) { const p = pos.get(n.id); const c = centroid.get(n.group) || { x: 0, y: 0, k: 0 }; c.x += p.x; c.y += p.y; c.k++; centroid.set(n.group, c); }
+    for (const n of vn) {
+        const p = pos.get(n.id); const c = centroid.get(n.group);
+        p.vx += ((c.x / c.k - p.x) * 0.012 - p.x * 0.01) * alpha; p.vy += ((c.y / c.k - p.y) * 0.012 - p.y * 0.01) * alpha;
+        if (p.fixed) { p.vx = 0; p.vy = 0; continue; }
+        p.vx *= 0.6; p.vy *= 0.6;
+        const v = Math.hypot(p.vx, p.vy); if (v > 40) { p.vx *= 40 / v; p.vy *= 40 / v; }
+        p.x += p.vx; p.y += p.vy;
+    }
+    alpha *= 0.975;
+}
+
+/* ---------- drawing ---------- */
+const canvas = $('#graph'); const ctx = canvas.getContext('2d');
+const cam = { x: 0, y: 0, k: 1 };
+let W = 0; let H = 0; let frame = 0;
+function resize() {
+    const r = canvas.getBoundingClientRect(); const dpr = window.devicePixelRatio || 1;
+    W = r.width; H = r.height; canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); kick();
+}
+const toWorld = (sx, sy) => ({ x: (sx - W / 2) / cam.k + cam.x, y: (sy - H / 2) / cam.k + cam.y });
+function focusSet() {
+    if (state.flow !== null) return new Set(ann.flows[state.flow].steps);
+    const id = state.selected && view.byId.has(state.selected) ? state.selected : state.hover;
+    if (!id) return null;
+    const s = new Set([id]);
+    for (const e of view.edges) { if (e.source === id) s.add(e.target); if (e.target === id) s.add(e.source); }
+    return s;
+}
+function draw() {
+    const dpr = window.devicePixelRatio || 1;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = colors.bg; ctx.fillRect(0, 0, W, H);
+    ctx.translate(W / 2, H / 2); ctx.scale(cam.k, cam.k); ctx.translate(-cam.x, -cam.y);
+    const focus = focusSet(); const center = state.selected || state.hover;
+    const flowHops = state.flow !== null ? ann.flows[state.flow].hops : [];
+    for (const e of view.edges) {
+        const p = pos.get(e.source); const q = pos.get(e.target); if (!p || !q) continue;
+        const lit = focus ? (state.flow !== null ? false : (e.source === center || e.target === center)) : true;
+        ctx.globalAlpha = focus ? (lit ? 0.85 : 0.05) : 0.32;
+        ctx.strokeStyle = edgeColor(e.type); ctx.lineWidth = Math.min(4, 1 + Math.log2(e.weight || 1) * 0.6) / cam.k;
+        drawArrow(p, q, cam.k > 0.45 && (lit || !focus));
+    }
+    ctx.globalAlpha = 1;
+    for (const h of flowHops) {
+        const p = pos.get(h.from); const q = pos.get(h.to); if (!p || !q) continue;
+        ctx.strokeStyle = colors.accent; ctx.lineWidth = 3 / cam.k; ctx.setLineDash(h.inferred ? [8 / cam.k, 6 / cam.k] : []);
+        drawArrow(p, q, true); ctx.setLineDash([]);
+    }
+    for (const n of view.nodes) {
+        const p = pos.get(n.id); const r = radius(n);
+        ctx.globalAlpha = focus && !focus.has(n.id) ? 0.15 : 1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = nodeColor(n); ctx.fill();
+        if (n.external) { ctx.setLineDash([3 / cam.k, 3 / cam.k]); ctx.strokeStyle = colors.muted; ctx.lineWidth = 1 / cam.k; ctx.stroke(); ctx.setLineDash([]); }
+        if (n.entry && n.entry.length) { ctx.beginPath(); ctx.arc(p.x, p.y, r + 3 / cam.k, 0, Math.PI * 2); ctx.strokeStyle = colors.ink; ctx.lineWidth = 2 / cam.k; ctx.stroke(); }
+        if (n.id === state.selected) { ctx.beginPath(); ctx.arc(p.x, p.y, r + 7 / cam.k, 0, Math.PI * 2); ctx.strokeStyle = colors.accent; ctx.lineWidth = 3 / cam.k; ctx.stroke(); }
+    }
+    if (state.flow !== null) {
+        ann.flows[state.flow].steps.forEach((id, k) => {
+            const p = pos.get(id); if (!p) return; const r = radius(byId.get(id)); const bx = p.x + r * 0.8; const by = p.y - r * 0.8; const br = 9 / cam.k;
+            ctx.globalAlpha = 1; ctx.beginPath(); ctx.arc(bx, by, br, 0, Math.PI * 2); ctx.fillStyle = colors.accent; ctx.fill();
+            ctx.fillStyle = '#fff'; ctx.font = `600 ${11 / cam.k}px system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(String(k + 1), bx, by + 0.5 / cam.k);
+        });
+    }
+    ctx.font = `${12 / cam.k}px system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.lineJoin = 'round'; ctx.lineWidth = 3 / cam.k; ctx.strokeStyle = colors.bg;
+    for (const n of view.nodes) {
+        const r = radius(n);
+        const show = n.id === state.selected || n.id === state.hover || (focus ? focus.has(n.id) && focus.size < 60 : view.nodes.length <= 40 || r * cam.k > 11 || cam.k > 1.6);
+        if (!show) continue;
+        const p = pos.get(n.id); ctx.globalAlpha = 1; ctx.fillStyle = colors.ink;
+        const label = n.name.length > 40 ? `${n.name.slice(0, 38)}…` : n.name;
+        ctx.strokeText(label, p.x, p.y + r + 4 / cam.k); ctx.fillText(label, p.x, p.y + r + 4 / cam.k);
+    }
+    ctx.globalAlpha = 1;
+}
+function drawArrow(p, q, head) {
+    const x = q.x - p.x; const y = q.y - p.y; const d = Math.sqrt(x * x + y * y) || 1; const ux = x / d; const uy = y / d;
+    const rq = (q.r || 6) + 2 / cam.k; const sx = p.x + ux * (p.r || 6); const sy = p.y + uy * (p.r || 6); const ex = q.x - ux * rq; const ey = q.y - uy * rq;
+    ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(ex, ey); ctx.stroke();
+    if (!head) return;
+    const s = 7 / cam.k; ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(ex - ux * s - uy * s * 0.5, ey - uy * s + ux * s * 0.5); ctx.lineTo(ex - ux * s + uy * s * 0.5, ey - uy * s - ux * s * 0.5); ctx.closePath();
+    ctx.fillStyle = ctx.strokeStyle; ctx.fill();
+}
+let autoFit = true;
+function loop() {
+    frame = 0;
+    if (alpha > 0.02 || drag) tick();
+    if (autoFit && alpha > 0.02 && !drag) fit(autoFitIds, false);
+    draw();
+    if (alpha > 0.02 || drag) kick();
+}
+function kick() { if (!frame) frame = requestAnimationFrame(loop); }
+let autoFitIds = null;
+function fit(ids, schedule = true) {
+    const list = (ids ? ids.map((id) => view.byId.get(id)).filter(Boolean) : view.nodes);
+    if (!list.length || !W) return;
+    let x0 = Infinity; let y0 = Infinity; let x1 = -Infinity; let y1 = -Infinity;
+    for (const n of list) { const p = pos.get(n.id); const r = radius(n); x0 = Math.min(x0, p.x - r); y0 = Math.min(y0, p.y - r); x1 = Math.max(x1, p.x + r); y1 = Math.max(y1, p.y + r); }
+    cam.x = (x0 + x1) / 2; cam.y = (y0 + y1) / 2;
+    cam.k = Math.max(0.08, Math.min(2.2, Math.min(W / (x1 - x0 + 120), H / (y1 - y0 + 120))));
+    if (schedule) kick();
+}
+
+/* ---------- interaction ---------- */
+let drag = null;
+function hit(sx, sy) {
+    const w = toWorld(sx, sy);
+    for (let i = view.nodes.length - 1; i >= 0; i--) {
+        const n = view.nodes[i]; const p = pos.get(n.id); const r = radius(n) + 3 / cam.k;
+        if ((p.x - w.x) ** 2 + (p.y - w.y) ** 2 <= r * r) return n;
+    }
+    return null;
+}
+const local = (ev) => { const r = canvas.getBoundingClientRect(); return { x: ev.clientX - r.left, y: ev.clientY - r.top }; };
+canvas.addEventListener('pointerdown', (ev) => {
+    const s = local(ev); const n = hit(s.x, s.y);
+    drag = { node: n, sx: s.x, sy: s.y, cx: cam.x, cy: cam.y, moved: false };
+    autoFit = false;
+    if (n) pos.get(n.id).fixed = true;
+    canvas.setPointerCapture(ev.pointerId); canvas.classList.add('dragging');
+});
+canvas.addEventListener('pointermove', (ev) => {
+    const s = local(ev);
+    if (drag) {
+        if (Math.abs(s.x - drag.sx) + Math.abs(s.y - drag.sy) > 3) drag.moved = true;
+        if (drag.node) { const w = toWorld(s.x, s.y); const p = pos.get(drag.node.id); p.x = w.x; p.y = w.y; alpha = Math.max(alpha, 0.3); }
+        else { cam.x = drag.cx - (s.x - drag.sx) / cam.k; cam.y = drag.cy - (s.y - drag.sy) / cam.k; }
+        kick(); return;
+    }
+    const n = hit(s.x, s.y); const tip = $('#tooltip');
+    if ((n && n.id) !== state.hover) { state.hover = n ? n.id : null; kick(); }
+    if (!n) { tip.hidden = true; return; }
+    tip.hidden = false;
+    tip.innerHTML = `<b>${esc(n.name)}</b><div class="sub">${esc(n.layer)}${n.group ? ` · ${esc(n.group)}` : ''}</div><div class="sub">${n.external ? `${fmt(n.refs)} refs` : n.layer === 'Group' ? `${fmt(n.loc)} lines` : `${fmt(n.loc)} lines · used by ${n.fanIn} · uses ${n.fanOut}`}</div>`;
+    tip.style.left = `${Math.min(s.x + 14, W - tip.offsetWidth - 8)}px`; tip.style.top = `${Math.min(s.y + 14, H - tip.offsetHeight - 8)}px`;
+});
+canvas.addEventListener('pointerup', () => {
+    if (!drag) return;
+    if (drag.node) pos.get(drag.node.id).fixed = drag.moved;
+    if (!drag.moved) select(drag.node ? drag.node.id : null, false);
+    drag = null; canvas.classList.remove('dragging');
+});
+canvas.addEventListener('pointerleave', () => { state.hover = null; $('#tooltip').hidden = true; kick(); });
+canvas.addEventListener('dblclick', (ev) => { const s = local(ev); const n = hit(s.x, s.y); if (n) { pos.get(n.id).fixed = false; alpha = 0.3; kick(); } else { autoFit = true; fit(autoFitIds); } });
+canvas.addEventListener('wheel', (ev) => {
+    ev.preventDefault(); autoFit = false; const s = local(ev); const before = toWorld(s.x, s.y);
+    cam.k = Math.max(0.05, Math.min(5, cam.k * Math.exp(-ev.deltaY * 0.0015)));
+    const after = toWorld(s.x, s.y); cam.x += before.x - after.x; cam.y += before.y - after.y; kick();
+}, { passive: false });
+
+function select(id, center = true) {
+    if (id && id.startsWith('group:') === false && state.groupView && byId.has(id)) { state.groupView = false; $('#groupView').checked = false; }
+    state.selected = id;
+    if (state.flow !== null && id && !ann.flows[state.flow].steps.includes(id)) exitFlow(false);
+    if (id && !view.byId.has(id)) buildView();
+    if (id && center && pos.has(id)) { autoFit = false; const p = pos.get(id); cam.x = p.x; cam.y = p.y; cam.k = Math.max(cam.k, 0.9); }
+    renderList(); renderDetails(); kick();
+}
+function openFlow(i) {
+    state.flow = i; state.selected = null; state.tab = 'flows';
+    const f = ann.flows[i];
+    $('#flowBanner').hidden = false; $('#flowBanner').innerHTML = `<span>Flow: <b>${esc(f.name)}</b></span><button class="btn" data-exitflow>Exit</button>`;
+    if (state.groupView) { state.groupView = false; $('#groupView').checked = false; }
+    autoFit = true; autoFitIds = f.steps;
+    buildView(); renderList(); renderDetails(); fit(f.steps);
+}
+function exitFlow(render = true) {
+    state.flow = null; autoFitIds = null; $('#flowBanner').hidden = true;
+    if (render) { renderList(); renderDetails(); kick(); }
+}
+document.addEventListener('click', (ev) => {
+    const t = ev.target.closest('[data-id],[data-flow],[data-exitflow],[data-tab],[data-type],[data-group],[data-bigby],[data-copy]');
+    if (!t) return;
+    if (t.dataset.copy) { navigator.clipboard && navigator.clipboard.writeText(t.dataset.copy).then(() => { t.textContent = 'Copied'; }, () => {}); return; }
+    if (t.dataset.tab) { state.tab = t.dataset.tab; renderList(); return; }
+    if (t.dataset.bigby !== undefined) { state.bigBy = state.bigBy === 'loc' ? 'bytes' : 'loc'; renderList(); return; }
+    if (t.dataset.exitflow !== undefined) { exitFlow(); return; }
+    if (t.dataset.flow !== undefined) { openFlow(Number(t.dataset.flow)); return; }
+    if (t.dataset.type) { const ty = t.dataset.type; state.hiddenTypes.has(ty) ? state.hiddenTypes.delete(ty) : state.hiddenTypes.add(ty); renderChips(); buildView(); return; }
+    if (t.dataset.group) { const g = t.dataset.group; state.hiddenGroups.has(g) ? state.hiddenGroups.delete(g) : state.hiddenGroups.add(g); renderLegend(); buildView(); return; }
+    if (t.dataset.id) select(t.dataset.id);
+});
+topN.addEventListener('input', () => { state.topN = Number(topN.value); $('#topNOut').textContent = state.topN; buildView(); });
+$('#showExt').addEventListener('change', (ev) => { state.showExt = ev.target.checked; renderLegend(); buildView(); });
+$('#groupView').addEventListener('change', (ev) => { state.groupView = ev.target.checked; if (state.groupView) exitFlow(false); state.selected = null; buildView(); renderDetails(); autoFit = true; autoFitIds = null; });
+$('#fitBtn').addEventListener('click', () => { autoFit = true; fit(autoFitIds); });
+$('#search').addEventListener('change', (ev) => {
+    const q = ev.target.value.trim().toLowerCase(); if (!q) return;
+    const n = byId.get(ev.target.value.trim()) || nodes.find((x) => x.name.toLowerCase() === q) || nodes.find((x) => x.id.toLowerCase().includes(q));
+    if (n) select(n.id);
+});
+const themes = ['auto', 'light', 'dark'];
+let themeIdx = 0;
+try { themeIdx = Math.max(0, themes.indexOf(localStorage.getItem('code-map-theme') || 'auto')); } catch { /* storage unavailable */ }
+function applyTheme() {
+    const t = themes[themeIdx];
+    if (t === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+    $('#themeBtn').textContent = `Theme: ${t}`; readColors(); renderChips(); renderLegend(); kick();
+}
+$('#themeBtn').addEventListener('click', () => { themeIdx = (themeIdx + 1) % themes.length; try { localStorage.setItem('code-map-theme', themes[themeIdx]); } catch { /* ignore */ } applyTheme(); });
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readColors(); renderChips(); renderLegend(); kick(); });
+new ResizeObserver(resize).observe($('#wrap'));
+
+applyTheme(); renderList(); renderDetails(); resize(); buildView();
+for (let i = 0; i < 200 && view.nodes.length < 1500; i++) tick();
+fit();
+})();
+</script>
+</body>
+</html>

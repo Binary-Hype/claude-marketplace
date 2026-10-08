@@ -9,8 +9,8 @@
         {
             "name": "coding-assistant",
             "source": "./coding-assistant",
-            "description": "A lean coding assistant focused on code quality, security, and correctness. Provides expert guidance on design patterns, testing, database review, dependency health, merge-conflict resolution, handoffs, and full maintenance turns while respecting your project's architecture and conventions.",
-            "version": "2.3.10",
+            "description": "A lean coding assistant focused on code quality, security, and correctness. Provides expert guidance on design patterns, testing, database review, dependency health, merge-conflict resolution, handoffs, full maintenance turns, and interactive code maps while respecting your project's architecture and conventions.",
+            "version": "2.3.11",
             "author": {
                 "name": "Tobias Kokesch",
                 "email": "hallo@binary-hype.com"
@@ -40,7 +40,10 @@
                 "promote-prs",
                 "jira",
                 "handoff",
-                "maintenance"
+                "maintenance",
+                "visualization",
+                "architecture",
+                "dependency-graph"
             ],
             "category": "developer-tools"
         }

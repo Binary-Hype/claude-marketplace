@@ -1,0 +1,9 @@
+{
+    "name": "swag/paypal",
+    "type": "shopware-platform-plugin",
+    "autoload": {
+        "psr-4": {
+            "Swag\\PayPal\\": "src/"
+        }
+    }
+}
