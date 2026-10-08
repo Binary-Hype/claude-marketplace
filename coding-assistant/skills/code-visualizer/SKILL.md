@@ -125,12 +125,12 @@ Keep the report short:
 
 So you can explain the page to the user:
 
-- **Left: rankings.** Most used (fan-in), Biggest (lines or bytes), Hubs (fan-in × fan-out), Entry points, and Flows. Clicking an entry focuses that component.
+- **Left: rankings.** Most used (fan-in), Biggest (lines of code), Hubs (fan-in × fan-out), Entry points, and Flows. Clicking an entry focuses that component.
 - **Center: graph.**
   - Node size reflects lines of code, color reflects the group (plugin or top-level folder), and a ring marks an entry point.
   - Edge colors: purple for inheritance, grey for dependencies (injects, uses, instantiates, imports), orange for events (dispatches, listens), and green for routes and HTTP calls.
   - Controls:
-    - "Top N" limits the graph to the most important components (150 by default).
+    - "Top N" limits the graph to the most important components (150 by default); drag the slider or type an exact number.
     - "Group view" collapses everything to plugins and folders.
     - "Externals" shows the folded framework and library nodes.
     - Edge-type chips and group legend entries toggle what is shown.

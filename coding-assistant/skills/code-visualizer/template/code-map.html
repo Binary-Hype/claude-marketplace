@@ -26,41 +26,42 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; height: 100%; }
-body { background: var(--bg); color: var(--ink); font: 13px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; display: flex; flex-direction: column; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; display: flex; flex-direction: column; }
 button, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
-code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
-.top { display: flex; align-items: center; gap: 16px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
-.top h1 { font-size: 15px; margin: 0; font-weight: 650; }
+code { font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.top { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.top h1 { font-size: 16px; margin: 0; font-weight: 650; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
-.chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--muted); font-size: 12px; white-space: nowrap; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--muted); font-size: 12px; white-space: nowrap; }
 .chip b { color: var(--ink); font-weight: 600; }
-.btn { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 10px; }
+.btn { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 5px 12px; }
 .btn:hover { background: var(--soft); }
-.overview { padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); color: var(--ink); max-height: 120px; overflow: auto; }
+.overview { padding: 12px 20px; line-height: 1.6; border-bottom: 1px solid var(--line); background: var(--panel); color: var(--ink); max-height: 120px; overflow: auto; }
 .overview p { margin: 0; max-width: 110ch; }
-.layout { flex: 1; min-height: 0; display: grid; grid-template-columns: 300px minmax(0, 1fr) 340px; }
+.layout { flex: 1; min-height: 0; display: grid; grid-template-columns: clamp(280px, 22vw, 360px) minmax(0, 1fr) clamp(320px, 27vw, 440px); }
 .side, .details { background: var(--panel); overflow: auto; min-height: 0; }
 .side { border-right: 1px solid var(--line); display: flex; flex-direction: column; }
-.details { border-left: 1px solid var(--line); padding: 14px 16px; }
-.tabs { display: flex; flex-wrap: wrap; gap: 2px; padding: 8px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel); z-index: 1; }
-.tabs button { border: 0; background: none; padding: 4px 8px; border-radius: 6px; color: var(--muted); }
+.details { border-left: 1px solid var(--line); padding: 20px 22px 28px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 12px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel); z-index: 1; }
+.tabs button { border: 0; background: none; padding: 5px 10px; border-radius: 6px; color: var(--muted); }
 .tabs button[aria-selected="true"] { background: var(--soft); color: var(--ink); font-weight: 600; }
-.list { padding: 6px; }
-.list-head { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 8px; color: var(--muted); font-size: 12px; }
-.row { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 6px 8px; border-radius: 6px; }
+.list { padding: 8px 10px 16px; }
+.list-head { display: flex; justify-content: space-between; align-items: center; padding: 6px 8px 10px; color: var(--muted); font-size: 12px; }
+.row { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 9px 10px; border-radius: 8px; margin-bottom: 2px; }
 .row:hover, .row.active { background: var(--soft); }
 .row .name { display: flex; justify-content: space-between; gap: 8px; font-weight: 550; }
 .row .name span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.row .sub { color: var(--muted); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.row .bar { height: 3px; background: var(--line); border-radius: 2px; margin-top: 4px; }
+.row .sub { color: var(--muted); font-size: 12.5px; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row .bar { height: 3px; background: var(--line); border-radius: 2px; margin-top: 7px; }
 .row .bar i { display: block; height: 100%; background: var(--bar); border-radius: 2px; }
 .stage { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
-.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--panel); }
-.toolbar input[type="search"] { flex: 1; min-width: 160px; padding: 5px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.toolbar input[type="search"] { flex: 1 1 280px; min-width: 0; padding: 7px 11px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.toolbar .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
 .toolbar label { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
-.toolbar output { min-width: 3ch; color: var(--ink); font-variant-numeric: tabular-nums; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 12px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.toolbar input[type="number"] { width: 7ch; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font-variant-numeric: tabular-nums; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
 .chips button.off, .legend button.off { opacity: .4; text-decoration: line-through; }
 .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
 .canvas-wrap { position: relative; flex: 1; min-height: 300px; }
@@ -69,34 +70,45 @@ canvas.dragging { cursor: grabbing; }
 .tooltip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 9px; box-shadow: 0 4px 14px rgb(0 0 0 / .12); max-width: 360px; font-size: 12px; }
 .tooltip .sub { color: var(--muted); }
 .flow-banner { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 6px 4px 14px; display: flex; gap: 10px; align-items: center; box-shadow: 0 4px 14px rgb(0 0 0 / .12); }
-.legend { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; border-top: 1px solid var(--line); background: var(--panel); max-height: 92px; overflow: auto; }
-.legend button { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 2px 8px; font-size: 12px; }
-.details h2 { font-size: 15px; margin: 0; word-break: break-word; }
-.details h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 16px; border-top: 1px solid var(--line); background: var(--panel); max-height: 120px; overflow: auto; }
+.legend button { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 3px 10px; font-size: 12.5px; }
+.details h2 { font-size: 17px; line-height: 1.3; margin: 0; overflow-wrap: anywhere; }
+.details h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 26px 0 10px; padding-top: 14px; border-top: 1px solid var(--line); }
 .d-head { display: flex; gap: 10px; align-items: flex-start; }
 .d-head .dot { width: 12px; height: 12px; margin-top: 4px; }
-.sub-id { color: var(--muted); font-size: 12px; word-break: break-all; }
-.badges { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
-.badge { padding: 1px 7px; border-radius: 4px; background: var(--soft); border: 1px solid var(--line); font-size: 11.5px; }
+.sub-id { color: var(--muted); font-size: 12.5px; margin-top: 4px; overflow-wrap: anywhere; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.badge { padding: 2px 8px; border-radius: 5px; background: var(--soft); border: 1px solid var(--line); font-size: 11.5px; }
 .badge.entry { border-color: var(--e-route); color: var(--e-route); }
 .badge.warn { border-color: var(--e-event); color: var(--e-event); }
-.summary { margin: 8px 0; }
+.summary { margin: 12px 0; line-height: 1.6; }
+.file { margin: 14px 0 4px; padding: 10px 12px; background: var(--soft); border-radius: 8px; display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; }
+.file code { flex: 1; }
 .muted { color: var(--muted); }
-.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.metric { background: var(--soft); border-radius: 6px; padding: 6px 8px; }
-.metric b { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
-.metric span { color: var(--muted); font-size: 11px; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.metric { background: var(--soft); border-radius: 8px; padding: 9px 11px; }
+.metric b { display: block; font-size: 17px; font-variant-numeric: tabular-nums; }
+.metric span { color: var(--muted); font-size: 12px; }
 .links { list-style: none; margin: 0; padding: 0; }
-.links li { margin: 2px 0; }
-.links button { border: 0; background: none; padding: 2px 0; text-align: left; color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; word-break: break-all; }
+.links li { margin: 5px 0; }
+.links button { border: 0; background: none; padding: 2px 0; text-align: left; color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; overflow-wrap: anywhere; }
 .links button:hover { text-decoration-color: var(--ink); }
-.type-label { color: var(--muted); font-size: 11.5px; margin-top: 8px; }
-ol.steps { padding-left: 20px; margin: 6px 0; }
-ol.steps li { margin: 6px 0; }
-.hop { color: var(--muted); font-size: 11.5px; }
-.hop.inferred { color: var(--e-event); }
+.type-label { color: var(--muted); font-size: 12px; margin-top: 12px; }
+.flow-row .flow-title, .flow-row .flow-meta, .step-name, .step-meta, .step-text { display: block; }
+.flow-row .flow-title { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+.flow-row .flow-meta { color: var(--muted); font-size: 12.5px; line-height: 1.45; margin-top: 5px; white-space: normal; }
+.steps { list-style: none; margin: 4px 0 18px; padding: 0; }
+.step { width: 100%; display: grid; grid-template-columns: 28px 1fr; gap: 12px; text-align: left; border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 12px 14px; }
+.step:hover { background: var(--soft); }
+.step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.step-name { font-weight: 650; font-size: 14.5px; line-height: 1.35; overflow-wrap: anywhere; }
+.step-meta { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+.step-text { margin-top: 6px; line-height: 1.55; }
+.hop { color: var(--muted); font-size: 12.5px; padding: 6px 0 6px 26px; border-left: 2px solid var(--line); margin-left: 26px; }
+.hop.inferred { color: var(--e-event); border-left-style: dashed; border-left-color: var(--e-event); }
+.flow-data { margin: 12px 0; padding: 10px 12px; background: var(--soft); border-radius: 8px; line-height: 1.55; }
 .layer-bars .row { cursor: default; }
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .layout { grid-template-columns: 1fr; overflow: auto; }
     .side { max-height: 320px; border-right: 0; border-bottom: 1px solid var(--line); }
     .stage { height: 70vh; }
@@ -127,10 +139,12 @@ ol.steps li { margin: 6px 0; }
         <div class="toolbar">
             <input id="search" type="search" placeholder="Find a class, file or component…" list="names" autocomplete="off">
             <datalist id="names"></datalist>
-            <label>Top <input id="topN" type="range" min="1" step="1"> <output id="topNOut"></output></label>
+            <div class="controls">
+            <label>Top <input id="topN" type="range" min="1" step="1" aria-label="Number of components shown"> <input id="topNNum" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of components shown"></label>
             <label><input id="showExt" type="checkbox"> Externals</label>
             <label><input id="groupView" type="checkbox"> Group view</label>
             <button class="btn" id="fitBtn" type="button">Fit</button>
+            </div>
         </div>
         <div class="chips" id="edgeChips"></div>
         <div class="canvas-wrap" id="wrap">
@@ -171,7 +185,7 @@ const edgeTypeCounts = new Map();
 for (const e of DATA.edges) if (byId.has(e.target) && !e.target.startsWith('ext:')) edgeTypeCounts.set(e.type, (edgeTypeCounts.get(e.type) || 0) + 1);
 const flowsOf = (id) => ann.flows.map((f, i) => [f, i]).filter(([f]) => f.steps.includes(id));
 
-const state = { tab: 'used', bigBy: 'loc', selected: null, hover: null, flow: null, topN: Math.min(150, nodes.length), showExt: false, groupView: false, hiddenGroups: new Set(), hiddenTypes: new Set() };
+const state = { tab: 'used', selected: null, hover: null, flow: null, topN: Math.min(150, nodes.length), showExt: false, groupView: false, hiddenGroups: new Set(), hiddenTypes: new Set() };
 let colors = {};
 function readColors() {
     const cs = getComputedStyle(document.documentElement);
@@ -195,7 +209,8 @@ $('#meta').innerHTML = [
 ].join('');
 if (ann.overview) { $('#overview').hidden = false; $('#overview').innerHTML = `<p>${esc(ann.overview)}</p>`; }
 const topN = $('#topN');
-topN.max = String(Math.max(1, nodes.length)); topN.value = String(state.topN); $('#topNOut').textContent = state.topN;
+const topNNum = $('#topNNum');
+topN.max = topNNum.max = String(Math.max(1, nodes.length)); topN.value = topNNum.value = String(state.topN);
 $('#names').innerHTML = nodes.slice(0, 3000).map((n) => `<option value="${esc(n.id)}">${esc(n.name)}</option>`).join('');
 
 function renderChips() {
@@ -222,10 +237,8 @@ function renderList() {
         const list = top(nodes, (n) => n.fanIn);
         el.innerHTML = `<div class="list-head">Used by most other components</div>${list.map((n) => rowHtml(n, n.fanIn, list[0] && list[0].fanIn)).join('') || '<p class="muted">No internal links found.</p>'}`;
     } else if (state.tab === 'biggest') {
-        const key = state.bigBy === 'loc' ? (n) => n.loc : (n) => n.bytes;
-        const list = top(nodes, key);
-        el.innerHTML = `<div class="list-head"><span>Largest components</span><button class="btn" data-bigby>${state.bigBy === 'loc' ? 'by lines' : 'by bytes'}</button></div>`
-            + list.map((n) => rowHtml(n, key(n), key(list[0]))).join('');
+        const list = top(nodes, (n) => n.loc);
+        el.innerHTML = `<div class="list-head">Largest components by lines of code</div>${list.map((n) => rowHtml(n, n.loc, list[0].loc)).join('')}`;
     } else if (state.tab === 'hubs') {
         const key = (n) => n.fanIn * n.fanOut;
         const list = top(nodes, key);
@@ -235,7 +248,7 @@ function renderList() {
         el.innerHTML = `<div class="list-head">Where execution starts</div>${list.map((n) => rowHtml(n, n.fanOut, 0, `${n.entry.join(', ')} · ${[...n.routes, ...n.listensTo, ...n.hooks][0] || n.group}`)).join('') || '<p class="muted">No entry points detected.</p>'}`;
     } else {
         el.innerHTML = `<div class="list-head">Data flows traced by Claude</div>${ann.flows.map((f, i) =>
-            `<button class="row ${state.flow === i ? 'active' : ''}" data-flow="${i}"><div class="name"><span>${esc(f.name)}</span><span class="muted">${f.steps.length} steps</span></div><div class="sub">${esc(f.data || f.description)}</div></button>`).join('') || '<p class="muted">No flows were annotated for this map.</p>'}`;
+            `<button class="row flow-row ${state.flow === i ? 'active' : ''}" data-flow="${i}"><span class="flow-title">${esc(f.name)}</span><span class="flow-meta">${f.steps.length} steps${f.data ? ` · ${esc(f.data)}` : ''}</span></button>`).join('') || '<p class="muted">No flows were annotated for this map.</p>'}`;
     }
 }
 
@@ -268,7 +281,7 @@ function renderNodePanel(n) {
     $('#details').innerHTML = `<div class="d-head"><span class="dot" style="background:${nodeColor(n)}"></span><div><h2>${esc(n.name)}</h2>${n.id !== n.name ? `<div class="sub-id">${esc(n.id)}</div>` : ''}</div></div>
         <div class="badges"><span class="badge">${esc(n.layer)}</span>${n.kind && n.kind !== 'external' ? `<span class="badge">${esc(n.kind)}</span>` : ''}${n.group ? `<span class="badge">${esc(n.group)}</span>` : ''}${(n.entry || []).map((e) => `<span class="badge entry">${esc(e)}</span>`).join('')}</div>
         ${summary ? `<p class="summary">${esc(summary)}</p>` : n.external ? '<p class="muted">Framework or library code. Only references are counted; nothing inside it was scanned.</p>' : '<p class="muted">No summary — not among the components Claude annotated.</p>'}
-        ${n.file ? `<p><code>${esc(n.file)}:${n.line}</code> <button class="btn" data-copy="${esc(`${n.file}:${n.line}`)}">Copy</button></p>` : ''}
+        ${n.file ? `<div class="file"><code>${esc(n.file)}:${n.line}</code><button class="btn" data-copy="${esc(`${n.file}:${n.line}`)}">Copy</button></div>` : ''}
         ${n.external ? `<div class="metrics"><div class="metric"><b>${fmt(n.refs)}</b><span>references</span></div></div>` : `<div class="metrics">
             <div class="metric"><b>${fmt(n.loc)}</b><span>lines of code</span></div><div class="metric"><b>${kb(n.bytes)}</b><span>file size</span></div><div class="metric"><b>${fmt(n.methods)}</b><span>functions</span></div>
             <div class="metric"><b>${fmt(n.fanIn)}</b><span>used by</span></div><div class="metric"><b>${fmt(n.fanOut)}</b><span>uses</span></div><div class="metric"><b>${fmt(n.externalDeps)}</b><span>external deps</span></div></div>`}
@@ -280,17 +293,18 @@ function renderNodePanel(n) {
 function renderGroupPanel(g) {
     const members = nodes.filter((n) => n.group === g.group);
     $('#details').innerHTML = `<div class="d-head"><span class="dot" style="background:${nodeColor(g)}"></span><div><h2>${esc(g.group)}</h2><div class="sub-id">group</div></div></div>
-        <div class="metrics" style="margin-top:10px"><div class="metric"><b>${fmt(members.length)}</b><span>components</span></div><div class="metric"><b>${fmt(g.loc)}</b><span>lines of code</span></div><div class="metric"><b>${fmt(members.filter((n) => n.entry.length).length)}</b><span>entry points</span></div></div>
+        <div class="metrics"><div class="metric"><b>${fmt(members.length)}</b><span>components</span></div><div class="metric"><b>${fmt(g.loc)}</b><span>lines of code</span></div><div class="metric"><b>${fmt(members.filter((n) => n.entry.length).length)}</b><span>entry points</span></div></div>
         <h3>Top members</h3><ul class="links">${members.slice(0, 25).map((n) => `<li><button data-id="${esc(n.id)}">${esc(n.name)}</button> <span class="muted">${esc(n.layer)}</span></li>`).join('')}</ul>`;
 }
 function renderFlowPanel(i) {
     const f = ann.flows[i];
-    $('#details').innerHTML = `<h2>${esc(f.name)}</h2><p class="summary">${esc(f.description)}</p>${f.data ? `<p><span class="badge">data</span> ${esc(f.data)}</p>` : ''}
+    $('#details').innerHTML = `<h2>${esc(f.name)}</h2>${f.description ? `<p class="summary">${esc(f.description)}</p>` : ''}${f.data ? `<div class="flow-data"><span class="badge">data</span> ${esc(f.data)}</div>` : ''}
         <h3>Steps</h3><ol class="steps">${f.steps.map((id, k) => {
             const n = byId.get(id);
             const hop = f.hops[k - 1];
-            return `${hop ? `<div class="hop ${hop.inferred ? 'inferred' : ''}">${hop.inferred ? '↓ inferred, no direct edge in the graph' : '↓'}</div>` : ''}<li><button class="btn" data-id="${esc(id)}">${esc(n.name)}</button> <span class="muted">${esc(n.layer)}</span>${ann.summaries[id] ? `<div class="muted">${esc(ann.summaries[id])}</div>` : ''}</li>`;
-        }).join('')}</ol><p><button class="btn" data-exitflow>Exit flow</button></p>`;
+            const edge = hop ? DATA.edges.find((e) => (e.source === hop.from && e.target === hop.to) || (e.source === hop.to && e.target === hop.from)) : null;
+            return `${hop ? `<div class="hop ${hop.inferred ? 'inferred' : ''}">${hop.inferred ? 'inferred, no direct link in the code' : esc(edge ? edge.type : '')}</div>` : ''}<li><button class="step" data-id="${esc(id)}"><span class="step-num">${k + 1}</span><span><span class="step-name">${esc(n.name)}</span><span class="step-meta">${esc(n.layer)}${n.group && !n.external ? ` · ${esc(n.group)}` : ''}</span>${ann.summaries[id] ? `<span class="step-text">${esc(ann.summaries[id])}</span>` : ''}</span></button></li>`;
+        }).join('')}</ol><button class="btn" data-exitflow>Exit flow</button>`;
 }
 function renderDetails() {
     if (state.flow !== null) return renderFlowPanel(state.flow);
@@ -540,18 +554,23 @@ function exitFlow(render = true) {
     if (render) { renderList(); renderDetails(); kick(); }
 }
 document.addEventListener('click', (ev) => {
-    const t = ev.target.closest('[data-id],[data-flow],[data-exitflow],[data-tab],[data-type],[data-group],[data-bigby],[data-copy]');
+    const t = ev.target.closest('[data-id],[data-flow],[data-exitflow],[data-tab],[data-type],[data-group],[data-copy]');
     if (!t) return;
     if (t.dataset.copy) { navigator.clipboard && navigator.clipboard.writeText(t.dataset.copy).then(() => { t.textContent = 'Copied'; }, () => {}); return; }
     if (t.dataset.tab) { state.tab = t.dataset.tab; renderList(); return; }
-    if (t.dataset.bigby !== undefined) { state.bigBy = state.bigBy === 'loc' ? 'bytes' : 'loc'; renderList(); return; }
     if (t.dataset.exitflow !== undefined) { exitFlow(); return; }
     if (t.dataset.flow !== undefined) { openFlow(Number(t.dataset.flow)); return; }
     if (t.dataset.type) { const ty = t.dataset.type; state.hiddenTypes.has(ty) ? state.hiddenTypes.delete(ty) : state.hiddenTypes.add(ty); renderChips(); buildView(); return; }
     if (t.dataset.group) { const g = t.dataset.group; state.hiddenGroups.has(g) ? state.hiddenGroups.delete(g) : state.hiddenGroups.add(g); renderLegend(); buildView(); return; }
     if (t.dataset.id) select(t.dataset.id);
 });
-topN.addEventListener('input', () => { state.topN = Number(topN.value); $('#topNOut').textContent = state.topN; buildView(); });
+function setTopN(value) {
+    const v = Math.max(1, Math.min(nodes.length || 1, Math.round(Number(value) || 1)));
+    state.topN = v; topN.value = topNNum.value = String(v); buildView();
+}
+topN.addEventListener('input', () => setTopN(topN.value));
+topNNum.addEventListener('change', () => setTopN(topNNum.value));
+topNNum.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') setTopN(topNNum.value); });
 $('#showExt').addEventListener('change', (ev) => { state.showExt = ev.target.checked; renderLegend(); buildView(); });
 $('#groupView').addEventListener('change', (ev) => { state.groupView = ev.target.checked; if (state.groupView) exitFlow(false); state.selected = null; buildView(); renderDetails(); autoFit = true; autoFitIds = null; });
 $('#fitBtn').addEventListener('click', () => { autoFit = true; fit(autoFitIds); });
