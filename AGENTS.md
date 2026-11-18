@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.14
+**Version:** 2.3.15
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -33,7 +33,7 @@ A lean coding assistant providing expert guidance on code quality, security, and
 
 7. **humanizer**: Removes signs of AI-generated writing from text. Based on Wikipedia's "Signs of AI writing" guide. Detects and fixes patterns including inflated symbolism, promotional language, superficial -ing analyses, vague attributions, em dash overuse, rule of three, AI vocabulary words, negative parallelisms, and excessive conjunctive phrases. Use when editing or reviewing text to make it sound more natural and human-written.
 
-8. **promote-prs**: Creates paired pull/merge requests for the current feature branch — one targeting `develop` (fallback `main`) labeled `(production)`, and one targeting `staging` (fallback `stage`, then `testing`) labeled `(staging)`. Auto-extracts JIRA ticket from the branch name (formats like `TIC-1337` and `TIC_1337` both supported), prompts only when missing. Idempotent: skips PRs that already exist for the same source→target pair. Supports GitHub (`gh`) and GitLab (`glab`), auto-detected from the origin remote URL.
+8. **promote-pr**: Creates a pull/merge request for the current branch. With no argument (`/promote-pr`) it targets `main`; with a branch argument (`/promote-pr staging`) it targets that branch exactly. Title label follows the target: `(production)` for `main`/`master`/`develop`, `(staging)` for `staging`/`stage`/`testing`, none otherwise. Auto-extracts JIRA ticket from the branch name (formats like `TIC-1337` and `TIC_1337` both supported), prompts only when missing. Idempotent: reports an existing open PR for the same source→target pair instead of creating a duplicate. Supports GitHub (`gh`) and GitLab (`glab`), auto-detected from the origin remote URL.
 
 9. **grill-me**: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions "grill me".
 10. **commit-message**: Generates well-structured git commit messages by analyzing staged changes. Presents the proposed message for user approval before creating the commit. Follows best practices: imperative mood, 50-character subjects, bulleted body, no AI attribution.
