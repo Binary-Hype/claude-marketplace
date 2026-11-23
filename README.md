@@ -26,7 +26,7 @@ This plugin doesn't add process or overhead. It enhances what you already do.
 - **Subagents that activate on their own** — code review and security scanning are picked up by Claude automatically. No manual setup needed.
 - **Zero configuration** — sensible defaults out of the box. Override anything via `~/.claude/` if you want to, but you don't have to.
 
-## coding-assistant (v2.3.15)
+## coding-assistant (v2.3.16)
 
 ### Skills
 
@@ -39,6 +39,8 @@ Invoke any skill with `/skill-name`.
 **Security & Health** — `/dependency-auditor` · `/maintenance-turn`
 
 **Git & Review** — `/promote-pr` · `/commit-message` · `/handoff`
+
+**Task Workflow** — `/caos`
 
 **Overview** — `/code-visualizer`
 
