@@ -49,17 +49,23 @@ Everything changed in CAOS is visible live to the team, lands in the card histor
 
 Parse the argument and the user's message:
 
-| Input | Card reference |
-|-------|----------------|
-| Key such as `CA-142`, `COS-227` (`[A-Z][A-Z0-9]+-\d+`) | the key |
-| `os.codeaeffchen.de` link | the card key or id found in the URL |
-| Anything else / nothing | no card, so create one |
+| Input | Card reference | Project |
+|-------|----------------|---------|
+| Key such as `CA-142`, `COS-227` (`[A-Z][A-Z0-9]+-\d+`) | the key | from the card |
+| Card link: `os.codeaeffchen.de/cards/CA-142` or any CAOS page with `?card=CA-142` | the key in the URL | from the card |
+| Project link without a card: `os.codeaeffchen.de/projects/<project-id>` (also `/planning`, `/settings`, … below it) | none, so create one | the `<project-id>` in the URL |
+| Anything else / nothing | none, so create one | **unknown, ask the user** |
 
 **Card given:** call `get-card` with the key or id. Note its project key, type, title, description, checklists, comments and current assignees. If the card is already in a `testing`, `to_bill` or `done` column, ask the user whether to reopen it before continuing.
 
 **No card given:** create one.
 
-1. Find the project. Match the current repository (folder name, remote URL, the project key used in existing branch names such as `feature/COS-…`) against `list-projects`. If there is no single clear match, ask the user with AskUserQuestion.
+1. Determine the project.
+   - **Project link given:** use the project id from the URL and confirm it exists with `get-project`. If it does not resolve, treat the project as unknown.
+   - **Otherwise:** always ask the user which project the task is for, even when the repository looks like an obvious match. Never pick the project on your own. Call `list-projects`, then ask with AskUserQuestion:
+     - Offer exactly **two** project suggestions, shown as `KEY – Name`. The first is the best repository match, marked "(Recommended)" (match the folder name, the remote URL and the project key in existing branch names such as `feature/COS-…`). The second is the next most likely project.
+     - Say in the question that the user can choose "Other" to **paste a CAOS link or type the project name or key** themselves.
+     - Resolve an "Other" answer: a project link gives the project id, a card link or card key gives that card's project (via `get-card`), and a name or key is matched against `list-projects`. If it matches no project or several, ask again.
 2. Draft a short title and a description from the user's request: what should change and why, as Markdown. Pick the card `type`: `bug` for defects, `task` otherwise (`story`/`epic` only when the user says so).
 3. Show the draft (project, title, type, description) and let the user adjust it.
 4. Call `get-project` for the column ids and `assignable_people`, then `create-card` directly in the `in_progress` column with the user as assignee (`column_id` + `assignee_ids`). That also covers Step 2.
