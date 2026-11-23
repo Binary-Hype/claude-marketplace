@@ -13,7 +13,7 @@ This is a marketplace repository for Claude Code plugins created by Binary Hype 
 ## Plugin: coding-assistant
 
 **Location:** `./coding-assistant`
-**Version:** 2.3.17
+**Version:** 2.3.18
 
 A lean coding assistant providing expert guidance on code quality, security, and correctness.
 
@@ -46,7 +46,7 @@ A lean coding assistant providing expert guidance on code quality, security, and
 
 14. **code-visualizer**: Builds an interactive, offline `code-map.html` in the repo root showing the project's own code — most used, biggest and most connected classes/files, dependency links, entry points (routes, commands, subscribers, jobs) and Claude-traced data flows. A bundled zero-dependency Node script detects frameworks from manifests only, then scans strictly the include roots agreed with the user; `vendor/`, `node_modules/`, build output, tests and secret files are always skipped and framework references fold into external nodes. Asks whether third-party plugins (Shopware `custom/plugins`, WordPress plugins/themes) should be included, with a one-click option to ignore the whole folder. The page shows the commit (short hash and title) it was built from. A re-run is an update: it overwrites the existing map, reuses the earlier scope and annotations, and refreshes only summaries and flows touched by files changed since the last map's commit. Supports PHP and JS/TS/Vue.
 
-15. **caos**: Works a Codeäffchen OS (CAOS) card end to end through the CAOS MCP tools. Creates the card when no card key or `os.codeaeffchen.de` card link is given, asking the user which project it belongs to unless the URL names the project, then moves it to the `in_progress` column and adds the user to its assignees (keeping existing ones), branches off `origin/main` as `feature/<KEY>_<slug>` (or `fix/` for bug cards), implements the change and loops on user feedback until approved. Then commits via `commit-message`, pushes, opens the PR via `promote-pr` (each with a manual fallback), merges with a merge commit only when there are no conflicts and no failing checks (which deploys), and moves the card to the `testing` column. Columns are picked by type, never by name; never force-pushes or bypasses branch protection.
+15. **caos**: Works a Codeäffchen OS (CAOS) card end to end through the CAOS MCP tools. Creates the card when no card key or `os.codeaeffchen.de` card link is given, asking the user which project it belongs to unless the URL names the project, starts the user's CAOS timer on the card once it is created or read, then moves it to the `in_progress` column and adds the user to its assignees (keeping existing ones), branches off `origin/main` as `feature/<KEY>_<slug>` (or `fix/` for bug cards), implements the change and loops on user feedback until approved. Then commits via `commit-message`, pushes, opens the PR via `promote-pr` (each with a manual fallback), merges with a merge commit only when there are no conflicts and no failing checks (which deploys), stops the timer after the merge, and moves the card to the `testing` column. Columns are picked by type, never by name; never force-pushes or bypasses branch protection.
 
 ### Subagents
 

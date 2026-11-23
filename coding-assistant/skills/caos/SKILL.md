@@ -2,11 +2,12 @@
 name: caos
 description: |
   Works a task (card) end to end with Codeäffchen OS (CAOS): creates the card
-  when no card URL or key is given, moves it to In Progress and assigns the
-  user, branches off main (feature/CA-142_short-slug), implements the change,
-  loops on user feedback, commits via /commit-message, pushes, opens the PR via
-  /promote-pr, merges it when there are no conflicts (which deploys), and moves
-  the card to Testing. Use when the user wants to work on a CAOS card, passes a
+  when no card URL or key is given, starts the user's CAOS timer on it, moves
+  it to In Progress and assigns the user, branches off main
+  (feature/CA-142_short-slug), implements the change, loops on user feedback,
+  commits via /commit-message, pushes, opens the PR via /promote-pr, merges it
+  when there are no conflicts (which deploys), stops the timer, and moves the
+  card to Testing. Use when the user wants to work on a CAOS card, passes a
   card key like CA-142 or an os.codeaeffchen.de link, or starts a new task that
   should be tracked in CAOS.
 argument-hint: "[card-key | card-url | task description]"
@@ -27,8 +28,9 @@ allowed-tools:
 Take one task from card to deployment using Codeäffchen OS (CAOS) and git. The steps below run in a fixed order. Stop and report clearly at the first hard failure; never skip a step without telling the user.
 
 ```
-card → In Progress + assigned → branch → implement → user review loop
-     → commit → push → PR → merge (deploy) → card to Testing
+card → timer started → In Progress + assigned → branch → implement
+     → user review loop → commit → push → PR → merge (deploy)
+     → timer stopped → card to Testing
 ```
 
 ## Prerequisites
@@ -36,7 +38,7 @@ card → In Progress + assigned → branch → implement → user review loop
 The CAOS MCP tools (`mcp__codeaeffchen__*`) must be available. They are usually deferred, so load the ones you need in **one** ToolSearch call before Step 1:
 
 ```
-select:mcp__codeaeffchen__who-am-i,mcp__codeaeffchen__get-card,mcp__codeaeffchen__get-project,mcp__codeaeffchen__get-project-context,mcp__codeaeffchen__list-projects,mcp__codeaeffchen__create-card,mcp__codeaeffchen__move-card,mcp__codeaeffchen__set-card-assignees
+select:mcp__codeaeffchen__who-am-i,mcp__codeaeffchen__get-card,mcp__codeaeffchen__get-project,mcp__codeaeffchen__get-project-context,mcp__codeaeffchen__list-projects,mcp__codeaeffchen__create-card,mcp__codeaeffchen__move-card,mcp__codeaeffchen__set-card-assignees,mcp__codeaeffchen__get-timer,mcp__codeaeffchen__start-timer,mcp__codeaeffchen__stop-timer
 ```
 
 If the tools do not exist, stop and tell the user to connect the Codeäffchen OS MCP server. Do not fall back to the browser.
@@ -71,6 +73,16 @@ Parse the argument and the user's message:
 4. Call `get-project` for the column ids and `assignable_people`, then `create-card` directly in the `in_progress` column with the user as assignee (`column_id` + `assignee_ids`). That also covers Step 2.
 
 Report the new card key.
+
+### Start the Timer
+
+As soon as the card exists (right after `create-card`) or has been read (right after `get-card`, or after the user agreed to reopen a card from `testing`, `to_bill` or `done`), start the user's timer on it:
+
+1. `get-timer` to see what is running. The user has only one timer.
+2. If it already runs on this card, leave it alone.
+3. Otherwise call `start-timer` with `card` set to the card key. A timer running on another card or project is stopped and saved by CAOS first; tell the user which card or project that was.
+
+The timer keeps running through implementation and review until Step 9 stops it after the merge.
 
 ## Step 2: Move to In Progress and Assign the User
 
@@ -186,6 +198,13 @@ Do not pass `--admin` or any flag that bypasses branch protection. Do not delete
 
 After a successful merge, tell the user plainly that the PR is merged into `main` and **the changes are now being deployed**.
 
+Then stop the timer:
+
+1. `get-timer` first. Only if the running timer is on **this card**, call `stop-timer`. If it runs on another card or project (the user switched in between) or nothing runs, leave it and tell the user.
+2. Report the tracked time from the start time `get-timer` returned. CAOS discards entries under one minute; say so if that happened.
+
+Stop the timer only after a merge. If the flow stops before it (conflicts, failing checks, rejected push, user aborts), leave the timer running and tell the user it is still running on the card.
+
 ## Step 10: Move the Card to Testing
 
 `move-card` to the column whose type is `testing`. If the board has no `testing` column, tell the user and ask where the card should go instead.
@@ -197,9 +216,10 @@ Card:    COS-227 Timeline start date  → Testing
 Branch:  feature/COS-227_timeline-start-date
 Commit:  a1b2c3d Add start date to project timeline
 PR:      https://github.com/org/repo/pull/93  (merged, deploying)
+Timer:   stopped, 1h 25m on COS-227
 ```
 
-If the flow stopped early (conflicts, failing checks, rejected push), report the step it stopped at and where the card is now.
+If the flow stopped early (conflicts, failing checks, rejected push), report the step it stopped at, where the card is now, and that the timer is still running.
 
 ## Rules
 
@@ -208,4 +228,5 @@ If the flow stopped early (conflicts, failing checks, rejected push), report the
 3. **Never lose work.** No force-push, no `git reset --hard`, no discarding of uncommitted changes.
 4. **Assignees are additive.** `set-card-assignees` replaces the list, so always send the existing assignees along with the user.
 5. **Columns by type, not name.** Use `in_progress` and `testing` column types from `get-project`.
-6. **Project language on the card.** Card titles and descriptions follow the project's language; branch slugs are always English.
+6. **Timer from card to merge.** Start it once the card is created or read; stop it only after the merge, and only if it still runs on this card.
+7. **Project language on the card.** Card titles and descriptions follow the project's language; branch slugs are always English.
